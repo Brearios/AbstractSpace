@@ -1,0 +1,272 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1377530109007259518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1377530109007259505}
+  - component: {fileID: 1377530109007259504}
+  - component: {fileID: 1377530109007259519}
+  - component: {fileID: 1377530109007259506}
+  - component: {fileID: 1377530109007259511}
+  - component: {fileID: 1377530109007259510}
+  - component: {fileID: 1377530109007259509}
+  - component: {fileID: 1377530109007259508}
+  - component: {fileID: 1377530109007259507}
+  m_Layer: 0
+  m_Name: Human Federation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1377530109007259505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377530109007259518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 460.75275, y: 308.6794, z: -73.57945}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1377530109007259504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377530109007259518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a90cb2f9b5a1cd488efe96696350e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  race: {fileID: 2986737864861947366, guid: b9ae995c16431d245943b91196db67a0, type: 3}
+  Name: Human Federation
+  Adjective: Federation
+  rulerName: Aaron
+  grossEmpireProduct: 10
+  discoveredPlanets: 0
+  colonizedPlanets: 0
+  economy: {fileID: 1377530109007259506}
+  exploration: {fileID: 1377530109007259511}
+  colonization: {fileID: 1377530109007259510}
+  military: {fileID: 1377530109007259509}
+  science: {fileID: 1377530109007259508}
+  diplomacy: {fileID: 1377530109007259507}
+  empireSectors: []
+--- !u!114 &1377530109007259519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377530109007259518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa2504796f6f3a41a56b7aa8c747b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raceNameGenerationList:
+  - Alkari
+  - Bulrathi
+  - Darloks
+  - Humans
+  - Klackons
+  - Meklar
+  - Mrrshan
+  - Psilon
+  - Sakkra
+  - Silicoids
+  - Elerians
+  - Gnolams
+  - Trilarians
+  raceName: Humans
+  raceHomeworldGenerationList:
+  - Altair
+  - Ursa
+  - Nazin
+  - Sol
+  - Kholdan
+  - Meklon
+  - Fieras
+  - Menta
+  - Sssla
+  - Cryslon
+  - Berylia
+  - Gnol
+  - Wavya
+  raceHomeworld: Earth
+  locomationGenerationList:
+  - bipedal
+  - tripedal
+  - quadrupedal
+  - floating
+  - flying
+  - serpentine
+  locomation: 
+  typeOfRaceGenerationList:
+  - mammalian
+  - amphibian
+  - reptilian
+  - avian
+  - insectoid
+  - aquatic
+  - fungoid
+  - plantoid
+  - robotic
+  typeOfRace: bipedal
+  numberOfAppendagesGenerationList:
+  - two
+  - three
+  - four
+  - six
+  - many
+  numberOfAppendages: two
+  typesOfAppendagesGenerationList:
+  - hands
+  - claws
+  - wings
+  - tentacles
+  typesOfAppendages: jamds
+  eyeDetailsGenerationList:
+  - one eye
+  - two eyes
+  - three eyes
+  - many eyes
+  - compound eyes
+  eyeDetails: two eyes
+  externalCoveringGenerationList:
+  - an exoskeleton
+  - fur
+  - scales
+  - skin
+  externalCovering: skin
+  societalUnitGenerationList:
+  - in solitary isolation
+  - with immediate family
+  - with extended family groups
+  - in large tribes
+  - in cities
+  - in tightly-packed megacities
+  societalUnit: in cities
+  governmentTypesGenerationList:
+  - is a democracy
+  - is a dictatorship
+  - is a technocracy
+  - is a oligarchy
+  - is a monarchy
+  - is a theocracy
+  - is non-existent - anarchy
+  governmentTypes: is a democracy
+--- !u!114 &1377530109007259506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377530109007259518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408ccd54a2182724a876df69b1783d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectorName: Economy
+  fundingAllocation: 5
+  growthLevelsAchieved: 1
+  currentInvestment: 0
+  neededInvestment: 20
+--- !u!114 &1377530109007259511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377530109007259518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408ccd54a2182724a876df69b1783d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectorName: Exploration
+  fundingAllocation: 1
+  growthLevelsAchieved: 0
+  currentInvestment: 0
+  neededInvestment: 10
+--- !u!114 &1377530109007259510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377530109007259518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408ccd54a2182724a876df69b1783d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectorName: Colonization
+  fundingAllocation: 1
+  growthLevelsAchieved: 0
+  currentInvestment: 0
+  neededInvestment: 10
+--- !u!114 &1377530109007259509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377530109007259518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408ccd54a2182724a876df69b1783d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectorName: Military
+  fundingAllocation: 1
+  growthLevelsAchieved: 0
+  currentInvestment: 0
+  neededInvestment: 10
+--- !u!114 &1377530109007259508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377530109007259518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408ccd54a2182724a876df69b1783d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectorName: Science
+  fundingAllocation: 1
+  growthLevelsAchieved: 0
+  currentInvestment: 0
+  neededInvestment: 10
+--- !u!114 &1377530109007259507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377530109007259518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408ccd54a2182724a876df69b1783d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectorName: Diplomacy
+  fundingAllocation: 1
+  growthLevelsAchieved: 0
+  currentInvestment: 0
+  neededInvestment: 10

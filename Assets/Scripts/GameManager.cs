@@ -25,7 +25,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        SetPlayEmpireDefaults(playerEmpire);
     }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +49,15 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isRunning = !isRunning; // Toggle pause Bool when space is pressed
+            if (!isRunning)
+            {
+                return;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            AllocateSpending();
         }
 
 
@@ -56,10 +69,22 @@ public class GameManager : MonoBehaviour
 
         IncrementYear();
 
-        void IncrementYear()
-        {
-            spaceYear++;
-        }
+
+    }
+
+    private void SetPlayEmpireDefaults(Empire playerEmpire)
+    {
+        playerEmpire.Name = MagicNumbers.Instance.PlayerEmpireName;
+        playerEmpire.Adjective = MagicNumbers.Instance.PlayerAdjective;
+        playerEmpire.rulerName = MagicNumbers.Instance.PlayerRuler;
+        playerEmpire.grossEmpireProduct = 10;
+        playerEmpire.discoveredPlanets = 0;
+        playerEmpire.colonizedPlanets = 1;
+    }
+
+    private void AllocateSpending()
+    {
+        throw new NotImplementedException();
     }
 
     private void TimeControls()
@@ -107,48 +132,97 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+
 
     void CalculateProgress(Empire empire)
     {
         foreach (SectorValues currentSector in empire.empireSectors)
-            ProcessSectorGrowth(empire, currentSector);
+            ProcessSectorFunding(empire, currentSector);
 
-            //GrowEconomy(empire, empire.economy);
-            //ExploreStars(empire, empire.exploration);
-            //ColonizePlanets(empire, empire.colonization);
-            //BuildMilitaryShips(empire, empire.military);
-            //FundResearchGrants(empire, empire.science);
-            //SendSpaceDiplomats(empire, empire.diplomacy);
+        //GrowEconomy(empire, empire.economy);
+        //ExploreStars(empire, empire.exploration);
+        //ColonizePlanets(empire, empire.colonization);
+        //BuildMilitaryShips(empire, empire.military);
+        //FundResearchGrants(empire, empire.science);
+        //SendSpaceDiplomats(empire, empire.diplomacy);
     }
 
-    private void ProcessSectorGrowth(Empire empire, SectorValues currentSector)
+    private void ProcessSectorFunding(Empire empire, SectorValues currentSector)
     {
-        currentSector.currentInvestment += ((empire.grossEmpireProduct * currentSector.fundingAllocation) / 10);
-        if (currentSector.currentInvestment > currentSector.neededInvestment)
+        float iteratedInvestment = ((empire.grossEmpireProduct * currentSector.fundingAllocation) / 10);
+        iteratedInvestment += (iteratedInvestment * currentSector.sectorScienceMultiplier);
+        currentSector.currentInvestment += iteratedInvestment;
+        while (currentSector.currentInvestment > currentSector.neededInvestment)
         {
-            upgradeSector(currentSector);
-            upgradeEmpire(currentSector);
+            UpgradeSector(currentSector);
+            UpgradeEmpire(empire, currentSector.name);
         }
     }
 
-    private void upgradeSector(SectorValues sector)
+    private void UpgradeSector(SectorValues sector)
     {
         sector.growthLevelsAchieved += 1;
         sector.currentInvestment -= sector.neededInvestment;
         sector.neededInvestment *= MagicNumbers.Instance.upgradeCostMultiplier;
     }
 
-    private void upgradeEmpire(SectorValues sector)
+    private void UpgradeEmpire(Empire empire, string sectorName)
     {
-        throw new NotImplementedException();
+        switch (sectorName)
+        {
+            case "economy":
+                GrowGEP(empire);
+                break;
+
+            case "exploration":
+                ExploreStar(empire);
+                break;
+
+            case "colonization":
+                //TODO May want to eventually have individual planets with their own bonuses that roll here
+                empire.colonizedPlanets++;
+                break;
+
+            case "military":
+                empire.fleetStrength++;
+                break;
+
+            case "science":
+                //
+                break;
+
+            case "diplomacy":
+                //
+                break;
+        }
     }
-
-
 
     void DiscoverAlienRace()
     {
         //catchUpTurnCalculations();
         //add to knownEmpires();
+    }
+
+
+
+    void IncrementYear()
+    {
+        spaceYear++;
+    }
+
+    private void GrowGEP(Empire empire)
+    {
+        float economyIncrease = (1.0f + (empire.colonizedPlanets * MagicNumbers.Instance.planetGrossEmpireProductContribution));
+        if (empire == playerEmpire)
+        {
+            Debug.Log($"Economy increasing by {economyIncrease}, from {playerEmpire.grossEmpireProduct}, in space year {spaceYear}.");
+        }
+        empire.grossEmpireProduct += economyIncrease;
+    }
+
+    void ExploreStar(Empire empire)
+    {
+        //TODO - add random chance for stat increase, new alien race, space pirates, discover planet, etc.
+        empire.discoveredPlanets++;
     }
 }

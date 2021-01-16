@@ -9,4 +9,5 @@ public class SectorValues : MonoBehaviour
     public int growthLevelsAchieved;
     public float currentInvestment;
     public float neededInvestment;
+    public float sectorScienceMultiplier;
 }
