@@ -8,11 +8,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public bool isRunning;
     public Empire playerEmpire;
+    public SectorValues currentSector;
     public List<Empire> knownEmpires;
     public int spaceYear;
     public float gameSpeed;
     public float deltaTime;
     public float timeIncrement;
+
+    //TODO - War button and screen
 
     public void Awake()
     {
@@ -38,9 +41,13 @@ public class GameManager : MonoBehaviour
         timeIncrement = .2f;
         spaceYear = 1;
 
+        // TODO - Text box - press S to start, or C to customize your empire
+        // TODO - Buttons for Start and Customize
+        // CustomizeEmpire();
         // EstablishPlayerEmpire();
 
         knownEmpires.Add(playerEmpire);
+        AllocateSpending();
     }
 
     // Update is called once per frame
@@ -49,10 +56,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isRunning = !isRunning; // Toggle pause Bool when space is pressed
-            if (!isRunning)
-            {
-                return;
-            }
+        }
+
+        if (!isRunning)
+        {
+            return;
         }
 
         if (Input.GetKeyDown(KeyCode.A))
@@ -82,9 +90,18 @@ public class GameManager : MonoBehaviour
         playerEmpire.colonizedPlanets = 1;
     }
 
+    private void CustomizeEmpire()
+    {
+        // Set MagicNumbers Empire Variables via text boxes
+        throw new NotImplementedException();
+    }
+
     private void AllocateSpending()
     {
-        throw new NotImplementedException();
+        isRunning = false;
+        // Activate Buttons
+        // Deactivate Extra Menus
+        isRunning = true;
     }
 
     private void TimeControls()
@@ -222,6 +239,7 @@ public class GameManager : MonoBehaviour
 
     void ExploreStar(Empire empire)
     {
+        empire.exploredStars++;
         //TODO - add random chance for stat increase, new alien race, space pirates, discover planet, etc.
         empire.discoveredPlanets++;
     }
