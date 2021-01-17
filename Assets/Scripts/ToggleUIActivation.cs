@@ -29,12 +29,14 @@ public class ToggleUIActivation : MonoBehaviour
             statusTextActivator.SetActive(false);
             buttonActivator.SetActive(true);
             buttonText.text = "Return";
+            GameManager.Instance.isRunning = false;
         }
         else if (allocating)
         {
             buttonActivator.SetActive(false);
             statusTextActivator.SetActive(true);
             buttonText.text = "Allocate";
+            GameManager.Instance.isRunning = true;
         }
         allocating = !allocating;
     }
