@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public Empire playerEmpire;
     public SectorValues currentSector;
     public List<Empire> knownEmpires;
+    public int playerDefeatedEmpires;
+    public int currentWars;
     public int spaceYear;
     public float gameSpeed;
     public float deltaTime;

@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 191888508}
   - component: {fileID: 191888507}
   - component: {fileID: 191888506}
+  - component: {fileID: 191888509}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -390,6 +391,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &191888509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191888505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69db36429d4ca4e8a2ea5cd8d54380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overviewText: {fileID: 1572485280}
+  expansionText: {fileID: 410078597}
+  scienceText: {fileID: 1948717983}
+  spaceYearText: {fileID: 1199206056}
+  allocationText: {fileID: 1989999761}
+  militaryText: {fileID: 1610034244}
+  diplomacyText: {fileID: 583335611}
+  selectedSectorText: {fileID: 1421963312}
 --- !u!1 &207663060
 GameObject:
   m_ObjectHideFlags: 0

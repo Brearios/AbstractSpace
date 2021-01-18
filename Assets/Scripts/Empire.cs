@@ -5,6 +5,8 @@ using UnityEngine;
 public class Empire : MonoBehaviour
 {
     public Race race;
+    public bool AtWarWithPlayer;
+    public bool AlliedWithPlayer;
     public string Name;
     public string Adjective;
     public string rulerName;
@@ -13,6 +15,8 @@ public class Empire : MonoBehaviour
     public int discoveredPlanets;
     public int colonizedPlanets;
     public int fleetStrength;
+    public int relationsTowardPlayer;
+    // 1-100, with 1 being war, 2-34 being hostile, 35-65 being peace, 66-99 being trade, and 100 being allies
     public SectorValues economy;
     public SectorValues exploration;
     public SectorValues colonization;
