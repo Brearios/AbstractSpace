@@ -47,13 +47,13 @@ public class TextBoxController : MonoBehaviour
         spaceYearText.text = $"{GameManager.Instance.spaceYear} ESE \n" +
             "(Extra-Solar Era)";
 
-        allocationText.text = $"GEP: ${GameManager.Instance.playerEmpire.grossEmpireProduct} Gigacreds \n \n" +
+        allocationText.text = $"GEP: ${GameManager.Instance.playerEmpire.grossEmpireProduct} Quadracreds \n \n" +
             
-            $"Economy: {GameManager.Instance.playerEmpire.economy.fundingAllocation} \n +" +
-            $"Exploration: {GameManager.Instance.playerEmpire.exploration.fundingAllocation} \n +" +
-            $"Colonization: {GameManager.Instance.playerEmpire.colonization.fundingAllocation} \n +" +
-            $"Military: {GameManager.Instance.playerEmpire.military.fundingAllocation} \n +" +
-            $"Science: {GameManager.Instance.playerEmpire.science.fundingAllocation} \n +" +
+            $"Economy: {GameManager.Instance.playerEmpire.economy.fundingAllocation} \n" +
+            $"Exploration: {GameManager.Instance.playerEmpire.exploration.fundingAllocation} \n" +
+            $"Colonization: {GameManager.Instance.playerEmpire.colonization.fundingAllocation} \n" +
+            $"Military: {GameManager.Instance.playerEmpire.military.fundingAllocation} \n" +
+            $"Science: {GameManager.Instance.playerEmpire.science.fundingAllocation} \n" +
             $"Diplomacy: {GameManager.Instance.playerEmpire.diplomacy.fundingAllocation}";
 
         //TODO This needs to somehow account for losing ships/strength, right? And how do I track active wars?

@@ -13,6 +13,7 @@ public class MagicNumbers : MonoBehaviour
     public string PlayerEmpireName = "Human Space Alliance";
     public string PlayerAdjective = "Human";
     public string PlayerRuler = "Dwight Eisenhower";
+    public int StartingGrossEmpireProduct = 10;
     // Needs a starting grossEmpireProduct
 
     public void Awake()
