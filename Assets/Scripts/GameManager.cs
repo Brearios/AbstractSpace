@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public bool isRunning;
+    public bool allocating;
     public Empire playerEmpire;
     public SectorValues currentSector;
     public List<Empire> knownEmpires;
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     public float deltaTime;
     public float timeIncrement;
     public int empireLabelInt;
+
+    public GameObject notificationTextActivator;
 
     //TODO - War button and screen
 
@@ -171,8 +174,8 @@ public class GameManager : MonoBehaviour
 
     private void ProcessSectorFunding(Empire empire, SectorValues currentSector)
     {
-        float iteratedInvestment = ((empire.grossEmpireProduct * currentSector.fundingAllocation) / 100);
-        iteratedInvestment += ((empire.bonusResourcesFromEvents * currentSector.fundingAllocation) / 100);
+        float iteratedInvestment = ((empire.grossEmpireProduct * currentSector.fundingAllocation) / 10);
+        iteratedInvestment += ((empire.bonusResourcesFromEvents * currentSector.fundingAllocation) / 10);
         iteratedInvestment += (iteratedInvestment * currentSector.sectorScienceMultiplier);
         currentSector.currentInvestment += iteratedInvestment;
         while (currentSector.currentInvestment > currentSector.neededInvestment)
@@ -212,11 +215,32 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "science":
-                //
+                int selectedSector = UnityEngine.Random.Range(1, 6);
+                switch (selectedSector)
+                {
+                    case 1:
+                        empire.economy.sectorScienceMultiplier += 0.1f;
+                        break;
+                    case 2:
+                        empire.exploration.sectorScienceMultiplier += 0.1f;
+                        break;
+                    case 3:
+                        empire.colonization.sectorScienceMultiplier += 0.1f;
+                        break;
+                    case 4:
+                        empire.military.sectorScienceMultiplier += 0.1f;
+                        break;
+                    case 5:
+                        empire.science.sectorScienceMultiplier += 0.1f;
+                        break;
+                    case 6:
+                        empire.diplomacy.sectorScienceMultiplier += 0.1f;
+                        break;
+                }
                 break;
 
             case "diplomacy":
-                //
+                empire.diplomaticCapacity++;
                 break;
         }
     }
@@ -261,7 +285,7 @@ public class GameManager : MonoBehaviour
 
     private void FindBonusResources(Empire empire)
     {
-        float treasureAmount = (empire.grossEmpireProduct * 0.3f);
+        float treasureAmount = (empire.grossEmpireProduct * MagicNumbers.Instance.treasurePortionOfGEP);
         empire.bonusResourcesFromEvents += treasureAmount;
     }
 
@@ -298,5 +322,17 @@ public class GameManager : MonoBehaviour
     {
         int randIndex = UnityEngine.Random.Range(1, listName.Count);
         return listName[randIndex];
+    }
+
+    void TextBoxNotificationActivator()
+    {    }
+
+    void NotificationTextPopulator()
+    {
+        isRunning = false;
+        notificationTextActivator.SetActive(false);
+        // TODO this whole thing
+        // fillText;
+        // displayText;   
     }
 }

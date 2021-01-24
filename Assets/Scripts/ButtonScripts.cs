@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AllocationButtons : MonoBehaviour
+public class ButtonScripts : MonoBehaviour
 {
     //TODO - why can't I reference a specific sector instead of repeating myself? Use a list?
     public void ReduceAllocation()

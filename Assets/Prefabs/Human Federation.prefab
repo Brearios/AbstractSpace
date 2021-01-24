@@ -51,19 +51,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   race: {fileID: 2986737864861947366, guid: b9ae995c16431d245943b91196db67a0, type: 3}
+  AtWarWithPlayer: 0
+  AlliedWithPlayer: 0
   Name: Human Federation
   Adjective: Federation
   rulerName: Aaron
   grossEmpireProduct: 10
+  bonusResourcesFromEvents: 0
+  exploredStars: 0
   discoveredPlanets: 0
   colonizedPlanets: 0
+  fleetStrength: 0
+  relationsTowardPlayer: 0
+  diplomaticCapacity: 0
   economy: {fileID: 1377530109007259506}
   exploration: {fileID: 1377530109007259511}
   colonization: {fileID: 1377530109007259510}
   military: {fileID: 1377530109007259509}
   science: {fileID: 1377530109007259508}
   diplomacy: {fileID: 1377530109007259507}
-  empireSectors: []
+  empireSectors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  economyScienceMultiplier: 0
+  explorationScienceMultiplier: 0
+  colonizationScienceMultiplier: 0
+  militaryScienceMultiplier: 0
+  scienceScienceMultiplier: 0
+  diplomacyScienceMultiplier: 0
 --- !u!114 &1377530109007259519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,97 +95,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa2504796f6f3a41a56b7aa8c747b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raceNameGenerationList:
-  - Alkari
-  - Bulrathi
-  - Darloks
-  - Humans
-  - Klackons
-  - Meklar
-  - Mrrshan
-  - Psilon
-  - Sakkra
-  - Silicoids
-  - Elerians
-  - Gnolams
-  - Trilarians
   raceName: Humans
-  raceHomeworldGenerationList:
-  - Altair
-  - Ursa
-  - Nazin
-  - Sol
-  - Kholdan
-  - Meklon
-  - Fieras
-  - Menta
-  - Sssla
-  - Cryslon
-  - Berylia
-  - Gnol
-  - Wavya
   raceHomeworld: Earth
-  locomationGenerationList:
-  - bipedal
-  - tripedal
-  - quadrupedal
-  - floating
-  - flying
-  - serpentine
   locomation: 
-  typeOfRaceGenerationList:
-  - mammalian
-  - amphibian
-  - reptilian
-  - avian
-  - insectoid
-  - aquatic
-  - fungoid
-  - plantoid
-  - robotic
   typeOfRace: bipedal
-  numberOfAppendagesGenerationList:
-  - two
-  - three
-  - four
-  - six
-  - many
   numberOfAppendages: two
-  typesOfAppendagesGenerationList:
-  - hands
-  - claws
-  - wings
-  - tentacles
   typesOfAppendages: jamds
-  eyeDetailsGenerationList:
-  - one eye
-  - two eyes
-  - three eyes
-  - many eyes
-  - compound eyes
   eyeDetails: two eyes
-  externalCoveringGenerationList:
-  - an exoskeleton
-  - fur
-  - scales
-  - skin
   externalCovering: skin
-  societalUnitGenerationList:
-  - in solitary isolation
-  - with immediate family
-  - with extended family groups
-  - in large tribes
-  - in cities
-  - in tightly-packed megacities
   societalUnit: in cities
-  governmentTypesGenerationList:
-  - is a democracy
-  - is a dictatorship
-  - is a technocracy
-  - is a oligarchy
-  - is a monarchy
-  - is a theocracy
-  - is non-existent - anarchy
   governmentTypes: is a democracy
 --- !u!114 &1377530109007259506
 MonoBehaviour:
@@ -185,6 +122,7 @@ MonoBehaviour:
   growthLevelsAchieved: 1
   currentInvestment: 0
   neededInvestment: 20
+  sectorScienceMultiplier: 0
 --- !u!114 &1377530109007259511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +140,7 @@ MonoBehaviour:
   growthLevelsAchieved: 0
   currentInvestment: 0
   neededInvestment: 10
+  sectorScienceMultiplier: 0
 --- !u!114 &1377530109007259510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +158,7 @@ MonoBehaviour:
   growthLevelsAchieved: 0
   currentInvestment: 0
   neededInvestment: 10
+  sectorScienceMultiplier: 0
 --- !u!114 &1377530109007259509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +176,7 @@ MonoBehaviour:
   growthLevelsAchieved: 0
   currentInvestment: 0
   neededInvestment: 10
+  sectorScienceMultiplier: 0
 --- !u!114 &1377530109007259508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +194,7 @@ MonoBehaviour:
   growthLevelsAchieved: 0
   currentInvestment: 0
   neededInvestment: 10
+  sectorScienceMultiplier: 0
 --- !u!114 &1377530109007259507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,3 +212,4 @@ MonoBehaviour:
   growthLevelsAchieved: 0
   currentInvestment: 0
   neededInvestment: 10
+  sectorScienceMultiplier: 0

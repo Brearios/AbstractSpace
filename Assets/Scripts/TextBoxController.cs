@@ -48,7 +48,7 @@ public class TextBoxController : MonoBehaviour
             "(Extra-Solar Era)";
 
         allocationText.text = $"GEP: ${GameManager.Instance.playerEmpire.grossEmpireProduct} Quadracreds \n \n" +
-            
+            // TODO  $"Added by Trade: {variableForTradingGEP&AllyGEP} \n \n"
             $"Economy: {GameManager.Instance.playerEmpire.economy.fundingAllocation} \n" +
             $"Exploration: {GameManager.Instance.playerEmpire.exploration.fundingAllocation} \n" +
             $"Colonization: {GameManager.Instance.playerEmpire.colonization.fundingAllocation} \n" +
@@ -57,9 +57,10 @@ public class TextBoxController : MonoBehaviour
             $"Diplomacy: {GameManager.Instance.playerEmpire.diplomacy.fundingAllocation}";
 
         //TODO This needs to somehow account for losing ships/strength, right? And how do I track active wars?
-        militaryText.text = $"Fleet Strength: {GameManager.Instance.playerEmpire.military.growthLevelsAchieved} \n \n" +
+        militaryText.text = $"Fleet Strength (FS): {GameManager.Instance.playerEmpire.fleetStrength} \n \n" +
+            // TODO  $"Allies Fleet Strength: {variableForAlliesFleetStrength} \n \n"
             $"Active Wars: {GameManager.Instance.currentWars} \n \n" +
-            $"Enemy Fleets: {GameManager.Instance.playerEmpire.colonizedPlanets}";
+            $"Enemy FS: {GameManager.Instance.playerEmpire.colonizedPlanets}";
 
         //TODO - fill in diplomacy, double-check list count - may need -1 or +1
         diplomacyText.text = $"Known Empires: {GameManager.Instance.knownEmpires.Count} \n \n" +
@@ -68,9 +69,10 @@ public class TextBoxController : MonoBehaviour
             $"Peaceful Coexistence: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
             $"Hostile: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
             $"At War: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
-            $"Defeated: {GameManager.Instance.playerDefeatedEmpires} \n";
+            $"Defeated: {GameManager.Instance.playerDefeatedEmpires} \n \n" +
+            $"Diplomatic Capacity: {GameManager.Instance.playerEmpire.diplomaticCapacity} \n" +
+            $"Needed Capacity: Placeholder \n";
 
         selectedSectorText.text = $"{GameManager.Instance.currentSector}";
-
-}
+    }
 }

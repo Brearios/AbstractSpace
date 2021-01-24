@@ -1,30 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ToggleUIActivation : MonoBehaviour
+public class NotificationAcknowledgementScript : MonoBehaviour
 {
+    public GameObject notificationTextActivator;
     public GameObject buttonActivator;
     public GameObject statusTextActivator;
-    public Text buttonText;
 
-    public void ToggleAllocationButtons()
+    public void AcknowledgeNotificationAndDismiss()
     {
-        if (!GameManager.Instance.allocating)
+        if (GameManager.Instance.allocating)
         {
+            notificationTextActivator.SetActive(false);
             statusTextActivator.SetActive(false);
             buttonActivator.SetActive(true);
-            buttonText.text = "Return";
             GameManager.Instance.isRunning = false;
         }
-        else if (GameManager.Instance.allocating)
+        else
         {
+            notificationTextActivator.SetActive(false);
             buttonActivator.SetActive(false);
             statusTextActivator.SetActive(true);
-            buttonText.text = "Allocate";
             GameManager.Instance.isRunning = true;
         }
-        GameManager.Instance.allocating = !GameManager.Instance.allocating;
+        //De-activate object
+        //Activate other panels
+        GameManager.Instance.isRunning = true;
     }
 }
