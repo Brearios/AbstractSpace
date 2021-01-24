@@ -1331,12 +1331,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 787091032}
-        m_MethodName: 
+      - m_Target: {fileID: 787091034}
+        m_MethodName: ReduceAllocation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2982,6 +2982,7 @@ GameObject:
   - component: {fileID: 1421879418}
   - component: {fileID: 1421879417}
   - component: {fileID: 1421879416}
+  - component: {fileID: 1421879419}
   m_Layer: 5
   m_Name: PlusFivePercentButton
   m_TagString: Untagged
@@ -3051,7 +3052,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1421879417}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1421879419}
+        m_MethodName: IncreaseAllocation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1421879417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3088,6 +3100,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1421879414}
   m_CullTransparentMesh: 0
+--- !u!114 &1421879419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421879414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddb2b2f13805ac4aa7a5cbe12651f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1421963310
 GameObject:
   m_ObjectHideFlags: 0

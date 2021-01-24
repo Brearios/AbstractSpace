@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject notificationTextActivator;
 
     //TODO - War button and screen
+    //TODO - connect gameSpeed to deltaTime
 
     public void Awake()
     {
@@ -100,6 +101,7 @@ public class GameManager : MonoBehaviour
     private void CustomizeEmpire()
     {
         // Set MagicNumbers Empire Variables via text boxes
+        // TODO - implement customization with text boxes
         throw new NotImplementedException();
     }
 
@@ -150,6 +152,7 @@ public class GameManager : MonoBehaviour
 
     private void ProcessKnownEmpries()
     {
+        Debug.Log($"Processing empires, in space year {spaceYear}.");   
         foreach (Empire currentEmpire in knownEmpires)
         {
             CalculateProgress(currentEmpire);
@@ -162,6 +165,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (SectorValues currentSector in empire.empireSectors)
             ProcessSectorFunding(empire, currentSector);
+            Debug.Log($"Calculating progress for {empire}, in space year {spaceYear}.");
 
         //GrowEconomy(empire, empire.economy);
         //ExploreStars(empire, empire.exploration);
@@ -180,8 +184,8 @@ public class GameManager : MonoBehaviour
         currentSector.currentInvestment += iteratedInvestment;
         while (currentSector.currentInvestment > currentSector.neededInvestment)
         {
+            UpgradeEmpire(empire, currentSector);
             UpgradeSector(currentSector);
-            UpgradeEmpire(empire, currentSector.name);
         }
 
     }
@@ -191,11 +195,13 @@ public class GameManager : MonoBehaviour
         sector.growthLevelsAchieved += 1;
         sector.currentInvestment -= sector.neededInvestment;
         sector.neededInvestment *= MagicNumbers.Instance.upgradeCostMultiplier;
+        Debug.Log($"Upgraded {sector}, in space year {spaceYear}.");
     }
 
-    private void UpgradeEmpire(Empire empire, string sectorName)
+    private void UpgradeEmpire(Empire empire, SectorValues sector)
     {
-        switch (sectorName)
+        Debug.Log($"Upgrading {empire}'s {sector.name} in space year {spaceYear}.");
+        switch (sector.name)
         {
             case "economy":
                 GrowGEP(empire);
