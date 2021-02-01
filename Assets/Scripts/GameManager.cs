@@ -152,7 +152,13 @@ public class GameManager : MonoBehaviour
 
     private void ProcessKnownEmpries()
     {
-        Debug.Log($"Processing empires, in space year {spaceYear}.");   
+        if (LogManager.Instance.logsEnabled)
+            {
+            if (LogManager.Instance.calculateProgressLogs)
+            {
+                Debug.Log($"Processing empires, in space year {spaceYear}.");
+            }
+        }
         foreach (Empire currentEmpire in knownEmpires)
         {
             CalculateProgress(currentEmpire);
@@ -165,8 +171,13 @@ public class GameManager : MonoBehaviour
     {
         foreach (SectorValues currentSector in empire.empireSectors)
             ProcessSectorFunding(empire, currentSector);
-            Debug.Log($"Calculating progress for {empire}, in space year {spaceYear}.");
-
+        if (LogManager.Instance.logsEnabled)
+        {
+            if (LogManager.Instance.calculateProgressLogs)
+            {
+                Debug.Log($"Calculating progress for {empire.Name}, in space year {spaceYear}.");
+            }
+        }
         //GrowEconomy(empire, empire.economy);
         //ExploreStars(empire, empire.exploration);
         //ColonizePlanets(empire, empire.colonization);
@@ -195,13 +206,20 @@ public class GameManager : MonoBehaviour
         sector.growthLevelsAchieved += 1;
         sector.currentInvestment -= sector.neededInvestment;
         sector.neededInvestment *= MagicNumbers.Instance.upgradeCostMultiplier;
-        Debug.Log($"Upgraded {sector}, in space year {spaceYear}.");
+        Debug.Log($"Upgraded {sector.sectorName}, in space year {spaceYear}.");
     }
 
     private void UpgradeEmpire(Empire empire, SectorValues sector)
     {
-        Debug.Log($"Upgrading {empire}'s {sector.name} in space year {spaceYear}.");
-        switch (sector.name)
+        if (LogManager.Instance.logsEnabled)
+        {
+            if (LogManager.Instance.empireUpgradeLogs)
+            {
+
+                Debug.Log($"Upgrading {empire.Name}'s {sector.sectorName} in space year {spaceYear}.");
+            }
+        }
+        switch (sector.sectorName)
         {
             case "economy":
                 GrowGEP(empire);
@@ -217,7 +235,16 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "military":
+                if (LogManager.Instance.logsEnabled)
+                {
+                    if (LogManager.Instance.fleetUpgradeLogs)
+                    {
+                        Debug.Log($"Upgrading fleet - from {empire.fleetStrength} to {(empire.fleetStrength + (empire.fleetStrength * MagicNumbers.Instance.fleetStrengthUpgradeMultiplier))}.");
+                    }
+                }
+
                 empire.fleetStrength++;
+                //TODO Multiply by a value - say 1.08 - rounding up if less than 1?
                 break;
 
             case "science":
@@ -259,9 +286,14 @@ public class GameManager : MonoBehaviour
     private void GrowGEP(Empire empire)
     {
         float economyIncrease = (1.0f + (empire.colonizedPlanets * MagicNumbers.Instance.planetGrossEmpireProductContribution));
-        if (empire == playerEmpire)
         {
-            Debug.Log($"Economy increasing by {economyIncrease}, from {playerEmpire.grossEmpireProduct}, in space year {spaceYear}.");
+            if (LogManager.Instance.logsEnabled)
+            {
+                if (LogManager.Instance.growGEPLogs)
+                {
+                    Debug.Log($"Economy increasing by {economyIncrease}, from {playerEmpire.grossEmpireProduct}, in space year {spaceYear}.");
+                }
+            }
         }
         empire.grossEmpireProduct += economyIncrease;
     }
@@ -302,15 +334,22 @@ public class GameManager : MonoBehaviour
         //GenerateEmpireDetails();
         //GenerateRaceDetails();
         Race discoveredEmpireRace = new Race();
-        string empName = ListObjectGrabber(RandomElementsObject.Instance.raceNameGenerationList);
+        discoveredEmpireRace.raceHomeworld = ListObjectGrabber(RandomElementsObject.Instance.raceHomeworldGenerationList);
+        string empName = ListObjectGrabber(RandomElementsObject.Instance.raceNameAndAdjectiveGenerationList);
         // TODO - switch statement with empire names for race names
         string empAdjective = empName;
         // TODO - having the adjective be the name is probably terrible - will need to revisit
         string ruler = ListObjectGrabber(RandomElementsObject.Instance.emperorNameGenerationList);
         Empire discoveredEmpire = new Empire(discoveredEmpireRace, empName, empAdjective, ruler);
-        for (int i = 0; i < (MagicNumbers.Instance.allocationIterationAmount / 100);  i++)
+        for (int i = 0; i < (100 / MagicNumbers.Instance.allocationIterationAmount);  i++)
         {
+            // Determine how empire will allocate it's economy
+            // TODO - tie this to priorities
             AllocateEconomy(discoveredEmpire);
+        }
+        for (int i = 0; i < spaceYear; i++)
+        {
+            CalculateProgress(discoveredEmpire);
         }
         //CatchUpTurnCalculations();
         knownEmpires.Add(discoveredEmpire);

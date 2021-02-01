@@ -5,6 +5,7 @@ using UnityEngine;
 public class ButtonScripts : MonoBehaviour
 {
     //TODO - why can't I reference a specific sector instead of repeating myself? Use a list?
+    //TODO - better UI would be for each to have a +/- button, and a reset button - for later
     public void ReduceAllocation()
     {
         if (GameManager.Instance.currentSector.fundingAllocation > MagicNumbers.Instance.allocationIterationAmount)

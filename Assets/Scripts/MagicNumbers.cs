@@ -15,6 +15,7 @@ public class MagicNumbers : MonoBehaviour
     public string PlayerRuler = "Dwight Eisenhower";
     public int StartingGrossEmpireProduct = 10;
     public float treasurePortionOfGEP = 0.3f;
+    public float fleetStrengthUpgradeMultiplier;
     // Needs a starting grossEmpireProduct
 
     public void Awake()
