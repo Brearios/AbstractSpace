@@ -359,7 +359,7 @@ public class GameManager : MonoBehaviour
         // TODO - having the adjective be the name is probably terrible - will need to revisit
         string ruler = ListObjectGrabber(RandomNamesAndElements.Instance.emperorNameGenerationList);
         Empire discoveredEmpire = ScriptableObject.CreateInstance<Empire>();
-        CreateAndSectorsToList(discoveredEmpire);
+        CreateAndListAlienSectors(discoveredEmpire);
 
         for (int i = 0; i < (100 / MagicNumbers.Instance.allocationIterationAmount);  i++)
         {
@@ -376,7 +376,7 @@ public class GameManager : MonoBehaviour
         //add to knownEmpires();
     }
 
-    private void CreateAndSectorsToList(Empire discoveredEmpire)
+    private void CreateAndListAlienSectors(Empire discoveredEmpire)
     {
         // Trying tp get sectors to not give "instance of object errors" when adding to list, or allocating below
 
