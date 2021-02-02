@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Empire playerEmpire;
     public SectorValues currentSector;
     public List<Empire> knownEmpires;
+    public Empire alienEmpireTemplate;
     public int playerDefeatedEmpires;
     public int currentWars;
     public int spaceYear;
@@ -350,15 +351,16 @@ public class GameManager : MonoBehaviour
         // Give each empire a unique name - Unsure if this is necessary
         //GenerateEmpireDetails();
         //GenerateRaceDetails();
-        Race discoveredEmpireRace = new Race();
+        Race discoveredEmpireRace = ScriptableObject.CreateInstance<Race>();
         discoveredEmpireRace.raceHomeworld = ListObjectGrabber(RandomNamesAndElements.Instance.raceHomeworldGenerationList);
         string empName = ListObjectGrabber(RandomNamesAndElements.Instance.raceNameAndAdjectiveGenerationList);
         // TODO - switch statement with empire names for race names
         string empAdjective = empName;
         // TODO - having the adjective be the name is probably terrible - will need to revisit
         string ruler = ListObjectGrabber(RandomNamesAndElements.Instance.emperorNameGenerationList);
-        Empire discoveredEmpire = new Empire(discoveredEmpireRace, empName, empAdjective, ruler);
-        //InitializeEmpire(discoveredEmpire);
+        Empire discoveredEmpire = ScriptableObject.CreateInstance<Empire>();
+        CreateAndSectorsToList(discoveredEmpire);
+
         for (int i = 0; i < (100 / MagicNumbers.Instance.allocationIterationAmount);  i++)
         {
             // Determine how empire will allocate it's economy
@@ -374,11 +376,29 @@ public class GameManager : MonoBehaviour
         //add to knownEmpires();
     }
 
+    private void CreateAndSectorsToList(Empire discoveredEmpire)
+    {
+        // Trying tp get sectors to not give "instance of object errors" when adding to list, or allocating below
+
+        discoveredEmpire.economy = ScriptableObject.CreateInstance<SectorValues>();
+        discoveredEmpire.exploration = ScriptableObject.CreateInstance<SectorValues>();
+        discoveredEmpire.colonization = ScriptableObject.CreateInstance<SectorValues>();
+        discoveredEmpire.military = ScriptableObject.CreateInstance<SectorValues>();
+        discoveredEmpire.science = ScriptableObject.CreateInstance<SectorValues>();
+        discoveredEmpire.diplomacy = ScriptableObject.CreateInstance<SectorValues>();
+        discoveredEmpire.empireSectors.Add(discoveredEmpire.economy);
+        discoveredEmpire.empireSectors.Add(discoveredEmpire.exploration);
+        discoveredEmpire.empireSectors.Add(discoveredEmpire.colonization);
+        discoveredEmpire.empireSectors.Add(discoveredEmpire.military);
+        discoveredEmpire.empireSectors.Add(discoveredEmpire.science);
+        discoveredEmpire.empireSectors.Add(discoveredEmpire.diplomacy);
+    }
+
     private void AllocateEconomy(Empire empire)
     {
         // Choose a Sector
         // Add 10 to that sector
-        int allocation = UnityEngine.Random.Range(1, empire.empireSectors.Count);
+        int allocation = UnityEngine.Random.Range(1, 7);
         if (LogManager.Instance.logsEnabled)
         {
             if (LogManager.Instance.alienAllocationLogs)

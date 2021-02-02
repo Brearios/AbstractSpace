@@ -415,6 +415,8 @@ MonoBehaviour:
   playerEmpire: {fileID: 11400000, guid: 485394bd2d3d68f44a8cbabf31f8160a, type: 2}
   currentSector: {fileID: 0}
   knownEmpires: []
+  alienEmpireTemplate: {fileID: 11400000, guid: 6b84ae56d36eb0f4c92917c710551a14,
+    type: 2}
   playerDefeatedEmpires: 0
   currentWars: 0
   spaceYear: 1

@@ -12,30 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a90cb2f9b5a1cd488efe96696350e82, type: 3}
   m_Name: Alien Empire
   m_EditorClassIdentifier: 
-  race: {fileID: 0}
+  race: {fileID: 11400000, guid: 4839c56bb41f2324f8a0df16f673f5eb, type: 2}
   AtWarWithPlayer: 0
   AlliedWithPlayer: 0
   Name: 
   Adjective: 
   rulerName: 
-  grossEmpireProduct: 0
+  grossEmpireProduct: 10
   bonusResourcesFromEvents: 0
   exploredStars: 0
   discoveredPlanets: 0
   colonizedPlanets: 0
-  fleetStrength: 0
+  fleetStrength: 1
   relationsTowardPlayer: 0
   diplomaticCapacity: 0
-  economy: {fileID: 0}
-  exploration: {fileID: 0}
-  colonization: {fileID: 0}
-  military: {fileID: 0}
-  science: {fileID: 0}
-  diplomacy: {fileID: 0}
-  empireSectors: []
-  economyScienceMultiplier: 0
-  explorationScienceMultiplier: 0
-  colonizationScienceMultiplier: 0
-  militaryScienceMultiplier: 0
-  scienceScienceMultiplier: 0
-  diplomacyScienceMultiplier: 0
+  economy: {fileID: 11400000, guid: f74daf70607bfd54eaca9720c166100d, type: 2}
+  exploration: {fileID: 11400000, guid: ba31d0c54157b1b418c05550c58a61f9, type: 2}
+  colonization: {fileID: 11400000, guid: e0ef32cb545ddcd40b36a7b27acd1a75, type: 2}
+  military: {fileID: 11400000, guid: 1a1e6621b0dd05c4fb56f0b3f53d1a5e, type: 2}
+  science: {fileID: 11400000, guid: 2db4889d73017b84a9a51d7a0c777255, type: 2}
+  diplomacy: {fileID: 11400000, guid: 8e767308e5e370e4897368433fedc0b3, type: 2}
+  empireSectors:
+  - {fileID: 11400000, guid: e0ef32cb545ddcd40b36a7b27acd1a75, type: 2}
+  - {fileID: 11400000, guid: 8e767308e5e370e4897368433fedc0b3, type: 2}
+  - {fileID: 11400000, guid: f74daf70607bfd54eaca9720c166100d, type: 2}
+  - {fileID: 11400000, guid: ba31d0c54157b1b418c05550c58a61f9, type: 2}
+  - {fileID: 11400000, guid: 1a1e6621b0dd05c4fb56f0b3f53d1a5e, type: 2}
+  - {fileID: 11400000, guid: 2db4889d73017b84a9a51d7a0c777255, type: 2}
