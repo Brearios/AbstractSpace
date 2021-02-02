@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Race : MonoBehaviour
+[CreateAssetMenu(fileName = "New Race", menuName = "Race")]
+
+public class Race : ScriptableObject
 {
     public string raceName;
     public string raceHomeworld;

@@ -53,9 +53,26 @@ public class GameManager : MonoBehaviour
         // TODO - Buttons for Start and Customize
         // CustomizeEmpire();
         // EstablishPlayerEmpire();
-
+        InitializeEmpire(playerEmpire);
         knownEmpires.Add(playerEmpire);
         AllocateSpending();
+    }
+
+    private void InitializeEmpire(Empire empire)
+    {
+        empire.grossEmpireProduct = 10;
+        empire.exploredStars = 0;
+        empire.discoveredPlanets = 0;
+        empire.colonizedPlanets = 1;
+        empire.fleetStrength = 1;
+        empire.diplomaticCapacity = 0;
+        foreach (SectorValues sector in empire.empireSectors)
+        {
+            sector.growthLevelsAchieved = 0;
+            sector.currentInvestment = 0;
+            sector.neededInvestment = 10;
+            sector.sectorScienceMultiplier = 0.0f;
+        }
     }
 
     // Update is called once per frame
@@ -221,20 +238,20 @@ public class GameManager : MonoBehaviour
         }
         switch (sector.sectorName)
         {
-            case "economy":
+            case "Economy":
                 GrowGEP(empire);
                 break;
 
-            case "exploration":
+            case "Exploration":
                 ExploreStar(empire);
                 break;
 
-            case "colonization":
+            case "Colonization":
                 //TODO May want to eventually have individual planets with their own bonuses that roll here
                 empire.colonizedPlanets++;
                 break;
 
-            case "military":
+            case "Military":
                 if (LogManager.Instance.logsEnabled)
                 {
                     if (LogManager.Instance.fleetUpgradeLogs)
@@ -247,7 +264,7 @@ public class GameManager : MonoBehaviour
                 //TODO Multiply by a value - say 1.08 - rounding up if less than 1?
                 break;
 
-            case "science":
+            case "Science":
                 int selectedSector = UnityEngine.Random.Range(1, 6);
                 switch (selectedSector)
                 {
@@ -272,7 +289,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
 
-            case "diplomacy":
+            case "Diplomacy":
                 empire.diplomaticCapacity++;
                 break;
         }
@@ -283,7 +300,7 @@ public class GameManager : MonoBehaviour
         spaceYear++;
     }
 
-    private void GrowGEP(Empire empire)
+    void GrowGEP(Empire empire)
     {
         float economyIncrease = (1.0f + (empire.colonizedPlanets * MagicNumbers.Instance.planetGrossEmpireProductContribution));
         {
@@ -334,13 +351,14 @@ public class GameManager : MonoBehaviour
         //GenerateEmpireDetails();
         //GenerateRaceDetails();
         Race discoveredEmpireRace = new Race();
-        discoveredEmpireRace.raceHomeworld = ListObjectGrabber(RandomElementsObject.Instance.raceHomeworldGenerationList);
-        string empName = ListObjectGrabber(RandomElementsObject.Instance.raceNameAndAdjectiveGenerationList);
+        discoveredEmpireRace.raceHomeworld = ListObjectGrabber(RandomNamesAndElements.Instance.raceHomeworldGenerationList);
+        string empName = ListObjectGrabber(RandomNamesAndElements.Instance.raceNameAndAdjectiveGenerationList);
         // TODO - switch statement with empire names for race names
         string empAdjective = empName;
         // TODO - having the adjective be the name is probably terrible - will need to revisit
-        string ruler = ListObjectGrabber(RandomElementsObject.Instance.emperorNameGenerationList);
+        string ruler = ListObjectGrabber(RandomNamesAndElements.Instance.emperorNameGenerationList);
         Empire discoveredEmpire = new Empire(discoveredEmpireRace, empName, empAdjective, ruler);
+        //InitializeEmpire(discoveredEmpire);
         for (int i = 0; i < (100 / MagicNumbers.Instance.allocationIterationAmount);  i++)
         {
             // Determine how empire will allocate it's economy
@@ -360,7 +378,15 @@ public class GameManager : MonoBehaviour
     {
         // Choose a Sector
         // Add 10 to that sector
-        empire.empireSectors[UnityEngine.Random.Range(1, 6)].fundingAllocation += MagicNumbers.Instance.allocationIterationAmount;
+        int allocation = UnityEngine.Random.Range(1, empire.empireSectors.Count);
+        if (LogManager.Instance.logsEnabled)
+        {
+            if (LogManager.Instance.alienAllocationLogs)
+            {
+                Debug.Log($"Allocating {MagicNumbers.Instance.allocationIterationAmount} percent of economy to sector {allocation}.");
+            }
+        }
+        empire.empireSectors[allocation].fundingAllocation += MagicNumbers.Instance.allocationIterationAmount;
     }
 
     string ListObjectGrabber(List<string> listName)

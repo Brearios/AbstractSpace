@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Empire : MonoBehaviour
+[CreateAssetMenu(fileName = "New Empire", menuName = "Empire")]
+
+public class Empire : ScriptableObject
 {
     public Race race;
     public bool AtWarWithPlayer;
@@ -27,12 +29,6 @@ public class Empire : MonoBehaviour
     public SectorValues diplomacy;
     // Potentially could add population numbers, to be factored into grossEmpireProduct, with a sector for spending that would increase growth rate
     public List<SectorValues> empireSectors = new List<SectorValues>();
-    public float economyScienceMultiplier = 0.0f;
-    public float explorationScienceMultiplier = 0.0f;
-    public float colonizationScienceMultiplier = 0.0f;
-    public float militaryScienceMultiplier = 0.0f;
-    public float scienceScienceMultiplier = 0.0f;
-    public float diplomacyScienceMultiplier = 0.0f;
 
     public Empire(Race raceDetails, string empName, string empAdjective, string ruler)
     {
@@ -41,29 +37,5 @@ public class Empire : MonoBehaviour
         Adjective = empAdjective;
         rulerName = ruler;
         grossEmpireProduct = MagicNumbers.Instance.StartingGrossEmpireProduct;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        empireSectors.Add(economy);
-        empireSectors.Add(exploration);
-        empireSectors.Add(colonization);
-        empireSectors.Add(military);
-        empireSectors.Add(science);
-        empireSectors.Add(diplomacy);
-
-        economyScienceMultiplier = 0.0f;
-        explorationScienceMultiplier = 0.0f;
-        colonizationScienceMultiplier = 0.0f;
-        militaryScienceMultiplier = 0.0f;
-        scienceScienceMultiplier = 0.0f;
-        diplomacyScienceMultiplier = 0.0f;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

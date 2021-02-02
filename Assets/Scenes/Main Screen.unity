@@ -366,6 +366,8 @@ GameObject:
   - component: {fileID: 191888507}
   - component: {fileID: 191888506}
   - component: {fileID: 191888509}
+  - component: {fileID: 191888511}
+  - component: {fileID: 191888510}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -395,6 +397,7 @@ MonoBehaviour:
   PlayerRuler: Dwight Eisenhower
   StartingGrossEmpireProduct: 10
   treasurePortionOfGEP: 0.3
+  fleetStrengthUpgradeMultiplier: 0
 --- !u!114 &191888507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,7 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRunning: 0
   allocating: 0
-  playerEmpire: {fileID: 1051192435}
+  playerEmpire: {fileID: 11400000, guid: 485394bd2d3d68f44a8cbabf31f8160a, type: 2}
   currentSector: {fileID: 0}
   knownEmpires: []
   playerDefeatedEmpires: 0
@@ -454,6 +457,134 @@ MonoBehaviour:
   militaryText: {fileID: 1610034244}
   diplomacyText: {fileID: 583335611}
   selectedSectorText: {fileID: 1421963312}
+--- !u!114 &191888510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191888505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26922eabe31491a44928d280fe6cd243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logsEnabled: 1
+  sectorUpgradeLogs: 1
+  empireUpgradeLogs: 1
+  processingEmpiresLogs: 0
+  calculateProgressLogs: 0
+  fleetUpgradeLogs: 1
+  growGEPLogs: 1
+  alienAllocationLogs: 1
+--- !u!114 &191888511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191888505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd7af2798f37e6248b1c3f0a7678255c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emperorNameGenerationList:
+  - Zekruk
+  - Qhakun
+  - Mies'ins
+  - Yulgaers
+  - Ghekrets
+  - Serea
+  - Ilgik
+  - Tazil
+  - Bas'ael
+  - Vadhuh
+  - Evroks
+  - Xungits
+  - Khicrets
+  raceNameAndAdjectiveGenerationList:
+  - Alkari
+  - Bulrathi
+  - Darloks
+  - Humans
+  - Klackons
+  - Meklar
+  - Mrrshan
+  - Psilon
+  - Sakkra
+  - Silicoids
+  - Elerians
+  - Gnolams
+  - Trilarians
+  raceHomeworldGenerationList:
+  - Altair
+  - Ursa
+  - Nazin
+  - Sol
+  - Kholdan
+  - Meklon
+  - Fieras
+  - Menta
+  - Sssla
+  - Cryslon
+  - Berylia
+  - Gnol
+  - Wavya
+  locomationGenerationList:
+  - bipedal
+  - tripedal
+  - quadrupedal
+  - floating
+  - flying
+  - serpentine
+  typeOfRaceGenerationList:
+  - mammalian
+  - amphibian
+  - reptilian
+  - avian
+  - insectoid
+  - aquatic
+  - fungoid
+  - plantoid
+  - robotic
+  numberOfAppendagesGenerationList:
+  - two
+  - three
+  - four
+  - six
+  - many
+  typesOfAppendagesGenerationList:
+  - hands
+  - claws
+  - wings
+  - tentacles
+  eyeDetailsGenerationList:
+  - one eye
+  - two eyes
+  - three eyes
+  - many eyes
+  - compound eyes
+  externalCoveringGenerationList:
+  - an exoskeleton
+  - fur
+  - scales
+  - skin
+  societalUnitGenerationList:
+  - in solitary isolation
+  - with immediate family
+  - with extended family groups
+  - in large tribes
+  - in cities
+  - in tightly-packed megacities
+  governmentTypesGenerationList:
+  - is a democracy
+  - is a dictatorship
+  - is a technocracy
+  - is a oligarchy
+  - is a monarchy
+  - is a theocracy
+  - is non-existent - anarchy
 --- !u!1 &207663060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,13 +1601,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5005d00d11243dd4095dd6febf9a1a03, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 14dc5ff8d3e8bd445b9dae3830fb3126, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1949,13 +2080,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5005d00d11243dd4095dd6febf9a1a03, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 14dc5ff8d3e8bd445b9dae3830fb3126, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2141,13 +2272,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5005d00d11243dd4095dd6febf9a1a03, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 14dc5ff8d3e8bd445b9dae3830fb3126, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2256,13 +2387,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 14dc5ff8d3e8bd445b9dae3830fb3126, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2474,114 +2605,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045433022}
   m_CullTransparentMesh: 0
---- !u!1001 &1051192433
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1377530109007259518, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_Name
-      value: Human Federation
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 460.75275
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 308.6794
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -73.57945
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259505, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259504, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: empireSectors.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377530109007259504, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: race
-      value: 
-      objectReference: {fileID: 1051192434}
-    - target: {fileID: 1377530109007259519, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-        type: 3}
-      propertyPath: typesOfAppendages
-      value: hands
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 86b2ac8ec3de7b94289a214b2c43532d, type: 3}
---- !u!114 &1051192434 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1377530109007259519, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1051192433}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa2504796f6f3a41a56b7aa8c747b2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1051192435 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1377530109007259504, guid: 86b2ac8ec3de7b94289a214b2c43532d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1051192433}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a90cb2f9b5a1cd488efe96696350e82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1148560886
 GameObject:
   m_ObjectHideFlags: 0
@@ -3423,13 +3446,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5005d00d11243dd4095dd6febf9a1a03, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 14dc5ff8d3e8bd445b9dae3830fb3126, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4248,13 +4271,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5005d00d11243dd4095dd6febf9a1a03, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 14dc5ff8d3e8bd445b9dae3830fb3126, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4961,13 +4984,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5005d00d11243dd4095dd6febf9a1a03, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 14dc5ff8d3e8bd445b9dae3830fb3126, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5142,13 +5165,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5005d00d11243dd4095dd6febf9a1a03, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 14dc5ff8d3e8bd445b9dae3830fb3126, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomElementsObject : MonoBehaviour
+public class RandomNamesAndElements : MonoBehaviour
 {
-    public static RandomElementsObject Instance;
+    public static RandomNamesAndElements Instance;
 
     public List<string> emperorNameGenerationList = new List<string>{ "Zekruk", "Qhakun", "Mies'ins", "Yulgaers", "Ghekrets", "Serea", "Ilgik", "Tazil", "Bas'ael", "Vadhuh", "Evroks", "Xungits", "Khicrets" };
     public List<string> raceNameAndAdjectiveGenerationList = new List<string>{ "Alkari", "Bulrathi", "Darloks", "Humans", "Klackons", "Meklar", "Mrrshan", "Psilon", "Sakkra", "Silicoids", "Elerians", "Gnolams", "Trilarians" };

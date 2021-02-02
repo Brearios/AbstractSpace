@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a90cb2f9b5a1cd488efe96696350e82, type: 3}
+  m_Name: Alien Empire
+  m_EditorClassIdentifier: 
+  race: {fileID: 0}
+  AtWarWithPlayer: 0
+  AlliedWithPlayer: 0
+  Name: 
+  Adjective: 
+  rulerName: 
+  grossEmpireProduct: 0
+  bonusResourcesFromEvents: 0
+  exploredStars: 0
+  discoveredPlanets: 0
+  colonizedPlanets: 0
+  fleetStrength: 0
+  relationsTowardPlayer: 0
+  diplomaticCapacity: 0
+  economy: {fileID: 0}
+  exploration: {fileID: 0}
+  colonization: {fileID: 0}
+  military: {fileID: 0}
+  science: {fileID: 0}
+  diplomacy: {fileID: 0}
+  empireSectors: []
+  economyScienceMultiplier: 0
+  explorationScienceMultiplier: 0
+  colonizationScienceMultiplier: 0
+  militaryScienceMultiplier: 0
+  scienceScienceMultiplier: 0
+  diplomacyScienceMultiplier: 0

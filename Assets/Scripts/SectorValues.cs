@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SectorValues : MonoBehaviour
+[CreateAssetMenu(fileName = "New Sector Value", menuName = "Sector Value")]
+
+public class SectorValues : ScriptableObject
 {
     public string sectorName;
     public float fundingAllocation;

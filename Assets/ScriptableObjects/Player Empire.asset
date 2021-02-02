@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a90cb2f9b5a1cd488efe96696350e82, type: 3}
+  m_Name: Player Empire
+  m_EditorClassIdentifier: 
+  race: {fileID: 11400000, guid: e922e03380f98eb4990d3cfdffa1d6d0, type: 2}
+  AtWarWithPlayer: 0
+  AlliedWithPlayer: 0
+  Name: Human Space Alliance
+  Adjective: Human
+  rulerName: Dwight Eisenhower
+  grossEmpireProduct: 10
+  bonusResourcesFromEvents: 0
+  exploredStars: 0
+  discoveredPlanets: 0
+  colonizedPlanets: 1
+  fleetStrength: 1
+  relationsTowardPlayer: 0
+  diplomaticCapacity: 0
+  economy: {fileID: 11400000, guid: 694526867a6ad8b4db4452418e2dcf41, type: 2}
+  exploration: {fileID: 11400000, guid: 58894faf6722f114d88c6c036e5068f8, type: 2}
+  colonization: {fileID: 11400000, guid: 5ab4249a88f39c44dac2d8fccbcabe33, type: 2}
+  military: {fileID: 11400000, guid: 31778b65833262343a31ade857553ae8, type: 2}
+  science: {fileID: 11400000, guid: dcdd8e122cc6a2042baf3bfd20e6108a, type: 2}
+  diplomacy: {fileID: 11400000, guid: ec6e1972312afb04f851f857b8a28f44, type: 2}
+  empireSectors:
+  - {fileID: 11400000, guid: 694526867a6ad8b4db4452418e2dcf41, type: 2}
+  - {fileID: 11400000, guid: 58894faf6722f114d88c6c036e5068f8, type: 2}
+  - {fileID: 11400000, guid: 5ab4249a88f39c44dac2d8fccbcabe33, type: 2}
+  - {fileID: 11400000, guid: 31778b65833262343a31ade857553ae8, type: 2}
+  - {fileID: 11400000, guid: dcdd8e122cc6a2042baf3bfd20e6108a, type: 2}
+  - {fileID: 11400000, guid: ec6e1972312afb04f851f857b8a28f44, type: 2}
+  economyScienceMultiplier: 0
+  explorationScienceMultiplier: 0
+  colonizationScienceMultiplier: 0
+  militaryScienceMultiplier: 0
+  scienceScienceMultiplier: 0
+  diplomacyScienceMultiplier: 0
