@@ -13,6 +13,9 @@ public class LogManager : MonoBehaviour
     public bool fleetUpgradeLogs;
     public bool growGEPLogs;
     public bool alienAllocationLogs;
+    public bool initializeFundingLogs;
+    public bool addSectorsToList;
+
     //public bool displaySectorUpgradeLogs;
     //public bool displaySectorUpgradeLogs;
     //public bool displaySectorUpgradeLogs;

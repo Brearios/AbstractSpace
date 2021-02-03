@@ -33,6 +33,7 @@ public class TextBoxController : MonoBehaviour
 
         expansionText.text = $"Explored Stars: {GameManager.Instance.playerEmpire.exploredStars} \n \n" +
             $"Colony Candidates: {GameManager.Instance.playerEmpire.discoveredPlanets} \n \n" +
+            $"Colony Ships on Standby: {GameManager.Instance.playerEmpire.colonyShips} \n \n" +
             $"Colonies: {GameManager.Instance.playerEmpire.colonizedPlanets}";
 
         scienceText.text = $"Science Level: {GameManager.Instance.playerEmpire.science.growthLevelsAchieved} \n \n" +
@@ -63,7 +64,7 @@ public class TextBoxController : MonoBehaviour
             $"Enemy FS: {GameManager.Instance.playerEmpire.colonizedPlanets}";
 
         //TODO - fill in diplomacy, double-check list count - may need -1 or +1
-        diplomacyText.text = $"Known Empires: {GameManager.Instance.knownEmpires.Count} \n \n" +
+        diplomacyText.text = $"Known Empires: {(GameManager.Instance.knownEmpires.Count -1)} \n \n" +
             $"Allies: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
             $"Trading Partners: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
             $"Peaceful Coexistence: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +

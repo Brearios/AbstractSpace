@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40eb7cdbb76c34e4b90e01cdb993730c, type: 3}
   m_Name: AlienRaceTemplate
   m_EditorClassIdentifier: 
-  raceName: 
-  raceHomeworld: 
-  locomation: 
-  typeOfRace: 
-  numberOfAppendages: 
-  typesOfAppendages: 
-  eyeDetails: 
-  externalCovering: 
-  societalUnit: 
-  governmentTypes: 
+  raceName: Sakkran
+  raceHomeworld: Sakkra
+  locomation: bipedal
+  typeOfRace: reptilian
+  numberOfAppendages: two
+  typesOfAppendages: clawed hands
+  eyeDetails: two eyes
+  externalCovering: scales
+  societalUnit: in large tribes
+  governmentTypes: is a dictatorship

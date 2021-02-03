@@ -15,6 +15,13 @@ public class SectorDetails : MonoBehaviour
     void Start()
     {
         sectorName = sectorValuesTemplate.sectorName;
+        if (LogManager.Instance.logsEnabled)
+        {
+            if (LogManager.Instance.initializeFundingLogs)
+            {
+                Debug.Log($"Initializing funding for {sectorName}, in space year {GameManager.Instance.spaceYear}.");
+            }
+        }
         fundingAllocation = sectorValuesTemplate.fundingAllocation;
         growthLevelsAchieved = sectorValuesTemplate.growthLevelsAchieved;
         currentInvestment = sectorValuesTemplate.currentInvestment;

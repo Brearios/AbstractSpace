@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2124734708050997621}
   - component: {fileID: 2124734708050997620}
   m_Layer: 0
-  m_Name: HumanEmpire
+  m_Name: AlienEmpire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,14 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a90cb2f9b5a1cd488efe96696350e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  race: {fileID: 9045642045965266342, guid: be10fa51274487448a3b20914bd52191, type: 3}
+  race: {fileID: 9045642045965266342, guid: 521af1404dd934046ac28a441ff1c2c5, type: 3}
   AtWarWithPlayer: 0
   AlliedWithPlayer: 0
-  Name: Human Space Alliance
-  isPlayer: 1
-  empireTemplate: {fileID: 11400000, guid: 275db1870dbce6047b4606779a7f5eed, type: 2}
+  Name: Space Predators
+  empireTemplate: {fileID: 11400000, guid: 65e3ec8e4fb8df9488b527e76d093e5f, type: 2}
   rulerName: 
-  grossEmpireProduct: 0
+  grossEmpireProduct: 10
   bonusResourcesFromEvents: 0
   exploredStars: 0
   discoveredPlanets: 0
@@ -58,12 +57,6 @@ MonoBehaviour:
   fleetStrength: 0
   relationsTowardPlayer: 0
   diplomaticCapacity: 0
-  economyAllocation: 0
-  explorationAllocation: 0
-  colonizationAllocation: 0
-  militaryAllocation: 0
-  scienceAllocation: 0
-  diplomacyAllocation: 0
   economy: {fileID: 5127814660335074034, guid: c558f7b886c29fa418059501657f059a, type: 3}
   exploration: {fileID: 5127814660335074034, guid: 5c27ea71a90ff044e85cef2c91835b1c,
     type: 3}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Race : MonoBehaviour
 {
     public string raceName;
+    public string raceAdjective;
     public string raceHomeworld;
     public string locomation;
     public string typeOfRace;
@@ -14,6 +15,7 @@ public class Race : MonoBehaviour
     public string externalCovering;
     public string societalUnit;
     public string governmentTypes;
+    public string currentStatus; // Allied, War, Defeated, Peace
 
     public ScriptableRace raceTemplate;
 

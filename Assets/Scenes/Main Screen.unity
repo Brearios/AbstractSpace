@@ -394,7 +394,7 @@ MonoBehaviour:
   totalCivilizations: 20
   PlayerEmpireName: Human Space Alliance
   PlayerAdjective: Human
-  PlayerRuler: Dwight Eisenhower
+  PlayerRuler: Aaron
   StartingGrossEmpireProduct: 10
   treasurePortionOfGEP: 0.3
   fleetStrengthUpgradeMultiplier: 0
@@ -410,19 +410,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6424cdbc3c85ff4428707c5c4eb3fab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRunning: 0
+  isRunning: 1
   allocating: 0
   playerEmpire: {fileID: 1776160985}
+  alienTemplateEmpire: {fileID: 1131332290}
   currentSector: {fileID: 0}
   knownEmpires: []
-  alienEmpireTemplate: {fileID: 0}
+  newEmpiresToAdd: []
   playerDefeatedEmpires: 0
   currentWars: 0
   spaceYear: 1
   gameSpeed: 0
   deltaTime: 0
   timeIncrement: 0
-  empireLabelInt: 0
+  alienEmpire: {fileID: 2124734708050997623, guid: 013d145c63ec1074d832ba964914530e,
+    type: 3}
   notificationTextActivator: {fileID: 58381984}
 --- !u!4 &191888508
 Transform:
@@ -470,14 +472,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26922eabe31491a44928d280fe6cd243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logsEnabled: 1
-  sectorUpgradeLogs: 1
-  empireUpgradeLogs: 1
+  logsEnabled: 0
+  sectorUpgradeLogs: 0
+  empireUpgradeLogs: 0
   processingEmpiresLogs: 0
   calculateProgressLogs: 0
-  fleetUpgradeLogs: 1
-  growGEPLogs: 1
+  fleetUpgradeLogs: 0
+  growGEPLogs: 0
   alienAllocationLogs: 1
+  initializeFundingLogs: 1
+  addSectorsToList: 1
 --- !u!114 &191888511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,7 +508,7 @@ MonoBehaviour:
   - Evroks
   - Xungits
   - Khicrets
-  raceNameAndAdjectiveGenerationList:
+  raceNameGenerationList:
   - Alkari
   - Bulrathi
   - Darloks
@@ -518,6 +522,20 @@ MonoBehaviour:
   - Elerians
   - Gnolams
   - Trilarians
+  raceAdjectiveGenerationList:
+  - Alkaran
+  - Bulrath
+  - Darlokian
+  - Human
+  - Klackon
+  - Meklar
+  - Mrrshan
+  - Psilon
+  - Sakkran
+  - Siliconian
+  - Elerian
+  - Gnolan
+  - Trilarian
   raceHomeworldGenerationList:
   - Altair
   - Ursa
@@ -728,6 +746,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ddb2b2f13805ac4aa7a5cbe12651f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &247475599
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2124734708050997623, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_Name
+      value: AlienEmpire
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 013d145c63ec1074d832ba964914530e, type: 3}
 --- !u!1 &260296417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,6 +2693,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045433022}
   m_CullTransparentMesh: 0
+--- !u!114 &1131332290 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+    type: 3}
+  m_PrefabInstance: {fileID: 247475599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a90cb2f9b5a1cd488efe96696350e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1148560886
 GameObject:
   m_ObjectHideFlags: 0
