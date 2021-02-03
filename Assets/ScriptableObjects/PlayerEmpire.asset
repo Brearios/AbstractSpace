@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d428d1da36ba873489d77ae3d5faf9d7, type: 3}
+  m_Name: PlayerEmpire
+  m_EditorClassIdentifier: 
+  Name: Human Space Alliance
+  Adjective: Human
+  rulerName: Datamancer Aaron
+  economy: {fileID: 5127814660335074034, guid: c558f7b886c29fa418059501657f059a, type: 3}
+  exploration: {fileID: 5127814660335074034, guid: 5c27ea71a90ff044e85cef2c91835b1c,
+    type: 3}
+  colonization: {fileID: 5127814660335074034, guid: c85c8bda0a03b0f4f8174bc04b73aea3,
+    type: 3}
+  military: {fileID: 5127814660335074034, guid: a03bf7240314d954e872e79e428d7655,
+    type: 3}
+  science: {fileID: 5127814660335074034, guid: 00a05c4e88a7962488a8b4701130d71e, type: 3}
+  diplomacy: {fileID: 5127814660335074034, guid: 6b0e1c98b5de52c4a9b6f782cda52c22,
+    type: 3}

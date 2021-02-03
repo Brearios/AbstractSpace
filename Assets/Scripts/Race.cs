@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Race", menuName = "Race")]
-
-public class Race : ScriptableObject
+public class Race : MonoBehaviour
 {
     public string raceName;
     public string raceHomeworld;
@@ -16,4 +14,20 @@ public class Race : ScriptableObject
     public string externalCovering;
     public string societalUnit;
     public string governmentTypes;
+
+    public ScriptableRace raceTemplate;
+
+    private void Start()
+    {
+        raceName = raceTemplate.raceName;
+        raceHomeworld = raceTemplate.raceHomeworld;
+        locomation = raceTemplate.locomation;
+        typeOfRace = raceTemplate.typeOfRace;
+        numberOfAppendages = raceTemplate.numberOfAppendages;
+        typesOfAppendages = raceTemplate.typesOfAppendages;
+        eyeDetails = raceTemplate.eyeDetails;
+        externalCovering = raceTemplate.externalCovering;
+        societalUnit = raceTemplate.societalUnit;
+        governmentTypes = raceTemplate.governmentTypes;
+    }
 }

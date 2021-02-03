@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Sector Value", menuName = "Sector Value")]
 
-public class SectorValues : ScriptableObject
+public class ScriptableSectorValues : ScriptableObject
 {
     public string sectorName;
     public float fundingAllocation;

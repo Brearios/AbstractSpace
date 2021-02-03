@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2124734708050997623
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2124734708050997621}
+  - component: {fileID: 2124734708050997620}
+  m_Layer: 0
+  m_Name: HumanEmpire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2124734708050997621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124734708050997623}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2124734708050997620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124734708050997623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a90cb2f9b5a1cd488efe96696350e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  race: {fileID: 9045642045965266342, guid: be10fa51274487448a3b20914bd52191, type: 3}
+  AtWarWithPlayer: 0
+  AlliedWithPlayer: 0
+  Name: Human Space Alliance
+  empireTemplate: {fileID: 11400000, guid: 275db1870dbce6047b4606779a7f5eed, type: 2}
+  rulerName: 
+  grossEmpireProduct: 0
+  bonusResourcesFromEvents: 0
+  exploredStars: 0
+  discoveredPlanets: 0
+  colonizedPlanets: 0
+  fleetStrength: 0
+  relationsTowardPlayer: 0
+  diplomaticCapacity: 0
+  economy: {fileID: 5127814660335074034, guid: c558f7b886c29fa418059501657f059a, type: 3}
+  exploration: {fileID: 5127814660335074034, guid: 5c27ea71a90ff044e85cef2c91835b1c,
+    type: 3}
+  colonization: {fileID: 5127814660335074034, guid: c85c8bda0a03b0f4f8174bc04b73aea3,
+    type: 3}
+  military: {fileID: 5127814660335074034, guid: a03bf7240314d954e872e79e428d7655,
+    type: 3}
+  science: {fileID: 5127814660335074034, guid: 00a05c4e88a7962488a8b4701130d71e, type: 3}
+  diplomacy: {fileID: 5127814660335074034, guid: 6b0e1c98b5de52c4a9b6f782cda52c22,
+    type: 3}
+  empireSectors: []

@@ -9,12 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 408ccd54a2182724a876df69b1783d3a, type: 3}
-  m_Name: Science 1
+  m_Script: {fileID: 11500000, guid: 40eb7cdbb76c34e4b90e01cdb993730c, type: 3}
+  m_Name: AlienRaceTemplate
   m_EditorClassIdentifier: 
-  sectorName: Science
-  fundingAllocation: 1
-  growthLevelsAchieved: 0
-  currentInvestment: 0
-  neededInvestment: 10
-  sectorScienceMultiplier: 0
+  raceName: 
+  raceHomeworld: 
+  locomation: 
+  typeOfRace: 
+  numberOfAppendages: 
+  typesOfAppendages: 
+  eyeDetails: 
+  externalCovering: 
+  societalUnit: 
+  governmentTypes: 

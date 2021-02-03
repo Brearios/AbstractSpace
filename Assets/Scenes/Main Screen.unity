@@ -412,11 +412,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRunning: 0
   allocating: 0
-  playerEmpire: {fileID: 11400000, guid: 485394bd2d3d68f44a8cbabf31f8160a, type: 2}
+  playerEmpire: {fileID: 1776160985}
   currentSector: {fileID: 0}
   knownEmpires: []
-  alienEmpireTemplate: {fileID: 11400000, guid: 6b84ae56d36eb0f4c92917c710551a14,
-    type: 2}
+  alienEmpireTemplate: {fileID: 0}
   playerDefeatedEmpires: 0
   currentWars: 0
   spaceYear: 1
@@ -4714,6 +4713,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761448392}
   m_CullTransparentMesh: 0
+--- !u!114 &1776160985 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2124734708050997620, guid: 4e606bddda9ba6f489597fa3397986a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2108321116}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a90cb2f9b5a1cd488efe96696350e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1948717979
 GameObject:
   m_ObjectHideFlags: 0
@@ -5572,3 +5583,72 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1001 &2108321116
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2124734708050997623, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_Name
+      value: HumanEmpire
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 4e606bddda9ba6f489597fa3397986a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4e606bddda9ba6f489597fa3397986a7, type: 3}

@@ -9,12 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 408ccd54a2182724a876df69b1783d3a, type: 3}
-  m_Name: Military 1
+  m_Script: {fileID: 11500000, guid: d428d1da36ba873489d77ae3d5faf9d7, type: 3}
+  m_Name: AlienTemplate
   m_EditorClassIdentifier: 
-  sectorName: Military
-  fundingAllocation: 1
-  growthLevelsAchieved: 0
-  currentInvestment: 0
-  neededInvestment: 10
-  sectorScienceMultiplier: 0
+  Name: 
+  Adjective: 
+  rulerName: 
+  economy: {fileID: 0}
+  exploration: {fileID: 0}
+  colonization: {fileID: 0}
+  military: {fileID: 0}
+  science: {fileID: 0}
+  diplomacy: {fileID: 0}

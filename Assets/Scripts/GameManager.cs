@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public bool isRunning;
     public bool allocating;
     public Empire playerEmpire;
-    public SectorValues currentSector;
+    public SectorDetails currentSector;
     public List<Empire> knownEmpires;
     public Empire alienEmpireTemplate;
     public int playerDefeatedEmpires;
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         empire.colonizedPlanets = 1;
         empire.fleetStrength = 1;
         empire.diplomaticCapacity = 0;
-        foreach (SectorValues sector in empire.empireSectors)
+        foreach (SectorDetails sector in empire.empireSectors)
         {
             sector.growthLevelsAchieved = 0;
             sector.currentInvestment = 0;
@@ -109,7 +109,10 @@ public class GameManager : MonoBehaviour
     private void SetPlayEmpireDefaults(Empire playerEmpire)
     {
         playerEmpire.Name = MagicNumbers.Instance.PlayerEmpireName;
-        playerEmpire.Adjective = MagicNumbers.Instance.PlayerAdjective;
+        
+        // Excluded for now, until I see if I need them
+        // playerEmpire.Adjective = MagicNumbers.Instance.PlayerAdjective;
+
         playerEmpire.rulerName = MagicNumbers.Instance.PlayerRuler;
         playerEmpire.grossEmpireProduct = MagicNumbers.Instance.StartingGrossEmpireProduct;
         playerEmpire.discoveredPlanets = 0;
@@ -187,7 +190,7 @@ public class GameManager : MonoBehaviour
 
     void CalculateProgress(Empire empire)
     {
-        foreach (SectorValues currentSector in empire.empireSectors)
+        foreach (SectorDetails currentSector in empire.empireSectors)
             ProcessSectorFunding(empire, currentSector);
         if (LogManager.Instance.logsEnabled)
         {
@@ -205,7 +208,7 @@ public class GameManager : MonoBehaviour
         empire.bonusResourcesFromEvents = 0;
     }
 
-    private void ProcessSectorFunding(Empire empire, SectorValues currentSector)
+    private void ProcessSectorFunding(Empire empire, SectorDetails currentSector)
     {
         float iteratedInvestment = ((empire.grossEmpireProduct * currentSector.fundingAllocation) / 10);
         iteratedInvestment += ((empire.bonusResourcesFromEvents * currentSector.fundingAllocation) / 10);
@@ -219,7 +222,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void UpgradeSector(SectorValues sector)
+    private void UpgradeSector(SectorDetails sector)
     {
         sector.growthLevelsAchieved += 1;
         sector.currentInvestment -= sector.neededInvestment;
@@ -227,7 +230,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Upgraded {sector.sectorName}, in space year {spaceYear}.");
     }
 
-    private void UpgradeEmpire(Empire empire, SectorValues sector)
+    private void UpgradeEmpire(Empire empire, SectorDetails sector)
     {
         if (LogManager.Instance.logsEnabled)
         {
@@ -351,14 +354,24 @@ public class GameManager : MonoBehaviour
         // Give each empire a unique name - Unsure if this is necessary
         //GenerateEmpireDetails();
         //GenerateRaceDetails();
-        Race discoveredEmpireRace = ScriptableObject.CreateInstance<Race>();
+
+        // REMOVE
+        // Race discoveredEmpireRace = ScriptableObject.CreateInstance<Race>();
+        Empire discoveredEmpire = new Empire();
+        Race discoveredEmpireRace = new Race();
         discoveredEmpireRace.raceHomeworld = ListObjectGrabber(RandomNamesAndElements.Instance.raceHomeworldGenerationList);
-        string empName = ListObjectGrabber(RandomNamesAndElements.Instance.raceNameAndAdjectiveGenerationList);
+        discoveredEmpire.Name = ListObjectGrabber(RandomNamesAndElements.Instance.raceNameAndAdjectiveGenerationList);
         // TODO - switch statement with empire names for race names
-        string empAdjective = empName;
+
+        // Removed until I figure out if paragraphs need seperate adjectives
+        // string empAdjective = empName;
         // TODO - having the adjective be the name is probably terrible - will need to revisit
+
         string ruler = ListObjectGrabber(RandomNamesAndElements.Instance.emperorNameGenerationList);
-        Empire discoveredEmpire = ScriptableObject.CreateInstance<Empire>();
+
+        // REMOVE
+        // Empire discoveredEmpire = ScriptableObject.CreateInstance<Empire>();
+
         CreateAndListAlienSectors(discoveredEmpire);
 
         for (int i = 0; i < (100 / MagicNumbers.Instance.allocationIterationAmount);  i++)
@@ -378,14 +391,17 @@ public class GameManager : MonoBehaviour
 
     private void CreateAndListAlienSectors(Empire discoveredEmpire)
     {
-        // Trying tp get sectors to not give "instance of object errors" when adding to list, or allocating below
+        // Trying to get sectors to not give "instance of object errors" when adding to list, or allocating below
 
-        discoveredEmpire.economy = ScriptableObject.CreateInstance<SectorValues>();
-        discoveredEmpire.exploration = ScriptableObject.CreateInstance<SectorValues>();
-        discoveredEmpire.colonization = ScriptableObject.CreateInstance<SectorValues>();
-        discoveredEmpire.military = ScriptableObject.CreateInstance<SectorValues>();
-        discoveredEmpire.science = ScriptableObject.CreateInstance<SectorValues>();
-        discoveredEmpire.diplomacy = ScriptableObject.CreateInstance<SectorValues>();
+
+        //REMOVE - may be able to remove this
+        //discoveredEmpire.economy = ScriptableObject.CreateInstance<SectorDetails>();
+        //discoveredEmpire.exploration = ScriptableObject.CreateInstance<SectorDetails>();
+        //discoveredEmpire.colonization = ScriptableObject.CreateInstance<SectorDetails>();
+        //discoveredEmpire.military = ScriptableObject.CreateInstance<SectorDetails>();
+        //discoveredEmpire.science = ScriptableObject.CreateInstance<SectorDetails>();
+        //discoveredEmpire.diplomacy = ScriptableObject.CreateInstance<SectorDetails>();
+
         discoveredEmpire.empireSectors.Add(discoveredEmpire.economy);
         discoveredEmpire.empireSectors.Add(discoveredEmpire.exploration);
         discoveredEmpire.empireSectors.Add(discoveredEmpire.colonization);
