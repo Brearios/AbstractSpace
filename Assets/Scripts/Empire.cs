@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,6 +33,13 @@ public class Empire : MonoBehaviour
     public float militaryAllocation;
     public float scienceAllocation;
     public float diplomacyAllocation;
+
+    public float expectedEconomyBudget;
+    public float expectedExplorationBudget;
+    public float expectedColonizationBudget;
+    public float expectedMilitaryBudget;
+    public float expectedScienceBudget;
+    public float expectedDiplomacyBudget;
 
     public SectorDetails economy;
     public SectorDetails exploration;
@@ -73,11 +81,28 @@ public class Empire : MonoBehaviour
 
     private void Update()
     {
-    economyAllocation = economy.fundingAllocation;
-    explorationAllocation = exploration.fundingAllocation;
-    colonizationAllocation = colonization.fundingAllocation;
-    militaryAllocation = military.fundingAllocation;
-    scienceAllocation = science.fundingAllocation;
-    diplomacyAllocation = diplomacy.fundingAllocation;
-}
+        UpdateEmpireAllocations();
+
+        CalculateExpectedBudgets();
+    }
+
+    private void UpdateEmpireAllocations()
+    {
+        economyAllocation = economy.fundingAllocation;
+        explorationAllocation = exploration.fundingAllocation;
+        colonizationAllocation = colonization.fundingAllocation;
+        militaryAllocation = military.fundingAllocation;
+        scienceAllocation = science.fundingAllocation;
+        diplomacyAllocation = diplomacy.fundingAllocation;
+    }
+
+    private void CalculateExpectedBudgets()
+    {
+        expectedEconomyBudget = ((grossEmpireProduct * economyAllocation) * MagicNumbers.Instance.allocationPercentage);
+        expectedExplorationBudget = ((grossEmpireProduct * explorationAllocation) * MagicNumbers.Instance.allocationPercentage);
+        expectedColonizationBudget = ((grossEmpireProduct * colonizationAllocation) * MagicNumbers.Instance.allocationPercentage);
+        expectedMilitaryBudget = ((grossEmpireProduct * militaryAllocation) * MagicNumbers.Instance.allocationPercentage);
+        expectedScienceBudget = ((grossEmpireProduct * scienceAllocation) * MagicNumbers.Instance.allocationPercentage);
+        expectedDiplomacyBudget = ((grossEmpireProduct * diplomacyAllocation) * MagicNumbers.Instance.allocationPercentage);
+    }
 }

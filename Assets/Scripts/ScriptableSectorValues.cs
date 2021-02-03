@@ -7,7 +7,7 @@ using UnityEngine;
 public class ScriptableSectorValues : ScriptableObject
 {
     public string sectorName;
-    public float fundingAllocation;
+    public int fundingAllocation;
     public int growthLevelsAchieved;
     public float currentInvestment;
     public float neededInvestment;

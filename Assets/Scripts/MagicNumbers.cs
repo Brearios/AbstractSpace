@@ -7,6 +7,8 @@ public class MagicNumbers : MonoBehaviour
     public static MagicNumbers Instance;
     public int initialUpgradeCost;
     public int allocationIterationAmount = 5;
+    public float allocationPercentage;
+    public int numberOfAllocationSegments;
     public float upgradeCostMultiplier;
     public float planetGrossEmpireProductContribution; // How much an economic growth level is added to, per colonized planet
     public int totalCivilizations;
@@ -28,5 +30,7 @@ public class MagicNumbers : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        allocationPercentage = (allocationIterationAmount / 100);
+        numberOfAllocationSegments = (100 / allocationIterationAmount);
     }
 }

@@ -438,7 +438,7 @@ public class GameManager : MonoBehaviour
             // TODO - tie this to priorities
             AllocateEconomy(discoveredEmpire);
         }
-        for (int i = 0; i < spaceYear; i++)
+        for (int i = 1; i < spaceYear; i++)
         {
             CalculateProgress(discoveredEmpire);
         }
@@ -470,7 +470,7 @@ public class GameManager : MonoBehaviour
         {
             if (LogManager.Instance.alienAllocationLogs)
             {
-                Debug.Log($"Allocating {MagicNumbers.Instance.allocationIterationAmount} percent of {empire.Name} economy to sector {allocation}.");
+                Debug.Log($"Allocating {MagicNumbers.Instance.allocationIterationAmount} percent of {empire.Name} economy to sector {empire.empireSectors[allocation].sectorName}.");
             }
         }
         empire.empireSectors[allocation].fundingAllocation += MagicNumbers.Instance.allocationIterationAmount;

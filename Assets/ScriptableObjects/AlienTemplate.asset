@@ -15,9 +15,13 @@ MonoBehaviour:
   Name: 
   Adjective: 
   rulerName: 
-  economy: {fileID: 0}
-  exploration: {fileID: 0}
-  colonization: {fileID: 0}
-  military: {fileID: 0}
-  science: {fileID: 0}
-  diplomacy: {fileID: 0}
+  economy: {fileID: 5127814660335074034, guid: c558f7b886c29fa418059501657f059a, type: 3}
+  exploration: {fileID: 5127814660335074034, guid: 5c27ea71a90ff044e85cef2c91835b1c,
+    type: 3}
+  colonization: {fileID: 5127814660335074034, guid: c85c8bda0a03b0f4f8174bc04b73aea3,
+    type: 3}
+  military: {fileID: 5127814660335074034, guid: a03bf7240314d954e872e79e428d7655,
+    type: 3}
+  science: {fileID: 5127814660335074034, guid: 00a05c4e88a7962488a8b4701130d71e, type: 3}
+  diplomacy: {fileID: 5127814660335074034, guid: 6b0e1c98b5de52c4a9b6f782cda52c22,
+    type: 3}

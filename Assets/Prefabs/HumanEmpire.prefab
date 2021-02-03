@@ -50,11 +50,12 @@ MonoBehaviour:
   isPlayer: 1
   empireTemplate: {fileID: 11400000, guid: 275db1870dbce6047b4606779a7f5eed, type: 2}
   rulerName: 
-  grossEmpireProduct: 0
+  grossEmpireProduct: 10
   bonusResourcesFromEvents: 0
   exploredStars: 0
   discoveredPlanets: 0
   colonizedPlanets: 0
+  colonyShips: 0
   fleetStrength: 0
   relationsTowardPlayer: 0
   diplomaticCapacity: 0
@@ -64,6 +65,12 @@ MonoBehaviour:
   militaryAllocation: 0
   scienceAllocation: 0
   diplomacyAllocation: 0
+  expectedEconomyBudget: 0
+  expectedExplorationBudget: 0
+  expectedColonizationBudget: 0
+  expectedMilitaryBudget: 0
+  expectedScienceBudget: 0
+  expectedDiplomacyBudget: 0
   economy: {fileID: 5127814660335074034, guid: c558f7b886c29fa418059501657f059a, type: 3}
   exploration: {fileID: 5127814660335074034, guid: 5c27ea71a90ff044e85cef2c91835b1c,
     type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Exploration
   m_EditorClassIdentifier: 
   sectorName: exploration
-  fundingAllocation: 1
+  fundingAllocation: 2
   growthLevelsAchieved: 0
   currentInvestment: 0
   neededInvestment: 10

@@ -388,7 +388,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialUpgradeCost: 10
-  allocationIterationAmount: 5
+  allocationIterationAmount: 10
+  allocationPercentage: 0
+  numberOfAllocationSegments: 0
   upgradeCostMultiplier: 1.15
   planetGrossEmpireProductContribution: 0.2
   totalCivilizations: 20
@@ -410,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6424cdbc3c85ff4428707c5c4eb3fab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRunning: 1
+  isRunning: 0
   allocating: 0
   playerEmpire: {fileID: 1776160985}
   alienTemplateEmpire: {fileID: 1131332290}
@@ -472,8 +474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26922eabe31491a44928d280fe6cd243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logsEnabled: 0
-  sectorUpgradeLogs: 0
+  logsEnabled: 1
+  sectorUpgradeLogs: 1
   empireUpgradeLogs: 0
   processingEmpiresLogs: 0
   calculateProgressLogs: 0
@@ -481,7 +483,7 @@ MonoBehaviour:
   growGEPLogs: 0
   alienAllocationLogs: 1
   initializeFundingLogs: 1
-  addSectorsToList: 1
+  addSectorsToList: 0
 --- !u!114 &191888511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,6 +815,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: colonization
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 4c8ff8c9148ccea4996f2b918c317fd3,
+        type: 3}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: diplomacy
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 6f4ecb7ad468db14eaf57b99c98047bf,
+        type: 3}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: economy
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 52334926d8646c04e8f2d896dd31bff0,
+        type: 3}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: exploration
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 43561456072060440a6b02879954023f,
+        type: 3}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: military
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 1c9de8c46ff00b04ca50fefdbe563c31,
+        type: 3}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: science
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 115f0792a4f0de3439b44dad5fdc9ff1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 013d145c63ec1074d832ba964914530e, type: 3}
 --- !u!1 &260296417

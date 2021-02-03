@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Economy
   m_EditorClassIdentifier: 
   sectorName: economy
-  fundingAllocation: 5
+  fundingAllocation: 4
   growthLevelsAchieved: 0
   currentInvestment: 0
   neededInvestment: 10
