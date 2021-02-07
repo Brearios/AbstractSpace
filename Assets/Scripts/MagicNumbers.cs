@@ -16,8 +16,12 @@ public class MagicNumbers : MonoBehaviour
     public string PlayerAdjective = "Human";
     public string PlayerRuler = "Dwight Eisenhower";
     public int StartingGrossEmpireProduct = 10;
+    public int StartingColonizedPlanets;
     public float treasurePortionOfGEP = 0.3f;
     public float fleetStrengthUpgradeMultiplier;
+
+    
+
     // Needs a starting grossEmpireProduct
 
     public void Awake()
@@ -30,7 +34,7 @@ public class MagicNumbers : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        allocationPercentage = (allocationIterationAmount / 100);
+        allocationPercentage = (100 / allocationIterationAmount);
         numberOfAllocationSegments = (100 / allocationIterationAmount);
     }
 }

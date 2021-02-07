@@ -21,15 +21,16 @@ public class Race : MonoBehaviour
 
     private void Start()
     {
-        raceName = raceTemplate.raceName;
-        raceHomeworld = raceTemplate.raceHomeworld;
-        locomation = raceTemplate.locomation;
-        typeOfRace = raceTemplate.typeOfRace;
-        numberOfAppendages = raceTemplate.numberOfAppendages;
-        typesOfAppendages = raceTemplate.typesOfAppendages;
-        eyeDetails = raceTemplate.eyeDetails;
-        externalCovering = raceTemplate.externalCovering;
-        societalUnit = raceTemplate.societalUnit;
-        governmentTypes = raceTemplate.governmentTypes;
+        // REMOVE - handled by Empire.Start.InitializeAlienEmpire.GenerateBiology~
+        //raceName = raceTemplate.raceName;
+        //raceHomeworld = raceTemplate.raceHomeworld;
+        //locomation = raceTemplate.locomation;
+        //typeOfRace = raceTemplate.typeOfRace;
+        //numberOfAppendages = raceTemplate.numberOfAppendages;
+        //typesOfAppendages = raceTemplate.typesOfAppendages;
+        //eyeDetails = raceTemplate.eyeDetails;
+        //externalCovering = raceTemplate.externalCovering;
+        //societalUnit = raceTemplate.societalUnit;
+        //governmentTypes = raceTemplate.governmentTypes;
     }
 }

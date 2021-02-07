@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     //TODO - War button and screen
     //TODO - connect gameSpeed to deltaTime
+    //TODO - generate race details
 
     public void Awake()
     {
@@ -54,47 +55,13 @@ public class GameManager : MonoBehaviour
         // TODO - Buttons for Start and Customize
         // CustomizeEmpire();
         // EstablishPlayerEmpire();
-        InitializeEmpire(playerEmpire);
-        knownEmpires.Add(playerEmpire);
+        
         
         // Uncomment once UI is complete/working
         // AllocateSpending();
     }
 
-    private void InitializeEmpire(Empire empire)
-    {
-        empire.grossEmpireProduct = 10;
-        empire.exploredStars = 0;
-        empire.discoveredPlanets = 0;
-        empire.colonizedPlanets = 1;
-        empire.fleetStrength = 1;
-        empire.diplomaticCapacity = 0;
-        foreach (SectorDetails sector in empire.empireSectors)
-        {
-            sector.sectorName = sector.sectorValuesTemplate.sectorName;
-            if (LogManager.Instance.logsEnabled)
-            {
-                if (LogManager.Instance.initializeFundingLogs)
-                {
-                    Debug.Log($"Initializing funding for {sector.sectorName}, in space year {GameManager.Instance.spaceYear}.");
-                }
-            }
-            sector.fundingAllocation = sector.sectorValuesTemplate.fundingAllocation;
-            sector.growthLevelsAchieved = sector.sectorValuesTemplate.growthLevelsAchieved;
-            sector.currentInvestment = sector.sectorValuesTemplate.currentInvestment;
-            sector.neededInvestment = sector.sectorValuesTemplate.neededInvestment;
-            sector.sectorScienceMultiplier = sector.sectorValuesTemplate.sectorScienceMultiplier;
-        }
-        
-        // These read from Scriptable Sectors at start
-        //foreach (SectorDetails sector in empire.empireSectors)
-        //{
-        //    sector.growthLevelsAchieved = 0;
-        //    sector.currentInvestment = 0;
-        //    sector.neededInvestment = 10;
-        //    sector.sectorScienceMultiplier = 0.0f;
-        //}
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -120,7 +87,8 @@ public class GameManager : MonoBehaviour
 
 
 
-        ProcessKnownEmpries();
+        // REMOVE - No longer need foreach due to move of CalculateProgress to Empire.cs
+        // ProcessKnownEmpries();
 
         AddEmpiresAndResetList();
 
@@ -195,272 +163,264 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ProcessKnownEmpries()
-    {
-        if (LogManager.Instance.logsEnabled)
-            {
-            if (LogManager.Instance.calculateProgressLogs)
-            {
-                Debug.Log($"Processing empires, in space year {spaceYear}.");
-            }
-        }
-        foreach (Empire currentEmpire in knownEmpires)
-        {
-            CalculateProgress(currentEmpire);
-        }
-    }
+    // REMOVE - moved to Empire.cs
+    // Moved CalculateProgress to Empire.cs, no longer necessary
+    //private void ProcessKnownEmpries()
+    //{
+    //    if (LogManager.Instance.logsEnabled)
+    //        {
+    //        if (LogManager.Instance.calculateProgressLogs)
+    //        {
+    //            Debug.Log($"Processing empires, in space year {spaceYear}.");
+    //        }
+    //    }
+    //    foreach (Empire currentEmpire in knownEmpires)
+    //    {
+    //        CalculateProgress(currentEmpire);
+    //    }
+    //}
 
+    // REMOVE - moved to Empire.cs
+    // Moved to CalculateProgress in Empire.cs, no longer necessary
+    //private void ProcessSectorFunding(Empire empire, SectorDetails currentSector)
+    //{
+    //    float iteratedInvestment = ((empire.grossEmpireProduct * currentSector.fundingAllocation) / (100 / MagicNumbers.Instance.allocationIterationAmount));
+    //    iteratedInvestment += ((empire.bonusResourcesFromEvents * currentSector.fundingAllocation) / (100 / MagicNumbers.Instance.allocationIterationAmount));
+    //    iteratedInvestment += (iteratedInvestment * currentSector.sectorScienceMultiplier);
+    //    currentSector.currentInvestment += iteratedInvestment;
+    //    while (currentSector.currentInvestment > currentSector.neededInvestment)
+    //    {
+    //        UpgradeEmpire(empire, currentSector);
+    //        UpgradeSector(currentSector);
+    //    }
 
+    //}
 
-    void CalculateProgress(Empire empire)
-    {
-        foreach (SectorDetails currentSector in empire.empireSectors)
-            ProcessSectorFunding(empire, currentSector);
-        if (LogManager.Instance.logsEnabled)
-        {
-            if (LogManager.Instance.calculateProgressLogs)
-            {
-                Debug.Log($"Calculating progress for {empire.Name}, in space year {spaceYear}.");
-            }
-        }
-        //GrowEconomy(empire, empire.economy);
-        //ExploreStars(empire, empire.exploration);
-        //ColonizePlanets(empire, empire.colonization);
-        //BuildMilitaryShips(empire, empire.military);
-        //FundResearchGrants(empire, empire.science);
-        //SendSpaceDiplomats(empire, empire.diplomacy);
-        empire.bonusResourcesFromEvents = 0;
-    }
+    // REMOVE - moved to Empire.cs
+    //private void UpgradeSector(SectorDetails sector)
+    //{
+    //    sector.growthLevelsAchieved += 1;
+    //    sector.currentInvestment -= sector.neededInvestment;
+    //    sector.neededInvestment *= MagicNumbers.Instance.upgradeCostMultiplier;
+    //    Debug.Log($"Upgraded {sector.sectorName}, to {sector.growthLevelsAchieved} in space year {spaceYear}.");
+    //}
 
-    private void ProcessSectorFunding(Empire empire, SectorDetails currentSector)
-    {
-        float iteratedInvestment = ((empire.grossEmpireProduct * currentSector.fundingAllocation) / (100 / MagicNumbers.Instance.allocationIterationAmount));
-        iteratedInvestment += ((empire.bonusResourcesFromEvents * currentSector.fundingAllocation) / (100 / MagicNumbers.Instance.allocationIterationAmount));
-        iteratedInvestment += (iteratedInvestment * currentSector.sectorScienceMultiplier);
-        currentSector.currentInvestment += iteratedInvestment;
-        while (currentSector.currentInvestment > currentSector.neededInvestment)
-        {
-            UpgradeEmpire(empire, currentSector);
-            UpgradeSector(currentSector);
-        }
+    // REMOVE - moved to Empire.cs
+    //private void UpgradeEmpire(Empire empire, SectorDetails sector)
+    //{
+    //    if (LogManager.Instance.logsEnabled)
+    //    {
+    //        if (LogManager.Instance.empireUpgradeLogs)
+    //        {
 
-    }
+    //            Debug.Log($"Upgrading {empire.Name}'s {sector.sectorName} in space year {spaceYear}.");
+    //        }
+    //    }
+    //    switch (sector.sectorName)
+    //    {
+    //        case "economy":
+    //            GrowGEP(empire);
+    //            break;
 
-    private void UpgradeSector(SectorDetails sector)
-    {
-        sector.growthLevelsAchieved += 1;
-        sector.currentInvestment -= sector.neededInvestment;
-        sector.neededInvestment *= MagicNumbers.Instance.upgradeCostMultiplier;
-        Debug.Log($"Upgraded {sector.sectorName}, in space year {spaceYear}.");
-    }
+    //        case "exploration":
+    //            ExploreStar(empire);
+    //            break;
 
-    private void UpgradeEmpire(Empire empire, SectorDetails sector)
-    {
-        if (LogManager.Instance.logsEnabled)
-        {
-            if (LogManager.Instance.empireUpgradeLogs)
-            {
+    //        case "colonization":
+    //            //TODO May want to eventually have individual planets with their own bonuses that roll here
+    //            if (empire.discoveredPlanets > 0)
+    //            {
+    //                empire.colonizedPlanets++;
+    //                empire.discoveredPlanets--;
+    //            }
+    //            else
+    //            {
+    //                empire.colonyShips++;
+    //            }
 
-                Debug.Log($"Upgrading {empire.Name}'s {sector.sectorName} in space year {spaceYear}.");
-            }
-        }
-        switch (sector.sectorName)
-        {
-            case "economy":
-                GrowGEP(empire);
-                break;
+    //            break;
 
-            case "exploration":
-                ExploreStar(empire);
-                break;
+    //        case "military":
+    //            if (LogManager.Instance.logsEnabled)
+    //            {
+    //                if (LogManager.Instance.fleetUpgradeLogs)
+    //                {
+    //                    Debug.Log($"Upgrading fleet - from {empire.fleetStrength} to {(empire.fleetStrength + (empire.fleetStrength * MagicNumbers.Instance.fleetStrengthUpgradeMultiplier))}.");
+    //                }
+    //            }
 
-            case "colonization":
-                //TODO May want to eventually have individual planets with their own bonuses that roll here
-                if (empire.discoveredPlanets > 0)
-                {
-                    empire.colonizedPlanets++;
-                    empire.discoveredPlanets--;
-                }
-                else
-                {
-                    empire.colonyShips++;
-                }
+    //            empire.fleetStrength++;
+    //            //TODO Multiply by a value - say 1.08 - rounding up if less than 1?
+    //            break;
 
-                break;
+    //        case "science":
+    //            int selectedSector = UnityEngine.Random.Range(1, 7);
+    //            switch (selectedSector)
+    //            {
+    //                case 1:
+    //                    empire.economy.sectorScienceMultiplier += 0.1f;
+    //                    break;
+    //                case 2:
+    //                    empire.exploration.sectorScienceMultiplier += 0.1f;
+    //                    break;
+    //                case 3:
+    //                    empire.colonization.sectorScienceMultiplier += 0.1f;
+    //                    break;
+    //                case 4:
+    //                    empire.military.sectorScienceMultiplier += 0.1f;
+    //                    break;
+    //                case 5:
+    //                    empire.science.sectorScienceMultiplier += 0.1f;
+    //                    break;
+    //                case 6:
+    //                    empire.diplomacy.sectorScienceMultiplier += 0.1f;
+    //                    break;
+    //            }
+    //            break;
 
-            case "military":
-                if (LogManager.Instance.logsEnabled)
-                {
-                    if (LogManager.Instance.fleetUpgradeLogs)
-                    {
-                        Debug.Log($"Upgrading fleet - from {empire.fleetStrength} to {(empire.fleetStrength + (empire.fleetStrength * MagicNumbers.Instance.fleetStrengthUpgradeMultiplier))}.");
-                    }
-                }
-
-                empire.fleetStrength++;
-                //TODO Multiply by a value - say 1.08 - rounding up if less than 1?
-                break;
-
-            case "science":
-                int selectedSector = UnityEngine.Random.Range(1, 7);
-                switch (selectedSector)
-                {
-                    case 1:
-                        empire.economy.sectorScienceMultiplier += 0.1f;
-                        break;
-                    case 2:
-                        empire.exploration.sectorScienceMultiplier += 0.1f;
-                        break;
-                    case 3:
-                        empire.colonization.sectorScienceMultiplier += 0.1f;
-                        break;
-                    case 4:
-                        empire.military.sectorScienceMultiplier += 0.1f;
-                        break;
-                    case 5:
-                        empire.science.sectorScienceMultiplier += 0.1f;
-                        break;
-                    case 6:
-                        empire.diplomacy.sectorScienceMultiplier += 0.1f;
-                        break;
-                }
-                break;
-
-            case "diplomacy":
-                empire.diplomaticCapacity++;
-                break;
-        }
-    }
+    //        case "diplomacy":
+    //            empire.diplomaticCapacity++;
+    //            break;
+    //    }
+    //}
 
     void IncrementYear()
     {
         spaceYear++;
     }
 
-    void GrowGEP(Empire empire)
-    {
-        float economyIncrease = (1.0f + (empire.colonizedPlanets * MagicNumbers.Instance.planetGrossEmpireProductContribution));
-        {
-            if (LogManager.Instance.logsEnabled)
-            {
-                if (LogManager.Instance.growGEPLogs)
-                {
-                    Debug.Log($"Economy increasing by {economyIncrease}, from {playerEmpire.grossEmpireProduct}, in space year {spaceYear}.");
-                }
-            }
-        }
-        empire.grossEmpireProduct += economyIncrease;
-    }
+    // REMOVE - moved to Empire.cs
+    //void GrowGEP(Empire empire)
+    //{
+    //    float economyIncrease = (1.0f + (empire.colonizedPlanets * MagicNumbers.Instance.planetGrossEmpireProductContribution));
+    //    {
+    //        if (LogManager.Instance.logsEnabled)
+    //        {
+    //            if (LogManager.Instance.growGEPLogs)
+    //            {
+    //                Debug.Log($"Economy increasing by {economyIncrease}, from {playerEmpire.grossEmpireProduct}, in space year {spaceYear}.");
+    //            }
+    //        }
+    //    }
+    //    empire.grossEmpireProduct += economyIncrease;
+    //}
 
-    void ExploreStar(Empire empire)
-    {
-        empire.exploredStars++;
-        RollStarOutcome(empire);
-    }
+    // REMOVE - moved to Empire.cs
+    //void ExploreStar(Empire empire)
+    //{
+    //    empire.exploredStars++;
+    //    RollStarOutcome(empire);
+    //}
 
-    private void RollStarOutcome(Empire empire)
-    {
-        int random = UnityEngine.Random.Range(1, 100);
-        if (random < 34)
-        {
-            if (empire.colonyShips > 0)
-            {
-                empire.colonyShips--;
-                empire.colonizedPlanets++;
-            }
-            else
-            {
-                empire.discoveredPlanets++;
-            }
-        }
-        else if (random < 67)
-        {
-            //TODO - figure out if I want alien empires meeting alien empires and having their own trade and war
-            if (empire.isPlayer)
-            {
-                DiscoverAlienEmpire();
-            }
-            else
-            {
-                FindBonusResources(empire);
-            }
-        }
-        else if (random < 100)
-        {
-            FindBonusResources(empire);
-        }
-    }
+    // REMOVE - moved to Empire.cs
+    //private void RollStarOutcome(Empire empire)
+    //{
+    //    int random = UnityEngine.Random.Range(1, 100);
+    //    if (random < 34)
+    //    {
+    //        if (empire.colonyShips > 0)
+    //        {
+    //            empire.colonyShips--;
+    //            empire.colonizedPlanets++;
+    //        }
+    //        else
+    //        {
+    //            empire.discoveredPlanets++;
+    //        }
+    //    }
+    //    else if (random < 67)
+    //    {
+    //        //TODO - figure out if I want alien empires meeting alien empires and having their own trade and war
+    //        if (empire.isPlayer)
+    //        {
+    //            DiscoverAlienEmpire();
+    //        }
+    //        else
+    //        {
+    //            FindBonusResources(empire);
+    //        }
+    //    }
+    //    else if (random < 100)
+    //    {
+    //        FindBonusResources(empire);
+    //    }
+    //}
 
-    private void FindBonusResources(Empire empire)
-    {
-        float treasureAmount = (empire.grossEmpireProduct * MagicNumbers.Instance.treasurePortionOfGEP);
-        empire.bonusResourcesFromEvents += treasureAmount;
-    }
+    // REMOVE - moved to Empire.cs
+    //private void FindBonusResources(Empire empire)
+    //{
+    //    float treasureAmount = (empire.grossEmpireProduct * MagicNumbers.Instance.treasurePortionOfGEP);
+    //    empire.bonusResourcesFromEvents += treasureAmount;
+    //}
 
-
-    void DiscoverAlienEmpire()
-    {
-        // Give each empire a unique name - Unsure if this is necessary
+    // REMOVE - moved to Empire.cs
+    //void DiscoverAlienEmpire()
+    //{
+    //    // Give each empire a unique name - Unsure if this is necessary
         
-        //GenerateEmpireDetails();
-        //GenerateRaceDetails();
+    //    //GenerateEmpireDetails();
+    //    //GenerateRaceDetails();
 
-        // REMOVE
-        // Race discoveredEmpireRace = ScriptableObject.CreateInstance<Race>();
-        (string raceName, string raceAdjective, string raceHomeworld) = SyncronizedRaceDetailsGrabber(RandomNamesAndElements.Instance.raceNameGenerationList, RandomNamesAndElements.Instance.raceAdjectiveGenerationList, RandomNamesAndElements.Instance.raceHomeworldGenerationList);
-        Race discoveredEmpireRace = new Race();
-        discoveredEmpireRace.raceName = raceName;
-        discoveredEmpireRace.raceAdjective = raceAdjective;
-        discoveredEmpireRace.raceHomeworld = raceHomeworld;
+    //    // RTEMOVE
+    //    // Race discoveredEmpireRace = ScriptableObject.CreateInstance<Race>();
 
-        GameObject tempEmpireObject = Instantiate(alienEmpire);
-        Empire discoveredEmpire;
-        discoveredEmpire = tempEmpireObject.GetComponent<Empire>();
-        discoveredEmpire.race = discoveredEmpireRace;
-        discoveredEmpire.Name = ListSingleObjectGrabber(RandomNamesAndElements.Instance.raceNameGenerationList);
-        // TODO - overload ListObjectGrabber to get name, adjective, and homeworld from same instance
+    //    // ODO - move this below Empire, and don't use new Race
+    //    (string raceName, string raceAdjective, string raceHomeworld) = SyncronizedRaceDetailsGrabber(RandomNamesAndElements.Instance.raceNameGenerationList, RandomNamesAndElements.Instance.raceAdjectiveGenerationList, RandomNamesAndElements.Instance.raceHomeworldGenerationList);
+    //    Race discoveredEmpireRace = new Race();
+    //    discoveredEmpireRace.raceName = raceName;
+    //    discoveredEmpireRace.raceAdjective = raceAdjective;
+    //    discoveredEmpireRace.raceHomeworld = raceHomeworld;
 
-        // Removed until I figure out if paragraphs need seperate adjectives
-        // string empAdjective = empName;
-        // TODO - having the adjective be the name is probably terrible - will need to revisit
+    //    GameObject tempEmpireObject = Instantiate(alienEmpire);
+    //    Empire discoveredEmpire;
+    //    discoveredEmpire = tempEmpireObject.GetComponent<Empire>();
+    //    discoveredEmpire.race = discoveredEmpireRace;
+    //    discoveredEmpire.Name = ListSingleObjectGrabber(RandomNamesAndElements.Instance.raceNameGenerationList);
+    //    // TODO - overload ListObjectGrabber to get name, adjective, and homeworld from same instance
 
-        discoveredEmpire.rulerName = ListSingleObjectGrabber(RandomNamesAndElements.Instance.emperorNameGenerationList);
+    //    // Removed until I figure out if paragraphs need seperate adjectives
+    //    // string empAdjective = empName;
+    //    // TODO - having the adjective be the name is probably terrible - will need to revisit
 
-        // REMOVE
-        // Empire discoveredEmpire = ScriptableObject.CreateInstance<Empire>();
+    //    discoveredEmpire.rulerName = ListSingleObjectGrabber(RandomNamesAndElements.Instance.emperorNameGenerationList);
+
+    //    // REMOVE
+    //    // Empire discoveredEmpire = ScriptableObject.CreateInstance<Empire>();
 
 
-        CreateAndListAlienSectors(discoveredEmpire);
+    //    CreateAndListAlienSectors(discoveredEmpire);
 
-        for (int i = 0; i < (100 / MagicNumbers.Instance.allocationIterationAmount);  i++)
-        {
-            // Determine how empire will allocate it's economy
-            // TODO - tie this to priorities
-            AllocateEconomy(discoveredEmpire);
-        }
-        for (int i = 1; i < spaceYear; i++)
-        {
-            CalculateProgress(discoveredEmpire);
-        }
-        //CatchUpTurnCalculations();
-        newEmpiresToAdd.Add(discoveredEmpire);
-        //add to knownEmpires();
-    }
+    //    for (int i = 0; i < (100 / MagicNumbers.Instance.allocationIterationAmount);  i++)
+    //    {
+    //        // Determine how empire will allocate it's economy
+    //        // TODO - tie this to priorities
+    //        AllocateEconomy(discoveredEmpire);
+    //    }
+    //    for (int i = 1; i < spaceYear; i++)
+    //    {
+    //        CalculateProgress(discoveredEmpire);
+    //    }
+    //    //CatchUpTurnCalculations();
+    //    newEmpiresToAdd.Add(discoveredEmpire);
+    //    //add to knownEmpires();
+    //}
 
-    private void CreateAndListAlienSectors(Empire discoveredEmpire)
-    {
+    // REMOVE - should be handled by Start in Empire.cs
+    //private void CreateAndListAlienSectors(Empire discoveredEmpire)
+    //{
 
-        if (!discoveredEmpire.isPlayer)
-        {
-            discoveredEmpire.empireSectors.Add(discoveredEmpire.economy);
-            discoveredEmpire.empireSectors.Add(discoveredEmpire.exploration);
-            discoveredEmpire.empireSectors.Add(discoveredEmpire.colonization);
-            discoveredEmpire.empireSectors.Add(discoveredEmpire.military);
-            discoveredEmpire.empireSectors.Add(discoveredEmpire.science);
-            discoveredEmpire.empireSectors.Add(discoveredEmpire.diplomacy);
-        }
-    }
+    //    if (!discoveredEmpire.isPlayer)
+    //    {
+    //        discoveredEmpire.empireSectors.Add(discoveredEmpire.economy);
+    //        discoveredEmpire.empireSectors.Add(discoveredEmpire.exploration);
+    //        discoveredEmpire.empireSectors.Add(discoveredEmpire.colonization);
+    //        discoveredEmpire.empireSectors.Add(discoveredEmpire.military);
+    //        discoveredEmpire.empireSectors.Add(discoveredEmpire.science);
+    //        discoveredEmpire.empireSectors.Add(discoveredEmpire.diplomacy);
+    //    }
+    //}
 
+    // REMOVE - moved to Empire.cs
     private void AllocateEconomy(Empire empire)
     {
         // Choose a Sector
@@ -476,12 +436,15 @@ public class GameManager : MonoBehaviour
         empire.empireSectors[allocation].fundingAllocation += MagicNumbers.Instance.allocationIterationAmount;
     }
 
+
+    // REMOVE - moved to Empire.cs
     string ListSingleObjectGrabber(List<string> listName)
     {
         int randIndex = UnityEngine.Random.Range(1, listName.Count);
         return listName[randIndex];
     }
 
+    // REMOVE - moved to Empire.cs
     (string raceName, string raceAdjective, string raceHomeworld) SyncronizedRaceDetailsGrabber(List<string> nameList, List<string> adjectiveList, List<string> homeworldList)
     {
         int randIndex = UnityEngine.Random.Range(1, nameList.Count);
@@ -504,6 +467,8 @@ public class GameManager : MonoBehaviour
         // displayText;   
     }
 
+
+    // Remove - added to known empires in Empire.Start
     void AddEmpiresAndResetList()
     {
         foreach (Empire currentEmpire in newEmpiresToAdd)
