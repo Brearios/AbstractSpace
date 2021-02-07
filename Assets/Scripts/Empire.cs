@@ -14,7 +14,7 @@ public class Empire : MonoBehaviour
     public string boastWord;
     public string governmentWord;
     public bool isPlayer;
-    public enum sixDegrees { Player, Rival, Second, Third, Fourth, Fifth }
+    public enum SixDegrees { Player, Rival, Second, Third, Fourth, Fifth }
     // TODO Less calculation for those further "out", determine number of desired degrees, method of discovering/promoting known empries
     // TODO - Record who discovered the empire, with GetInstanceID();
 
@@ -31,13 +31,20 @@ public class Empire : MonoBehaviour
     public int fleetStrength;
     public int relationsTowardPlayer;
     public int diplomaticCapacity; // Represents diplomats, analysts, space anthropologists
-    // 1-100, with 1 being war, 2-34 being hostile, 35-65 being peace, 66-99 being trade, and 100 being allies
-    public float economyAllocation;
-    public float explorationAllocation;
-    public float colonizationAllocation;
-    public float militaryAllocation;
-    public float scienceAllocation;
-    public float diplomacyAllocation;
+                                   // 1-100, with 1 being war, 2-34 being hostile, 35-65 being peace, 66-99 being trade, and 100 being allies
+    public int economySegmentsAllocated;
+    public int explorationSegmentsAllocated;
+    public int colonizationSegmentsAllocated;
+    public int militarySegmentsAllocated;
+    public int scienceSegmentsAllocated;
+    public int diplomacySegmentsAllocated;
+
+    public float economyAllocationAmount;
+    public float explorationAllocationAmount;
+    public float colonizationAllocationAmount;
+    public float militaryAllocationAmount;
+    public float scienceAllocationAmount;
+    public float diplomacyAllocationAmount;
 
     public float expectedEconomyBudget;
     public float expectedExplorationBudget;
@@ -109,7 +116,7 @@ public class Empire : MonoBehaviour
         empire.exploredStars = 0;
         empire.discoveredPlanets = 0;
         empire.colonizedPlanets = MagicNumbers.Instance.StartingColonizedPlanets;
-        empire.fleetStrength = 1;
+        empire.fleetStrength = MagicNumbers.Instance.StartingFleetStrength;
         empire.diplomaticCapacity = 0;
         foreach (SectorDetails sector in empire.empireSectors)
         {
@@ -311,13 +318,33 @@ public class Empire : MonoBehaviour
         rulerName = ListSingleObjectGrabber(RandomNamesAndElements.Instance.emperorNameGenerationList);
         GenerateEmpireName();
         GenerateBiologyValues();
+        if (!isPlayer)
+        {
+            SetSectorAllocationsToZero();
+        }
 
         for (int i = 0; i < (100 / MagicNumbers.Instance.allocationIterationAmount); i++)
         {
             // Determine how empire will allocate it's economy
             // TODO - tie this to randomly generated priorities
-            AllocateEconomy();
+            if (LogManager.Instance.logsEnabled)
+            {
+                if (LogManager.Instance.trackAlienAllocationLoop)
+                {
+                    Debug.Log($"Allocating 1 iteration amount for {Name}. Allocation {i} of {100/MagicNumbers.Instance.allocationIterationAmount}. Iteration amount is set to {MagicNumbers.Instance.allocationIterationAmount}");
+                }
+            }
+            AllocateEconomy(this);
         }
+    }
+
+    private void SetSectorAllocationsToZero()
+    {
+        foreach (SectorDetails sectorToBeZeroed in empireSectors)
+        {
+            sectorToBeZeroed.fundingAllocation = 0;
+        }
+
     }
 
     private void GenerateBiologyValues()
@@ -355,7 +382,7 @@ public class Empire : MonoBehaviour
         return (raceName, raceAdjective, raceHomeworld);
     }
 
-    private void AllocateEconomy()
+    private void AllocateEconomy(Empire allocationEmpire)
     {
         // Choose a Sector
         // Add 10 to that sector
@@ -367,7 +394,7 @@ public class Empire : MonoBehaviour
                 Debug.Log($"Allocating {MagicNumbers.Instance.allocationIterationAmount} percent of {Name} economy to sector {empireSectors[allocation].sectorName}.");
             }
         }
-        empireSectors[allocation].fundingAllocation += MagicNumbers.Instance.allocationIterationAmount;
+        allocationEmpire.empireSectors[allocation].fundingAllocation += 1;
     }
 
     private void UpgradeSector(SectorDetails sector)
@@ -416,22 +443,22 @@ public class Empire : MonoBehaviour
 
     private void UpdateEmpireAllocations()
     {
-        economyAllocation = economy.fundingAllocation;
-        explorationAllocation = exploration.fundingAllocation;
-        colonizationAllocation = colonization.fundingAllocation;
-        militaryAllocation = military.fundingAllocation;
-        scienceAllocation = science.fundingAllocation;
-        diplomacyAllocation = diplomacy.fundingAllocation;
+        economyAllocationAmount = economy.fundingAllocation;
+        explorationAllocationAmount = exploration.fundingAllocation;
+        colonizationAllocationAmount = colonization.fundingAllocation;
+        militaryAllocationAmount = military.fundingAllocation;
+        scienceAllocationAmount = science.fundingAllocation;
+        diplomacyAllocationAmount = diplomacy.fundingAllocation;
     }
 
     private void CalculateExpectedBudgets()
     {
-        expectedEconomyBudget = ((grossEmpireProduct * economyAllocation) / MagicNumbers.Instance.allocationPercentage);
-        expectedExplorationBudget = ((grossEmpireProduct * explorationAllocation) / MagicNumbers.Instance.allocationPercentage);
-        expectedColonizationBudget = ((grossEmpireProduct * colonizationAllocation) / MagicNumbers.Instance.allocationPercentage);
-        expectedMilitaryBudget = ((grossEmpireProduct * militaryAllocation) / MagicNumbers.Instance.allocationPercentage);
-        expectedScienceBudget = ((grossEmpireProduct * scienceAllocation) / MagicNumbers.Instance.allocationPercentage);
-        expectedDiplomacyBudget = ((grossEmpireProduct * diplomacyAllocation) / MagicNumbers.Instance.allocationPercentage);
+        expectedEconomyBudget = ((grossEmpireProduct * economyAllocationAmount) / MagicNumbers.Instance.allocationPercentage);
+        expectedExplorationBudget = ((grossEmpireProduct * explorationAllocationAmount) / MagicNumbers.Instance.allocationPercentage);
+        expectedColonizationBudget = ((grossEmpireProduct * colonizationAllocationAmount) / MagicNumbers.Instance.allocationPercentage);
+        expectedMilitaryBudget = ((grossEmpireProduct * militaryAllocationAmount) / MagicNumbers.Instance.allocationPercentage);
+        expectedScienceBudget = ((grossEmpireProduct * scienceAllocationAmount) / MagicNumbers.Instance.allocationPercentage);
+        expectedDiplomacyBudget = ((grossEmpireProduct * diplomacyAllocationAmount) / MagicNumbers.Instance.allocationPercentage);
     }
 
 

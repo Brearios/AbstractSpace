@@ -47,24 +47,47 @@ MonoBehaviour:
   AtWarWithPlayer: 0
   AlliedWithPlayer: 0
   Name: Space Predators
-  empireTemplate: {fileID: 11400000, guid: 65e3ec8e4fb8df9488b527e76d093e5f, type: 2}
   rulerName: 
+  discoveredBy: 
+  boastWord: 
+  governmentWord: 
+  isPlayer: 0
+  empireTemplate: {fileID: 11400000, guid: 65e3ec8e4fb8df9488b527e76d093e5f, type: 2}
   grossEmpireProduct: 10
   bonusResourcesFromEvents: 0
   exploredStars: 0
   discoveredPlanets: 0
   colonizedPlanets: 0
+  colonyShips: 0
   fleetStrength: 0
   relationsTowardPlayer: 0
   diplomaticCapacity: 0
-  economy: {fileID: 5127814660335074034, guid: c558f7b886c29fa418059501657f059a, type: 3}
-  exploration: {fileID: 5127814660335074034, guid: 5c27ea71a90ff044e85cef2c91835b1c,
+  economySegmentsAllocated: 0
+  explorationSegmentsAllocated: 0
+  colonizationSegmentsAllocated: 0
+  militarySegmentsAllocated: 0
+  scienceSegmentsAllocated: 0
+  diplomacySegmentsAllocated: 0
+  economyAllocationAmount: 0
+  explorationAllocationAmount: 0
+  colonizationAllocationAmount: 0
+  militaryAllocationAmount: 0
+  scienceAllocationAmount: 0
+  diplomacyAllocationAmount: 0
+  expectedEconomyBudget: 0
+  expectedExplorationBudget: 0
+  expectedColonizationBudget: 0
+  expectedMilitaryBudget: 0
+  expectedScienceBudget: 0
+  expectedDiplomacyBudget: 0
+  economy: {fileID: 5127814660335074034, guid: 52334926d8646c04e8f2d896dd31bff0, type: 3}
+  exploration: {fileID: 5127814660335074034, guid: 43561456072060440a6b02879954023f,
     type: 3}
-  colonization: {fileID: 5127814660335074034, guid: c85c8bda0a03b0f4f8174bc04b73aea3,
+  colonization: {fileID: 5127814660335074034, guid: 4c8ff8c9148ccea4996f2b918c317fd3,
     type: 3}
-  military: {fileID: 5127814660335074034, guid: a03bf7240314d954e872e79e428d7655,
+  military: {fileID: 5127814660335074034, guid: 1c9de8c46ff00b04ca50fefdbe563c31,
     type: 3}
-  science: {fileID: 5127814660335074034, guid: 00a05c4e88a7962488a8b4701130d71e, type: 3}
-  diplomacy: {fileID: 5127814660335074034, guid: 6b0e1c98b5de52c4a9b6f782cda52c22,
+  science: {fileID: 5127814660335074034, guid: 115f0792a4f0de3439b44dad5fdc9ff1, type: 3}
+  diplomacy: {fileID: 5127814660335074034, guid: 6f4ecb7ad468db14eaf57b99c98047bf,
     type: 3}
   empireSectors: []

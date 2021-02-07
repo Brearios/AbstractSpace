@@ -6,7 +6,7 @@ public class MagicNumbers : MonoBehaviour
 {
     public static MagicNumbers Instance;
     public int initialUpgradeCost;
-    public int allocationIterationAmount = 5;
+    public int allocationIterationAmount = 10;
     public float allocationPercentage;
     public int numberOfAllocationSegments;
     public float upgradeCostMultiplier;
@@ -16,7 +16,8 @@ public class MagicNumbers : MonoBehaviour
     public string PlayerAdjective = "Human";
     public string PlayerRuler = "Dwight Eisenhower";
     public int StartingGrossEmpireProduct = 10;
-    public int StartingColonizedPlanets;
+    public int StartingColonizedPlanets = 1;
+    public int StartingFleetStrength = 1;
     public float treasurePortionOfGEP = 0.3f;
     public float fleetStrengthUpgradeMultiplier;
 

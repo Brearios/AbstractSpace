@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sectorName: colonization
-  fundingAllocation: 1
+  fundingAllocation: 0
   growthLevelsAchieved: 0
   currentInvestment: 0
   neededInvestment: 10
