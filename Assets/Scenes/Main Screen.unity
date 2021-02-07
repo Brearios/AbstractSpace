@@ -920,6 +920,111 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263191240}
   m_CullTransparentMesh: 0
+--- !u!1001 &272109607
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2124734708050997623, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_Name
+      value: AlienEmpire
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: colonization
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 4c8ff8c9148ccea4996f2b918c317fd3,
+        type: 3}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: exploration
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 43561456072060440a6b02879954023f,
+        type: 3}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: economy
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 52334926d8646c04e8f2d896dd31bff0,
+        type: 3}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: diplomacy
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 6f4ecb7ad468db14eaf57b99c98047bf,
+        type: 3}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: science
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 115f0792a4f0de3439b44dad5fdc9ff1,
+        type: 3}
+    - target: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
+        type: 3}
+      propertyPath: military
+      value: 
+      objectReference: {fileID: 5127814660335074034, guid: 1c9de8c46ff00b04ca50fefdbe563c31,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 013d145c63ec1074d832ba964914530e, type: 3}
 --- !u!1 &410078594
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,14 +30,10 @@ public class Empire : MonoBehaviour
     public int colonyShips;
     public int fleetStrength;
     public int relationsTowardPlayer;
-    public int diplomaticCapacity; // Represents diplomats, analysts, space anthropologists
-                                   // 1-100, with 1 being war, 2-34 being hostile, 35-65 being peace, 66-99 being trade, and 100 being allies
-    public int economySegmentsAllocated;
-    public int explorationSegmentsAllocated;
-    public int colonizationSegmentsAllocated;
-    public int militarySegmentsAllocated;
-    public int scienceSegmentsAllocated;
-    public int diplomacySegmentsAllocated;
+    public int diplomaticCapacity; 
+    // Represents diplomats, analysts, space anthropologists
+    // 1-100, with 1 being war, 2-34 being hostile, 35-65 being peace, 66-99 being trade, and 100 being allies
+
 
     public float economyAllocationAmount;
     public float explorationAllocationAmount;
