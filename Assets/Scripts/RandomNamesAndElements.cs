@@ -19,7 +19,7 @@ public class RandomNamesAndElements : MonoBehaviour
     public List<string> societalUnitGenerationList = new List<string>{ "in solitary isolation", "with immediate family", "with extended family groups", "in large tribes", "in cities", "in tightly-packed megacities" };
     public List<string> governmentTypesGenerationList = new List<string>{ "is a democracy", "is a dictatorship", "is a technocracy", "is a oligarchy", "is a monarchy", "is a theocracy", "is non-existent - anarchy" };
     public List<string> boastWordGenerationList = new List<string> { "Great", "Indomintable", "Invincible", "Galactic", "Eternal" };
-    public List<string> governmentWordGenerationList = new List<string> { "Federaion", "Alliance", "Confederacy", "League", "Coalition", "Union", "Consortium" };
+    public List<string> governmentWordGenerationList = new List<string> { "Federaion", "Alliance", "Confederacy", "League", "Coalition", "Union", "Consortium", "High", "Grand" };
     public void Awake()
     {
         if (Instance == null)

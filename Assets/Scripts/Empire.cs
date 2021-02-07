@@ -86,9 +86,9 @@ public class Empire : MonoBehaviour
         InitializeEmpireAddSectorsAndSetGEP(this);
         if (!isPlayer)
         {
-            InitializeAlienEmpireDetails();
+            InitializeAlienEmpireDetails(this);
             CalculateProgressToSpaceyear();
-            GameManager.Instance.knownEmpires.Add(this);
+            GameManager.Instance.allEmpires.Add(this);
         }
     }
 
@@ -99,7 +99,7 @@ public class Empire : MonoBehaviour
             return;
         }
 
-        CalculateProgress();
+        CalculateProgress(true);
 
         UpdateEmpireAllocations();
 
@@ -142,13 +142,16 @@ public class Empire : MonoBehaviour
     }
 
 
-    void CalculateProgress()
+    void CalculateProgress(bool log)
     {
         if (LogManager.Instance.logsEnabled)
         {
-            if (LogManager.Instance.calculateProgressLogs)
+            if (log)
             {
-                Debug.Log($"Calculating progress for {Name}, in space year {GameManager.Instance.spaceYear}.");
+                if (LogManager.Instance.calculateProgressLogs)
+                {
+                    Debug.Log($"Calculating progress for {Name}, in space year {GameManager.Instance.spaceYear}.");
+                }
             }
         }
         foreach (SectorDetails currentSector in empireSectors)
@@ -270,6 +273,9 @@ public class Empire : MonoBehaviour
         else if (random < 67)
         {
             //TODO - figure out if I want alien empires meeting alien empires and having their own trade and war
+
+            // If Aliens discover aliens, especially in higher spaceyears, those aliens will discover aliens as they CalculateProgress.
+            // This would only be advisable if it only applied to rivals, possibly with a method for promoting empires discovered by Rivals to rivals themselves
             if (isPlayer)
             {
                 DiscoverAlienEmpire(this);
@@ -299,27 +305,34 @@ public class Empire : MonoBehaviour
         Empire discoveredEmpire;
         discoveredEmpire = tempEmpireObject.GetComponent<Empire>();
         discoveredEmpire.discoveredBy = discoveredByEmpire.Name;
+        if (discoveredByEmpire.isPlayer)
+        {
+            GameManager.Instance.knownEmpires.Add(discoveredEmpire);
+        }
     }
 
 
 
 
 
-    private void InitializeAlienEmpireDetails()
+    private void InitializeAlienEmpireDetails(Empire empire)
     {
         (string raceName, string raceAdjective, string raceHomeworld) = SyncronizedRaceDetailsGrabber(RandomNamesAndElements.Instance.raceNameGenerationList, RandomNamesAndElements.Instance.raceAdjectiveGenerationList, RandomNamesAndElements.Instance.raceHomeworldGenerationList);
         race.raceName = raceName;
         race.raceAdjective = raceAdjective;
         race.raceHomeworld = raceHomeworld;
         rulerName = ListSingleObjectGrabber(RandomNamesAndElements.Instance.emperorNameGenerationList);
-        GenerateEmpireName();
-        GenerateBiologyValues();
-        if (!isPlayer)
+        GenerateEmpireName(empire);
+        GenerateBiologyValues(empire);
+        SetSectorAllocationsToZero(empire);
+
+        // Setting 1 allocation to each sector, so empires cannot get stuck with one not developing
+        foreach (SectorDetails sector in empireSectors)
         {
-            SetSectorAllocationsToZero();
+            sector.fundingAllocation = 1;
         }
 
-        for (int i = 0; i < (100 / MagicNumbers.Instance.allocationIterationAmount); i++)
+        for (int i = 6; i < (100 / MagicNumbers.Instance.allocationIterationAmount); i++)
         {
             // Determine how empire will allocate it's economy
             // TODO - tie this to randomly generated priorities
@@ -327,23 +340,23 @@ public class Empire : MonoBehaviour
             {
                 if (LogManager.Instance.trackAlienAllocationLoop)
                 {
-                    Debug.Log($"Allocating 1 iteration amount for {Name}. Allocation {i} of {100/MagicNumbers.Instance.allocationIterationAmount}. Iteration amount is set to {MagicNumbers.Instance.allocationIterationAmount}");
+                    Debug.Log($"Allocating 1 iteration amount for {Name}. Allocation {i + 1} of {100 / MagicNumbers.Instance.allocationIterationAmount}. Iteration amount is set to {MagicNumbers.Instance.allocationIterationAmount}");
                 }
             }
-            AllocateEconomy(this);
+            AllocateEconomy(empire);
         }
     }
 
-    private void SetSectorAllocationsToZero()
+    private void SetSectorAllocationsToZero(Empire empire)
     {
-        foreach (SectorDetails sectorToBeZeroed in empireSectors)
+        foreach (SectorDetails sectorToBeZeroed in empire.empireSectors)
         {
             sectorToBeZeroed.fundingAllocation = 0;
         }
 
     }
 
-    private void GenerateBiologyValues()
+    private void GenerateBiologyValues(Empire empire)
     {
         if (LogManager.Instance.logsEnabled)
         {
@@ -352,14 +365,14 @@ public class Empire : MonoBehaviour
                 Debug.Log($"Attempting to generate biological values for {Name}, in space year {GameManager.Instance.spaceYear}.");
             }
         }
-        race.locomation = ListSingleObjectGrabber(RandomNamesAndElements.Instance.locomationGenerationList);
-        race.typeOfRace = ListSingleObjectGrabber(RandomNamesAndElements.Instance.typeOfRaceGenerationList);
-        race.numberOfAppendages = ListSingleObjectGrabber(RandomNamesAndElements.Instance.numberOfAppendagesGenerationList);
-        race.typesOfAppendages = ListSingleObjectGrabber(RandomNamesAndElements.Instance.typesOfAppendagesGenerationList);
-        race.eyeDetails = ListSingleObjectGrabber(RandomNamesAndElements.Instance.eyeDetailsGenerationList);
-        race.externalCovering = ListSingleObjectGrabber(RandomNamesAndElements.Instance.externalCoveringGenerationList);
-        race.societalUnit = ListSingleObjectGrabber(RandomNamesAndElements.Instance.societalUnitGenerationList);
-        race.governmentTypes = ListSingleObjectGrabber(RandomNamesAndElements.Instance.governmentTypesGenerationList);
+        empire.race.locomation = ListSingleObjectGrabber(RandomNamesAndElements.Instance.locomationGenerationList);
+        empire.race.typeOfRace = ListSingleObjectGrabber(RandomNamesAndElements.Instance.typeOfRaceGenerationList);
+        empire.race.numberOfAppendages = ListSingleObjectGrabber(RandomNamesAndElements.Instance.numberOfAppendagesGenerationList);
+        empire.race.typesOfAppendages = ListSingleObjectGrabber(RandomNamesAndElements.Instance.typesOfAppendagesGenerationList);
+        empire.race.eyeDetails = ListSingleObjectGrabber(RandomNamesAndElements.Instance.eyeDetailsGenerationList);
+        empire.race.externalCovering = ListSingleObjectGrabber(RandomNamesAndElements.Instance.externalCoveringGenerationList);
+        empire.race.societalUnit = ListSingleObjectGrabber(RandomNamesAndElements.Instance.societalUnitGenerationList);
+        empire.race.governmentTypes = ListSingleObjectGrabber(RandomNamesAndElements.Instance.governmentTypesGenerationList);
     }
 
     string ListSingleObjectGrabber(List<string> listName)
@@ -426,15 +439,22 @@ public class Empire : MonoBehaviour
     {
         for (int i = 1; i < GameManager.Instance.spaceYear; i++)
         {
-            CalculateProgress();
+            if (LogManager.Instance.logsEnabled)
+            {
+                if (LogManager.Instance.alienEmpireCatchUpLogs)
+                {
+                    Debug.Log($"Calculating catch-up progress for {Name}, for past year {i + 1} in space year {GameManager.Instance.spaceYear}.");
+                }
+            }
+            CalculateProgress(false);
         }
     }
 
-    private void GenerateEmpireName()
+    private void GenerateEmpireName(Empire empire)
     {
-        boastWord = ListSingleObjectGrabber(RandomNamesAndElements.Instance.boastWordGenerationList);
-        governmentWord = ListSingleObjectGrabber(RandomNamesAndElements.Instance.governmentWordGenerationList);
-        Name = $"{boastWord} {race.raceAdjective} {governmentWord}";
+        empire.boastWord = ListSingleObjectGrabber(RandomNamesAndElements.Instance.boastWordGenerationList);
+        empire.governmentWord = ListSingleObjectGrabber(RandomNamesAndElements.Instance.governmentWordGenerationList);
+        empire.Name = $"{boastWord} {race.raceAdjective} {governmentWord}";
     }
 
     private void UpdateEmpireAllocations()

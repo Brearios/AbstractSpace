@@ -7,10 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public bool isRunning;
-    public bool allocating;
+    public bool allocating; // Tracks whether Player is on the Allocation Screen
     public Empire playerEmpire;
     public Empire alienTemplateEmpire;
     public SectorDetails currentSector;
+    public List<Empire> allEmpires;
     public List<Empire> knownEmpires;
     public List<Empire> newEmpiresToAdd;
     public int playerDefeatedEmpires;
@@ -90,7 +91,8 @@ public class GameManager : MonoBehaviour
         // REMOVE - No longer need foreach due to move of CalculateProgress to Empire.cs
         // ProcessKnownEmpries();
 
-        AddEmpiresAndResetList();
+        // REMOVE - No longer interacting with lists, from within lists
+        //AddEmpiresAndResetList();
 
         IncrementYear();
 
@@ -469,12 +471,12 @@ public class GameManager : MonoBehaviour
 
 
     // Remove - added to known empires in Empire.Start
-    void AddEmpiresAndResetList()
-    {
-        foreach (Empire currentEmpire in newEmpiresToAdd)
-        {
-            knownEmpires.Add(currentEmpire);
-        }
-        newEmpiresToAdd.Clear();
-    }
+    //void AddEmpiresAndResetList()
+    //{
+    //    foreach (Empire currentEmpire in newEmpiresToAdd)
+    //    {
+    //        allEmpires.Add(currentEmpire);
+    //    }
+    //    newEmpiresToAdd.Clear();
+    //}
 }
