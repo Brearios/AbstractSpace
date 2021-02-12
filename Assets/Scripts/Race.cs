@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Race : MonoBehaviour
+[System.Serializable]
+
+// TODO - add diet
+
+public class Race
 {
     public string raceName;
     public string raceAdjective;
@@ -15,22 +19,4 @@ public class Race : MonoBehaviour
     public string externalCovering;
     public string societalUnit;
     public string governmentTypes;
-    public string currentStatus; // Allied, War, Defeated, Peace
-
-    public ScriptableRace raceTemplate;
-
-    private void Start()
-    {
-        // REMOVE - handled by Empire.Start.InitializeAlienEmpire.GenerateBiology~
-        //raceName = raceTemplate.raceName;
-        //raceHomeworld = raceTemplate.raceHomeworld;
-        //locomation = raceTemplate.locomation;
-        //typeOfRace = raceTemplate.typeOfRace;
-        //numberOfAppendages = raceTemplate.numberOfAppendages;
-        //typesOfAppendages = raceTemplate.typesOfAppendages;
-        //eyeDetails = raceTemplate.eyeDetails;
-        //externalCovering = raceTemplate.externalCovering;
-        //societalUnit = raceTemplate.societalUnit;
-        //governmentTypes = raceTemplate.governmentTypes;
-    }
 }

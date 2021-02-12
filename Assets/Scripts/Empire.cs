@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO - add randomness in funding allocation approach - work in random size chunks, not single segments - possibly randomly determine approach
+// TODO - add xenophobe/xenophile modifier - changing relations decay rate and costs
+
+// TODO - build in properties for Human Space Alliance if (isPlayer)
+// TODO - Empire madlib string
+
 public class Empire : MonoBehaviour
 {
     public Race race;
@@ -19,6 +25,8 @@ public class Empire : MonoBehaviour
     // TODO - Record who discovered the empire, with GetInstanceID();
 
     public ScriptableEmpire empireTemplate;
+
+    public string currentStatus; // Allied, War, Defeated, Peace
 
     // Removed until I see how the paragraphs play out
     // public string Adjective;    
@@ -56,6 +64,8 @@ public class Empire : MonoBehaviour
     public SectorDetails military;
     public SectorDetails science;
     public SectorDetails diplomacy;
+
+    public string madlib;
 
     // Potentially could add population numbers, to be factored into grossEmpireProduct, with a sector for spending that would increase growth rate
     public List<SectorDetails> empireSectors = new List<SectorDetails>();
@@ -118,6 +128,17 @@ public class Empire : MonoBehaviour
             military.fundingAllocation = 1.0f;
             science.fundingAllocation = 1.0f;
             diplomacy.fundingAllocation = 1.0f;
+            race.raceName = "Humans";
+            race.raceAdjective = "Human";
+            race.raceHomeworld = "Earth";
+            race.locomation = "bipedal";
+            race.typeOfRace = "mammalian";
+            race.numberOfAppendages = "two";
+            race.typesOfAppendages = "hands";
+            race.eyeDetails = "two eyes";
+            race.externalCovering = "skin";
+            race.societalUnit = "in cities";
+            race.governmentTypes = "is a democracy";
         }
 
         InitializeEmpireAddSectorsAndSetGEP(this);
@@ -127,6 +148,9 @@ public class Empire : MonoBehaviour
             CalculateProgressToSpaceyear();
             GameManager.Instance.allEmpires.Add(this);
         }
+        madlib = $"The {Name} is made up of {race.raceName}, who originated on the planet {race.raceHomeworld}. {race.raceName} are {race.locomation}, " +
+            $"and biologically seem to be {race.typeOfRace}, with {race.numberOfAppendages} {race.typesOfAppendages}. They see via {race.eyeDetails}, and their bodies are covered by {race.externalCovering}. " +
+            $"Most {race.raceName.ToLower()} live {race.societalUnit}. Their typical form of government {race.governmentTypes}.";
     }
 
     private void Update()
