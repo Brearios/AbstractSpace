@@ -49,6 +49,7 @@ public class Empire : MonoBehaviour
     public float expectedScienceBudget;
     public float expectedDiplomacyBudget;
 
+    
     public SectorDetails economy;
     public SectorDetails exploration;
     public SectorDetails colonization;
@@ -61,7 +62,14 @@ public class Empire : MonoBehaviour
 
     private void Start()
     {
-            if (LogManager.Instance.logsEnabled)
+        economy.sectorName = "economy";
+        exploration.sectorName = "exploration";
+        colonization.sectorName = "colonization";
+        military.sectorName = "military";
+        science.sectorName = "science";
+        diplomacy.sectorName = "diplomacy";
+
+        if (LogManager.Instance.logsEnabled)
             {
                 if (LogManager.Instance.addSectorsToListLogs)
                 {
@@ -83,6 +91,35 @@ public class Empire : MonoBehaviour
                     Debug.Log($"Added {empireSectors.Count} sectors to {Name}'s empireSectors list, in space year {GameManager.Instance.spaceYear}.");
                 }
             }
+
+        foreach (SectorDetails sector in empireSectors)
+            {
+                if (LogManager.Instance.logsEnabled)
+                {
+                    if (LogManager.Instance.initializeFundingLogs)
+                    {
+                        Debug.Log($"Initializing funding for {sector.sectorName}, in space year {GameManager.Instance.spaceYear}.");
+                    }
+                }
+
+                sector.growthLevelsAchieved = 0;
+                sector.fundingAllocation = 0.0f;
+                sector.currentInvestment = 0;
+                sector.neededInvestment = MagicNumbers.Instance.initialUpgradeCost;
+                sector.sectorScienceMultiplier = 0.0f;
+            }
+
+        // Temp allocations until allocating is set up
+        if (isPlayer)
+        {
+            economy.fundingAllocation = 4.0f;
+            exploration.fundingAllocation = 2.0f;
+            colonization.fundingAllocation = 1.0f;
+            military.fundingAllocation = 1.0f;
+            science.fundingAllocation = 1.0f;
+            diplomacy.fundingAllocation = 1.0f;
+        }
+
         InitializeEmpireAddSectorsAndSetGEP(this);
         if (!isPlayer)
         {
@@ -114,22 +151,24 @@ public class Empire : MonoBehaviour
         empire.colonizedPlanets = MagicNumbers.Instance.StartingColonizedPlanets;
         empire.fleetStrength = MagicNumbers.Instance.StartingFleetStrength;
         empire.diplomaticCapacity = 0;
-        foreach (SectorDetails sector in empire.empireSectors)
-        {
-            sector.sectorName = sector.sectorValuesTemplate.sectorName;
-            if (LogManager.Instance.logsEnabled)
-            {
-                if (LogManager.Instance.initializeFundingLogs)
-                {
-                    Debug.Log($"Initializing funding for {sector.sectorName}, in space year {GameManager.Instance.spaceYear}.");
-                }
-            }
-            sector.fundingAllocation = sector.sectorValuesTemplate.fundingAllocation;
-            sector.growthLevelsAchieved = sector.sectorValuesTemplate.growthLevelsAchieved;
-            sector.currentInvestment = sector.sectorValuesTemplate.currentInvestment;
-            sector.neededInvestment = sector.sectorValuesTemplate.neededInvestment;
-            sector.sectorScienceMultiplier = sector.sectorValuesTemplate.sectorScienceMultiplier;
-        }
+        
+        // REMOVE - handled in Start
+        //foreach (SectorDetails sector in empire.empireSectors)
+        //{
+        //    sector.sectorName = sector.sectorValuesTemplate.sectorName;
+        //    if (LogManager.Instance.logsEnabled)
+        //    {
+        //        if (LogManager.Instance.initializeFundingLogs)
+        //        {
+        //            Debug.Log($"Initializing funding for {sector.sectorName}, in space year {GameManager.Instance.spaceYear}.");
+        //        }
+        //    }
+        //    sector.fundingAllocation = sector.sectorValuesTemplate.fundingAllocation;
+        //    sector.growthLevelsAchieved = sector.sectorValuesTemplate.growthLevelsAchieved;
+        //    sector.currentInvestment = sector.sectorValuesTemplate.currentInvestment;
+        //    sector.neededInvestment = sector.sectorValuesTemplate.neededInvestment;
+        //    sector.sectorScienceMultiplier = sector.sectorValuesTemplate.sectorScienceMultiplier;
+        //}
 
         // These read from Scriptable Sectors at start
         //foreach (SectorDetails sector in empire.empireSectors)
@@ -309,6 +348,13 @@ public class Empire : MonoBehaviour
         {
             GameManager.Instance.knownEmpires.Add(discoveredEmpire);
         }
+        if (LogManager.Instance.logsEnabled)
+        {
+            if (LogManager.Instance.empireDiscovered)
+            {
+                Debug.Log($"An alien empire was discovered by {discoveredByEmpire} in {GameManager.Instance.spaceYear}.");
+            }
+        }
     }
 
 
@@ -324,7 +370,9 @@ public class Empire : MonoBehaviour
         rulerName = ListSingleObjectGrabber(RandomNamesAndElements.Instance.emperorNameGenerationList);
         GenerateEmpireName(empire);
         GenerateBiologyValues(empire);
-        SetSectorAllocationsToZero(empire);
+
+        // REMOVE - handled in Start script via foreach loop
+        // SetSectorAllocationsToZero(empire);
 
         // Setting 1 allocation to each sector, so empires cannot get stuck with one not developing
         foreach (SectorDetails sector in empireSectors)

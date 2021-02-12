@@ -86,8 +86,6 @@ public class GameManager : MonoBehaviour
 
         TimeControls();
 
-
-
         // REMOVE - No longer need foreach due to move of CalculateProgress to Empire.cs
         // ProcessKnownEmpries();
 

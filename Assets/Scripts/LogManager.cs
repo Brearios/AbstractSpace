@@ -18,6 +18,7 @@ public class LogManager : MonoBehaviour
     public bool generateBiologyLogs;
     public bool trackAlienAllocationLoop;
     public bool alienEmpireCatchUpLogs;
+    public bool empireDiscovered;
 
     //public bool displaySectorUpgradeLogs;
     //public bool displaySectorUpgradeLogs;
