@@ -20,6 +20,9 @@ public class RandomNamesAndElements : MonoBehaviour
     public List<string> governmentTypesGenerationList = new List<string>{ "is a democracy", "is a dictatorship", "is a technocracy", "is a oligarchy", "is a monarchy", "is a theocracy", "is non-existent - anarchy" };
     public List<string> boastWordGenerationList = new List<string> { "Great", "Indomintable", "Invincible", "Galactic", "Eternal" };
     public List<string> governmentWordGenerationList = new List<string> { "Federaion", "Alliance", "Confederacy", "League", "Coalition", "Union", "Consortium", "High", "Grand" };
+    public List<string> explorationActivity = new List<string> { "exploring a star system", "mapping an asteroid belt", "looking for potential colony sites" };
+    public List<string> explorationActor = new List<string> { "scouts", "away team", "scanners" };
+    public List<string> explorationFinding = new List<string> { "pirate cache", "ancient relics", "raw materials" };
     public void Awake()
     {
         if (Instance == null)

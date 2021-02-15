@@ -13,6 +13,7 @@ public class TextBoxController : MonoBehaviour
     public Text militaryText;
     public Text diplomacyText;
     public Text selectedSectorText;
+    public Text notificationText;
 
     // Start is called before the first frame update
     void Start()
@@ -38,17 +39,17 @@ public class TextBoxController : MonoBehaviour
 
         scienceText.text = $"Science Level: {GameManager.Instance.playerEmpire.science.growthLevelsAchieved} \n \n" +
             $"Sector Multiplers \n \n" +
-            $"Economy: {GameManager.Instance.playerEmpire.economy.sectorScienceMultiplier} \n" +
-            $"Exploration: {GameManager.Instance.playerEmpire.exploration.sectorScienceMultiplier} \n" +
-            $"Colonization: {GameManager.Instance.playerEmpire.colonization.sectorScienceMultiplier} \n" +
-            $"Military: {GameManager.Instance.playerEmpire.military.sectorScienceMultiplier} \n" +
-            $"Science: {GameManager.Instance.playerEmpire.science.sectorScienceMultiplier} \n" +
-            $"Diplomacy: {GameManager.Instance.playerEmpire.diplomacy.sectorScienceMultiplier}";
+            $"Economy: {GameManager.Instance.playerEmpire.economy.sectorScienceMultiplier.ToString("0.0")} \n" +
+            $"Exploration: {GameManager.Instance.playerEmpire.exploration.sectorScienceMultiplier.ToString("0.0")} \n" +
+            $"Colonization: {GameManager.Instance.playerEmpire.colonization.sectorScienceMultiplier.ToString("0.0")} \n" +
+            $"Military: {GameManager.Instance.playerEmpire.military.sectorScienceMultiplier.ToString("0.0")} \n" +
+            $"Science: {GameManager.Instance.playerEmpire.science.sectorScienceMultiplier.ToString("0.0")} \n" +
+            $"Diplomacy: {GameManager.Instance.playerEmpire.diplomacy.sectorScienceMultiplier.ToString("0.0")}";
 
         spaceYearText.text = $"{GameManager.Instance.spaceYear} ESE \n" +
             "(Extra-Solar Era)";
 
-        allocationText.text = $"GEP: ${GameManager.Instance.playerEmpire.grossEmpireProduct} Quadracreds \n \n" +
+        allocationText.text = $"GEP: ${GameManager.Instance.playerEmpire.grossEmpireProduct.ToString("0.00")} Quadracreds \n \n" +
             // TODO  $"Added by Trade: {variableForTradingGEP&AllyGEP} \n \n"
             $"Economy: {GameManager.Instance.playerEmpire.economy.fundingAllocation} \n" +
             $"Exploration: {GameManager.Instance.playerEmpire.exploration.fundingAllocation} \n" +
@@ -75,5 +76,7 @@ public class TextBoxController : MonoBehaviour
             $"Needed Capacity: Placeholder \n";
 
         selectedSectorText.text = $"{GameManager.Instance.currentSector}";
+
+        notificationText.text = GameManager.Instance.currentNotification;
     }
 }

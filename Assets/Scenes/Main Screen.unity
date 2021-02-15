@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &58381985
 RectTransform:
   m_ObjectHideFlags: 0
@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 191888509}
   - component: {fileID: 191888511}
   - component: {fileID: 191888510}
+  - component: {fileID: 191888512}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -414,11 +415,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6424cdbc3c85ff4428707c5c4eb3fab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRunning: 0
+  isRunning: 1
   allocating: 0
   playerEmpire: {fileID: 1776160985}
-  alienTemplateEmpire: {fileID: 237813881}
-  currentSector: {fileID: 0}
+  alienTemplateEmpire: {fileID: 0}
+  currentSector:
+    sectorName: 
+    fundingAllocation: 0
+    growthLevelsAchieved: 0
+    currentInvestment: 0
+    neededInvestment: 0
+    sectorScienceMultiplier: 0
   allEmpires: []
   knownEmpires: []
   newEmpiresToAdd: []
@@ -431,6 +438,8 @@ MonoBehaviour:
   alienEmpire: {fileID: 2124734708050997623, guid: 013d145c63ec1074d832ba964914530e,
     type: 3}
   notificationTextActivator: {fileID: 58381984}
+  currentNotification: 
+  notificationsToDisplay: []
 --- !u!4 &191888508
 Transform:
   m_ObjectHideFlags: 0
@@ -465,6 +474,7 @@ MonoBehaviour:
   militaryText: {fileID: 1610034244}
   diplomacyText: {fileID: 583335611}
   selectedSectorText: {fileID: 1421963312}
+  notificationText: {fileID: 1761448394}
 --- !u!114 &191888510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,6 +500,7 @@ MonoBehaviour:
   generateBiologyLogs: 1
   trackAlienAllocationLoop: 1
   alienEmpireCatchUpLogs: 1
+  empireDiscovered: 0
 --- !u!114 &191888511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +637,35 @@ MonoBehaviour:
   - Coalition
   - Union
   - Consortium
+  explorationActivity:
+  - exploring a star system
+  - mapping an asteroid belt
+  - looking for potential colony sites
+  explorationActor:
+  - scouts
+  - away team
+  - scanners
+  explorationFinding:
+  - pirate cache
+  - ancient relics
+  - raw materials
+--- !u!114 &191888512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191888505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd24f31a3b9fe2479683f88ce159ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notificationTextActivator: {fileID: 58381984}
+  buttonActivator: {fileID: 191496943}
+  statusTextActivator: {fileID: 1285485743}
+  OverviewTextBackground: {fileID: 1036709215}
+  AllocationTextBackground: {fileID: 1659988530}
 --- !u!1 &207663060
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,87 +806,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ddb2b2f13805ac4aa7a5cbe12651f93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1001 &237813880
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2124734708050997623, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_Name
-      value: AlienEmpire
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124734708050997621, guid: 013d145c63ec1074d832ba964914530e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 013d145c63ec1074d832ba964914530e, type: 3}
---- !u!114 &237813881 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2124734708050997620, guid: 013d145c63ec1074d832ba964914530e,
-    type: 3}
-  m_PrefabInstance: {fileID: 237813880}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a90cb2f9b5a1cd488efe96696350e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &260296417
@@ -2237,7 +2196,7 @@ GameObject:
   - component: {fileID: 1011013464}
   - component: {fileID: 1011013463}
   m_Layer: 5
-  m_Name: Text
+  m_Name: AcknwoledgedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2257,10 +2216,10 @@ RectTransform:
   m_Father: {fileID: 1596162263}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 15}
+  m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1011013463
 MonoBehaviour:
@@ -2282,10 +2241,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2431,7 +2390,7 @@ GameObject:
   - component: {fileID: 1038946167}
   - component: {fileID: 1038946166}
   m_Layer: 5
-  m_Name: ExpansionTextBackground
+  m_Name: NotificationTextBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2455,7 +2414,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 774.92957, y: 204.03755}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1038946166
 MonoBehaviour:
@@ -3876,7 +3835,7 @@ GameObject:
   - component: {fileID: 1596162264}
   - component: {fileID: 1596162267}
   m_Layer: 5
-  m_Name: Button
+  m_Name: NotificationTextAcknowledgementButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3944,7 +3903,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1596162265}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1596162267}
+        m_MethodName: AcknowledgeNotificationAndDismiss
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1596162265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3993,9 +3963,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd24f31a3b9fe2479683f88ce159ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notificationTextActivator: {fileID: 0}
+  notificationTextActivator: {fileID: 58381984}
   buttonActivator: {fileID: 191496943}
   statusTextActivator: {fileID: 1285485743}
+  OverviewTextBackground: {fileID: 0}
+  AllocationTextBackground: {fileID: 0}
 --- !u!1 &1610034240
 GameObject:
   m_ObjectHideFlags: 0
@@ -4765,7 +4737,7 @@ GameObject:
   - component: {fileID: 1761448395}
   - component: {fileID: 1761448394}
   m_Layer: 5
-  m_Name: ExpansionText
+  m_Name: NotificationText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4786,10 +4758,10 @@ RectTransform:
   m_Father: {fileID: 1038946165}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 387.46478, y: -102.018776}
-  m_SizeDelta: {x: 754.92957, y: 184.03755}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1761448394
 MonoBehaviour:

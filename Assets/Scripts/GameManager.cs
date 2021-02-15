@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public GameObject alienEmpire;
 
     public GameObject notificationTextActivator;
+    public string currentNotification;
+    public List<String> notificationsToDisplay;
 
     //TODO - War button and screen
     //TODO - connect gameSpeed to deltaTime
@@ -92,8 +94,38 @@ public class GameManager : MonoBehaviour
         // REMOVE - No longer interacting with lists, from within lists
         //AddEmpiresAndResetList();
 
+        ShowNotifications();
+
+        ClearNotifications();
+        
+
         IncrementYear();
 
+
+    }
+
+    private void ClearNotifications()
+    {
+        notificationsToDisplay.Clear();
+    }
+
+    private void ShowNotifications()
+    {
+        PanelActivator.Instance.notificationTextActivator.SetActive(true);
+        foreach (string notification in notificationsToDisplay)
+        {
+            currentNotification = notification;
+            
+            isRunning = false;
+            //while (!isRunning)
+            //{
+            //    return;
+            //}
+        }
+        if (isRunning)
+        {
+            PanelActivator.Instance.notificationTextActivator.SetActive(false);
+        }
 
     }
 
@@ -455,17 +487,7 @@ public class GameManager : MonoBehaviour
         return (raceName, raceAdjective, raceHomeworld);
     }
 
-    void TextBoxNotificationActivator()
-    {    }
 
-    void NotificationTextPopulator()
-    {
-        isRunning = false;
-        notificationTextActivator.SetActive(false);
-        // TODO this whole thing
-        // fillText;
-        // displayText;   
-    }
 
 
     // Remove - added to known empires in Empire.Start

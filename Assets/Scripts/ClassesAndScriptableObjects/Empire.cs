@@ -15,12 +15,14 @@ public class Empire : MonoBehaviour
     public bool AtWarWithPlayer;
     public bool AlliedWithPlayer;
     public string Name;
+    public string Abbreviation;
     public string rulerName;
     public string discoveredBy;
     public string boastWord;
     public string governmentWord;
     public bool isPlayer;
     public enum SixDegrees { Player, Rival, Second, Third, Fourth, Fifth }
+    public enum DiplomaticOrientation { Exterminator, Xenophobe, Average, Xenophile }
     // TODO Less calculation for those further "out", determine number of desired degrees, method of discovering/promoting known empries
     // TODO - Record who discovered the empire, with GetInstanceID();
 
@@ -130,7 +132,7 @@ public class Empire : MonoBehaviour
             diplomacy.fundingAllocation = 1.0f;
             race.raceName = "Humans";
             race.raceAdjective = "Human";
-            race.raceHomeworld = "Earth";
+            race.raceHomeworld = "Sol";
             race.locomation = "bipedal";
             race.typeOfRace = "mammalian";
             race.numberOfAppendages = "two";
@@ -148,9 +150,23 @@ public class Empire : MonoBehaviour
             CalculateProgressToSpaceyear();
             GameManager.Instance.allEmpires.Add(this);
         }
-        madlib = $"The {Name} is made up of {race.raceName}, who originated on the planet {race.raceHomeworld}. {race.raceName} are {race.locomation}, " +
-            $"and biologically seem to be {race.typeOfRace}, with {race.numberOfAppendages} {race.typesOfAppendages}. They see via {race.eyeDetails}, and their bodies are covered by {race.externalCovering}. " +
+
+        // Invicible Sakkran League, or ISL. The ISL is made up of ...
+        // Abbreviation = $"{boastWord.Substring(0, 1)}{race.raceAdjective.Substring(0, 1)}{governmentWord.Substring(0, 1)}";
+
+        madlib = $"The {Name} is made up of {race.raceName.ToLower()}, who originated on the planet {race.raceHomeworld}. \n \n" +
+            $"{ race.raceName} are {race.locomation}, and appear to be {race.typeOfRace}, with {race.numberOfAppendages} {race.typesOfAppendages}. \n " +
+            $"They see via {race.eyeDetails}, and their bodies are covered by {race.externalCovering}. \n \n " +
             $"Most {race.raceName.ToLower()} live {race.societalUnit}. Their typical form of government {race.governmentTypes}.";
+
+        string compiledString = $"In {GameManager.Instance.spaceYear} ESE, Your explorers made contact with aliens known as the {Name}. \n \n " +
+            $"{madlib}\n \n " +
+            $"Press Space to continue.";
+
+        if (!isPlayer)
+        {
+            AddNotificationToList(compiledString);
+        }
     }
 
     private void Update()
@@ -358,6 +374,16 @@ public class Empire : MonoBehaviour
     {
         float treasureAmount = (grossEmpireProduct * MagicNumbers.Instance.treasurePortionOfGEP);
         bonusResourcesFromEvents += treasureAmount;
+        if (isPlayer)
+        {
+            string activity = ListSingleObjectGrabber(RandomNamesAndElements.Instance.explorationActivity);
+            string finder = ListSingleObjectGrabber(RandomNamesAndElements.Instance.explorationActor);
+            string finding = ListSingleObjectGrabber(RandomNamesAndElements.Instance.explorationFinding);
+            string compiledString = $"While {activity}, your {finder} found a {finding} worth {treasureAmount.ToString("0.00")} quadracreds. \n" +
+            "The full amount will be added to next year's economic allocations. \n \n" +
+            "Press space to continue.";
+            AddNotificationToList(compiledString);
+        }
     }
 
     void DiscoverAlienEmpire(Empire discoveredByEmpire)
@@ -549,5 +575,10 @@ public class Empire : MonoBehaviour
         expectedDiplomacyBudget = ((grossEmpireProduct * diplomacyAllocationAmount) / MagicNumbers.Instance.allocationPercentage);
     }
 
-
+    void AddNotificationToList(string notificationText)
+    {
+        // Add to Notification List
+        GameManager.Instance.notificationsToDisplay.Add(notificationText);
+        // Display Notification is Handled by GameManager
+    }
 }
