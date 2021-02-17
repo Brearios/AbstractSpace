@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public bool playerLoss;
     public bool isRunning;
     public bool allocating; // Tracks whether Player is on the Allocation Screen
     public bool notificationsOn;

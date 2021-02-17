@@ -19,9 +19,23 @@ public class MagicNumbers : MonoBehaviour
     public int StartingColonizedPlanets = 1;
     public int StartingFleetStrength = 1;
     public float treasurePortionOfGEP = 0.3f;
-    public float fleetStrengthUpgradeMultiplier;
-
+    public float fleetStrengthUpgradeMultiplier; // I forgot what this is
+    public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity; // Currently starting at 10 - so if your military capacity is 6, your max fleet strength would be 60.
     
+    // Not currently in use
+    // REMOVE if not needed
+    //public int fleetStrengthWinnerReduction; // starting at 9 - numerator of the fraction, with fleetStrengthMaximumAsMultipleOfMilitaryCapactity as denominator, for how much the winner keeps
+    //public int fleetStrengthLoserReduction; // starting at 8 - numerator of the fraction, with fleetStrengthMaximumAsMultipleOfMilitaryCapactity as denominator, for how much the loser keeps
+
+    public int strongFleetStrengthVictoryReduction; // starting at 10%
+    public int strongFleetStrengthLossReduction; // starting at 25%
+    public int weakFleetStrengthVictoryReduction; // starting at 15%
+    public int weakFleetStrengthLossReduction; // starting at 25%
+    public int fleetStrengthKillingBlowLevel; // starting at 5 - if a fleet is below 20% total capacity, and suffers a loss, that empire is defeated
+
+
+
+
 
     // Needs a starting grossEmpireProduct
 
