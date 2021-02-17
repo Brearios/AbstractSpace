@@ -181,6 +181,11 @@ public class Empire : MonoBehaviour
             return;
         }
 
+        if (isDefeated)
+        {
+            return;
+        }
+
         CalculateProgress(true);
 
         UpdateEmpireAllocations();
@@ -682,11 +687,20 @@ public class Empire : MonoBehaviour
             {
                 GameManager.Instance.playerLoss = true;
                 string defeatNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by {defeatedBy}. \n " +
-                    $"With their fleet in shambles, {this.race.raceHomeworld} was invaded, and {this.rulerName} was captured. \n \n" +
-                    $" {this.race.raceAdjective.ToUpper()} civilization will only live on in the history books.";
+                    $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
+                    $" {race.raceAdjective.ToUpper()} civilization will only live on in the history books.";
                 // GameManager.Instance.isRunning = false; Notification will pause.
                 AddNotificationToList(defeatNotifaction);
             }
+            if (!isPlayer)
+            {
+                    string victoryNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by {defeatedBy}. \n " +
+                    $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
+                    $" {race.raceAdjective.ToUpper()} civilization will only live on in the history books.";
+                // GameManager.Instance.isRunning = false; Notification will pause.
+                AddNotificationToList(victoryNotifaction);
+            }
+
         }
     }
 }
