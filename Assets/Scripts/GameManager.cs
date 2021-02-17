@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public bool isRunning;
     public bool allocating; // Tracks whether Player is on the Allocation Screen
+    public bool notificationsOn;
     public Empire playerEmpire;
     public Empire alienTemplateEmpire;
     public SectorDetails currentSector;
@@ -111,20 +112,23 @@ public class GameManager : MonoBehaviour
 
     private void ShowNotifications()
     {
-        PanelActivator.Instance.notificationTextActivator.SetActive(true);
-        foreach (string notification in notificationsToDisplay)
+        if (notificationsOn)
         {
-            currentNotification = notification;
-            
-            isRunning = false;
-            //while (!isRunning)
-            //{
-            //    return;
-            //}
-        }
-        if (isRunning)
-        {
-            PanelActivator.Instance.notificationTextActivator.SetActive(false);
+            PanelActivator.Instance.notificationTextActivator.SetActive(true);
+            foreach (string notification in notificationsToDisplay)
+            {
+                currentNotification = notification;
+
+                isRunning = false;
+                //while (!isRunning)
+                //{
+                //    return;
+                //}
+            }
+            if (isRunning)
+            {
+                PanelActivator.Instance.notificationTextActivator.SetActive(false);
+            }
         }
 
     }
