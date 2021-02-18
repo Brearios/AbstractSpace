@@ -154,6 +154,7 @@ public class Empire : MonoBehaviour
             InitializeAlienEmpireDetails(this);
             CalculateProgressToSpaceyear();
             GameManager.Instance.allEmpires.Add(this);
+            relationsTowardPlayer = 20;
         }
 
         // Invicible Sakkran League, or ISL. The ISL is made up of ...
@@ -580,7 +581,7 @@ public class Empire : MonoBehaviour
         {
             relationsTowardPlayer--;
             // Xenophobia Multiplier Goes Here
-            if (relationsTowardPlayer < 20)
+            if ((relationsTowardPlayer < 10) && (militaryCapactiy > 0) && (fleetStrength > 5))
             {
                 AtWarWithPlayer = true;
                 
@@ -633,8 +634,8 @@ public class Empire : MonoBehaviour
                         weakerEmpire.defeatedBy = strongerEmpire.Name;
                     }
                     // Weaker empire loses 30% of their fleet strength, stronger loses 10%
-                    weakerEmpire.fleetStrength = (weakerEmpire.fleetStrength * MagicNumbers.Instance.weakFleetStrengthLossReduction);
-                    strongerEmpire.fleetStrength = (strongerEmpire.fleetStrength * MagicNumbers.Instance.strongFleetStrengthVictoryReduction);
+                    weakerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.weakFleetStrengthLossReduction) * weakerEmpire.fleetStrength)  / 100);
+                    strongerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.strongFleetStrengthVictoryReduction) * strongerEmpire.fleetStrength) / 100);
                 }
                 else
                 {
@@ -645,8 +646,8 @@ public class Empire : MonoBehaviour
                         strongerEmpire.defeatedBy = weakerEmpire.Name;
                     }
                     // Stronger empire loses 25% of their fleet strength, weaker loses 15%
-                    strongerEmpire.fleetStrength = (strongerEmpire.fleetStrength * MagicNumbers.Instance.strongFleetStrengthLossReduction);
-                    weakerEmpire.fleetStrength = (weakerEmpire.fleetStrength * MagicNumbers.Instance.weakFleetStrengthVictoryReduction);
+                    strongerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.strongFleetStrengthLossReduction) * strongerEmpire.fleetStrength) / 100);
+                    weakerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.weakFleetStrengthVictoryReduction) * weakerEmpire.fleetStrength) / 100);
                 }
 
 

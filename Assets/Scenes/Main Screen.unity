@@ -403,6 +403,12 @@ MonoBehaviour:
   StartingFleetStrength: 1
   treasurePortionOfGEP: 0.3
   fleetStrengthUpgradeMultiplier: 0
+  fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 10
+  strongFleetStrengthVictoryReduction: 10
+  strongFleetStrengthLossReduction: 25
+  weakFleetStrengthVictoryReduction: 15
+  weakFleetStrengthLossReduction: 30
+  fleetStrengthKillingBlowLevel: 20
 --- !u!114 &191888507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,8 +421,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6424cdbc3c85ff4428707c5c4eb3fab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLoss: 0
   isRunning: 1
   allocating: 0
+  notificationsOn: 1
   playerEmpire: {fileID: 1776160985}
   alienTemplateEmpire: {fileID: 0}
   currentSector:
