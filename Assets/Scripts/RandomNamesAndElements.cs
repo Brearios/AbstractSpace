@@ -7,9 +7,9 @@ public class RandomNamesAndElements : MonoBehaviour
     public static RandomNamesAndElements Instance;
 
     public List<string> emperorNameGenerationList = new List<string>{ "Zekruk", "Qhakun", "Mies'ins", "Yulgaers", "Ghekrets", "Serea", "Ilgik", "Tazil", "Bas'ael", "Vadhuh", "Evroks", "Xungits", "Khicrets" };
-    public List<string> raceNameGenerationList = new List<string>{ "Alkari", "Bulrathi", "Darloks", "Humans", "Klackons", "Meklar", "Mrrshan", "Psilon", "Sakkra", "Silicoids", "Elerians", "Gnolams", "Trilarians" };
-    public List<string> raceAdjectiveGenerationList = new List<string>{ "Alkaran", "Bulrath", "Darlokian", "Human", "Klackon", "Meklar", "Mrrshan", "Psilon", "Sakkran", "Siliconian", "Elerian", "Gnolan", "Trilarian" };
-    public List<string> raceHomeworldGenerationList = new List<string>{ "Altair", "Ursa", "Nazin", "Sol", "Kholdan", "Meklon", "Fieras", "Menta", "Sssla", "Cryslon", "Berylia", "Gnol", "Wavya" };
+    public List<string> raceNameGenerationList = new List<string>{ "Alkari", "Bulrathi", "Darloks", /*"Humans", */ "Klackons", "Meklar", "Mrrshan", "Psilon", "Sakkra", "Silicoids", "Elerians", "Gnolams", "Trilarians" };
+    public List<string> raceAdjectiveGenerationList = new List<string>{ "Alkaran", "Bulrath", "Darlokian", /* "Human", */ "Klackon", "Meklar", "Mrrshan", "Psilon", "Sakkran", "Siliconian", "Elerian", "Gnolan", "Trilarian" };
+    public List<string> raceHomeworldGenerationList = new List<string>{ "Altair", "Ursa", "Nazin", /* "Sol", */ "Kholdan", "Meklon", "Fieras", "Menta", "Sssla", "Cryslon", "Berylia", "Gnol", "Wavya" };
     public List<string> locomationGenerationList = new List<string>{ "bipedal", "tripedal", "quadrupedal", "floating", "flying", "serpentine" };
     public List<string> typeOfRaceGenerationList = new List<string>{ "mammalian", "amphibian", "reptilian", "avian", "insectoid", "aquatic", "fungoid", "plantoid", "robotic" };
     public List<string> numberOfAppendagesGenerationList = new List<string>{ "two", "three", "four", "six", "many" };

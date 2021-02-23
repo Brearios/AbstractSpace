@@ -581,7 +581,7 @@ public class Empire : MonoBehaviour
         {
             relationsTowardPlayer--;
             // Xenophobia Multiplier Goes Here
-            if ((relationsTowardPlayer < 10) && (militaryCapactiy > 0) && (fleetStrength > 5))
+            if (((relationsTowardPlayer < 10) && (militaryCapactiy > 0) && (fleetStrength > 5)) && !AtWarWithPlayer)
             {
                 AtWarWithPlayer = true;
                 

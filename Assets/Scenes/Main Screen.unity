@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cc45613c1edd841927e8e89307ece0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialUpgradeCost: 10
+  initialUpgradeCost: 30
   allocationIterationAmount: 10
   allocationPercentage: 0
   numberOfAllocationSegments: 0
