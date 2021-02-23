@@ -50,4 +50,9 @@ public class ButtonScripts : MonoBehaviour
     {
         GameManager.Instance.currentSector = GameManager.Instance.playerEmpire.diplomacy;
     }
+
+    public void isRunningToggle()
+    {
+        GameManager.Instance.isRunning = !GameManager.Instance.isRunning;
+    }
 }

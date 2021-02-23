@@ -21,7 +21,8 @@ public class MagicNumbers : MonoBehaviour
     public float treasurePortionOfGEP = 0.3f;
     public float fleetStrengthUpgradeMultiplier; // I forgot what this is
     public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity; // Currently starting at 10 - so if your military capacity is 6, your max fleet strength would be 60.
-    
+    public int startingRelations;
+
     // Not currently in use
     // REMOVE if not needed
     //public int fleetStrengthWinnerReduction; // starting at 9 - numerator of the fraction, with fleetStrengthMaximumAsMultipleOfMilitaryCapactity as denominator, for how much the winner keeps

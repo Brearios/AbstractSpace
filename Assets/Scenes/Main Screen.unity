@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cc45613c1edd841927e8e89307ece0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialUpgradeCost: 30
+  initialUpgradeCost: 50
   allocationIterationAmount: 10
   allocationPercentage: 0
   numberOfAllocationSegments: 0
@@ -404,6 +404,7 @@ MonoBehaviour:
   treasurePortionOfGEP: 0.3
   fleetStrengthUpgradeMultiplier: 0
   fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 10
+  startingRelations: 200
   strongFleetStrengthVictoryReduction: 10
   strongFleetStrengthLossReduction: 25
   weakFleetStrengthVictoryReduction: 15
@@ -4175,6 +4176,7 @@ GameObject:
   - component: {fileID: 1651969579}
   - component: {fileID: 1651969578}
   - component: {fileID: 1651969577}
+  - component: {fileID: 1651969580}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -4244,7 +4246,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1651969578}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1651969580}
+        m_MethodName: isRunningToggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1651969578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4281,6 +4294,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1651969575}
   m_CullTransparentMesh: 0
+--- !u!114 &1651969580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651969575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddb2b2f13805ac4aa7a5cbe12651f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1659988530
 GameObject:
   m_ObjectHideFlags: 0
@@ -4464,7 +4489,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Menu
+  m_Text: Pause
 --- !u!222 &1678200476
 CanvasRenderer:
   m_ObjectHideFlags: 0
