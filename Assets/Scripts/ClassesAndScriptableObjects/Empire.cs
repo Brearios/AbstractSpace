@@ -166,7 +166,7 @@ public class Empire : MonoBehaviour
             $"They see via {race.eyeDetails}, and their bodies are covered by {race.externalCovering}. \n \n " +
             $"Most {race.raceName.ToLower()} live {race.societalUnit}. Their typical form of government {race.governmentTypes}.";
 
-        string compiledString = $"In {GameManager.Instance.spaceYear} ESE, Your explorers made contact with aliens known as the {Name}. \n \n " +
+        string compiledString = $"In {GameManager.Instance.spaceYear} ESE, your explorers made contact with aliens known as the {Name}. \n \n " +
             $"{madlib}\n \n " +
             $"Press Space to continue.";
 
@@ -713,7 +713,7 @@ public class Empire : MonoBehaviour
                 GameManager.Instance.playerLoss = true;
                 string defeatNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by {defeatedBy}. \n " +
                     $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
-                    $" {race.raceAdjective.ToUpper()} civilization will only live on in the history books. \n \n" + 
+                    $"Now {race.raceAdjective} civilization will only live on in the history books. \n \n" + 
                     $"You lose, Imperator.";
                 // TODO - random race leader words?
 
@@ -725,7 +725,7 @@ public class Empire : MonoBehaviour
                 GameManager.Instance.currentWars--;
                     string victoryNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by {defeatedBy}. \n " +
                     $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
-                    $" {race.raceAdjective.ToUpper()} civilization will only live on in the history books.";
+                    $"Now, {race.raceAdjective} civilization will only live on in the history books.";
                     // GameManager.Instance.isRunning = false; Notification will pause.
                 AddNotificationToList(victoryNotifaction);
             }
