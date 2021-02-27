@@ -406,9 +406,9 @@ MonoBehaviour:
   fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 10
   startingRelations: 200
   exterminatorRelationsReduction: 4
-  xenophobeRelationsReduction: 3
-  normalRelationsReduction: 2
-  xenophileRelationsReduction: 1
+  xenophobicRelationsReduction: 3
+  moderateRelationsReduction: 2
+  xenophilicRelationsReduction: 1
   strongFleetStrengthVictoryReduction: 10
   strongFleetStrengthLossReduction: 25
   weakFleetStrengthVictoryReduction: 15

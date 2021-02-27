@@ -58,7 +58,7 @@ public class TextBoxController : MonoBehaviour
             $"Science: {GameManager.Instance.playerEmpire.science.fundingAllocation} \n" +
             $"Diplomacy: {GameManager.Instance.playerEmpire.diplomacy.fundingAllocation}";
 
-        //TODO This needs to somehow account for losing ships/strength, right? And how do I track active wars?
+        //RESOLVED This needs to somehow account for losing ships/strength, right? And how do I track active wars?
         militaryText.text = $"Annual Fleet Construction Capacity: {GameManager.Instance.playerEmpire.militaryCapacity} \n \n" +
             $"Fleet Strength (FS): {GameManager.Instance.playerEmpire.fleetStrength} \n \n" +
             // TODO  $"Allies Fleet Strength: {variableForAlliesFleetStrength} \n \n"

@@ -150,7 +150,7 @@ public class Empire : MonoBehaviour
             race.eyeDetails = "two eyes";
             race.externalCovering = "skin";
             race.societalUnit = "in cities";
-            race.governmentTypes = "a democracy";
+            race.governmentType = "a democracy";
         }
 
         InitializeEmpireAddSectorsAndSetGEP(this);
@@ -170,10 +170,14 @@ public class Empire : MonoBehaviour
         // Invicible Sakkran League, or ISL. The ISL is made up of ...
         // Abbreviation = $"{boastWord.Substring(0, 1)}{race.raceAdjective.Substring(0, 1)}{governmentWord.Substring(0, 1)}";
 
-        madlib = $"The {governmentWord} is made up of {race.raceName.ToLower()}, who originated on the planet {race.raceHomeworld}. \n \n" +
+        // TODO - exclude humans from randomness
+        // TODO - avoid previously generated races OR better, preserve their biological settings but not others.
+
+        // This should need an "is" in the last line, but it keeps duplicating somehow.
+        madlib = $"The {governmentWord} is made up of {race.raceName.ToLower()}, who originated on the planet {race.raceHomeworld}. Most {race.raceName.ToLower()} live {race.societalUnit}. \n \n" +
             $"{race.raceName} are {race.locomation}, and appear to be {race.typeOfRace}, with {race.numberOfAppendages} {race.typesOfAppendages}. \n " +
             $"They see via {race.eyeDetails}, and have bodies covered by {race.externalCovering}. \n \n " +
-            $"Most {race.raceName.ToLower()} live {race.societalUnit}. The {governmentWord} is {race.governmentTypes}. {race.raceName}'s approach to other races is {orientationString.ToLower()}.";
+            $" The {governmentWord} {race.governmentType}, and their approach to other races is {orientationString.ToLower()}.";
 
         string compiledString = $"In {GameManager.Instance.spaceYear} ESE, your explorers made contact with aliens known as the {Name}. \n \n " +
             $"{madlib}\n \n " +
@@ -381,7 +385,7 @@ public class Empire : MonoBehaviour
             string activity = ListSingleObjectGrabber(RandomNamesAndElements.Instance.explorationActivity);
             string finder = ListSingleObjectGrabber(RandomNamesAndElements.Instance.explorationActor);
             string finding = ListSingleObjectGrabber(RandomNamesAndElements.Instance.explorationFinding);
-            string compiledString = $"While {activity}, {race.raceAdjective} {finder} found {finding} worth {treasureAmount.ToString("0.00")} quadracreds. \n" +
+            string compiledString = $"While {activity}, {race.raceAdjective.ToLower()} {finder} found {finding} worth {treasureAmount.ToString("0.00")} quadracreds. \n" +
             "The full amount will be added to next year's economic allocations. \n \n" +
             "Press space to continue.";
             AddNotificationToList(compiledString);
@@ -473,7 +477,7 @@ public class Empire : MonoBehaviour
         empire.race.eyeDetails = ListSingleObjectGrabber(RandomNamesAndElements.Instance.eyeDetailsGenerationList);
         empire.race.externalCovering = ListSingleObjectGrabber(RandomNamesAndElements.Instance.externalCoveringGenerationList);
         empire.race.societalUnit = ListSingleObjectGrabber(RandomNamesAndElements.Instance.societalUnitGenerationList);
-        empire.race.governmentTypes = ListSingleObjectGrabber(RandomNamesAndElements.Instance.governmentTypesGenerationList);
+        empire.race.governmentType = ListSingleObjectGrabber(RandomNamesAndElements.Instance.governmentTypesGenerationList);
     }
 
     string ListSingleObjectGrabber(List<string> listName)

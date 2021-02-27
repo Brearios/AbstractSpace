@@ -18,5 +18,5 @@ public class Race
     public string eyeDetails;
     public string externalCovering;
     public string societalUnit;
-    public string governmentTypes;
+    public string governmentType;
 }

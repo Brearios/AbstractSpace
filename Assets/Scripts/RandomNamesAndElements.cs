@@ -21,7 +21,7 @@ public class RandomNamesAndElements : MonoBehaviour
     public List<string> boastWordGenerationList = new List<string> { "Great", "Indomintable", "Invincible", "Galactic", "Eternal", "Grand" };
     public List<string> governmentWordGenerationList = new List<string> { "Federaion", "Alliance", "Confederacy", "League", "Coalition", "Union", "Consortium", "High", "Imperium" };
     public List<string> explorationActivity = new List<string> { "exploring a star system", "mapping an asteroid belt", "looking for potential colony sites" };
-    public List<string> explorationActor = new List<string> { "scouts", "away team", "scanners" };
+    public List<string> explorationActor = new List<string> { "scouts", "away teams", "scanners" };
     public List<string> explorationFinding = new List<string> { "a pirate cache", "ancient relics", "raw materials" };
     public void Awake()
     {
