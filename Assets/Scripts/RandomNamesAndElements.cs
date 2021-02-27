@@ -17,12 +17,12 @@ public class RandomNamesAndElements : MonoBehaviour
     public List<string> eyeDetailsGenerationList = new List<string>{ "one eye", "two eyes", "three eyes", "many eyes", "compound eyes" };
     public List<string> externalCoveringGenerationList = new List<string>{ "an exoskeleton", "fur", "scales", "skin" };
     public List<string> societalUnitGenerationList = new List<string>{ "in solitary isolation", "with immediate family", "with extended family groups", "in large tribes", "in cities", "in tightly-packed megacities" };
-    public List<string> governmentTypesGenerationList = new List<string>{ "is a democracy", "is a dictatorship", "is a technocracy", "is a oligarchy", "is a monarchy", "is a theocracy", "is non-existent - anarchy" };
-    public List<string> boastWordGenerationList = new List<string> { "Great", "Indomintable", "Invincible", "Galactic", "Eternal" };
-    public List<string> governmentWordGenerationList = new List<string> { "Federaion", "Alliance", "Confederacy", "League", "Coalition", "Union", "Consortium", "High", "Grand" };
+    public List<string> governmentTypesGenerationList = new List<string>{ "a democracy", "a dictatorship", "a technocracy", "an oligarchy", "a monarchy", "a theocracy", "non-existent - anarchy" };
+    public List<string> boastWordGenerationList = new List<string> { "Great", "Indomintable", "Invincible", "Galactic", "Eternal", "Grand" };
+    public List<string> governmentWordGenerationList = new List<string> { "Federaion", "Alliance", "Confederacy", "League", "Coalition", "Union", "Consortium", "High", "Imperium" };
     public List<string> explorationActivity = new List<string> { "exploring a star system", "mapping an asteroid belt", "looking for potential colony sites" };
     public List<string> explorationActor = new List<string> { "scouts", "away team", "scanners" };
-    public List<string> explorationFinding = new List<string> { "pirate cache", "ancient relics", "raw materials" };
+    public List<string> explorationFinding = new List<string> { "a pirate cache", "ancient relics", "raw materials" };
     public void Awake()
     {
         if (Instance == null)

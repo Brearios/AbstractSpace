@@ -22,6 +22,10 @@ public class MagicNumbers : MonoBehaviour
     public float fleetStrengthUpgradeMultiplier; // I forgot what this is
     public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity; // Currently starting at 10 - so if your military capacity is 6, your max fleet strength would be 60.
     public int startingRelations;
+    public int exterminatorRelationsReduction;
+    public int xenophobicRelationsReduction;
+    public int moderateRelationsReduction;
+    public int xenophilicRelationsReduction;
 
     // Not currently in use
     // REMOVE if not needed

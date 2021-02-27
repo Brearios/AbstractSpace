@@ -21,15 +21,18 @@ public class Empire : MonoBehaviour
     public string discoveredBy;
     public string boastWord;
     public string governmentWord;
+    public string orientationString;
     public bool isPlayer;
     public enum SixDegrees { Player, Rival, Second, Third, Fourth, Fifth }
-    public enum DiplomaticOrientation { Exterminator, Xenophobe, Average, Xenophile }
+    public enum DiplomaticOrientation { Extermination, Xenophobic, Moderate, Xenophilic }
     // TODO Less calculation for those further "out", determine number of desired degrees, method of discovering/promoting known empries
 
     public ScriptableEmpire empireTemplate;
 
     public string currentStatus; // Allied, War, Defeated, Peace
- 
+
+    public DiplomaticOrientation orientation;
+
     public float grossEmpireProduct;
     public float bonusResourcesFromEvents;
     public int exploredStars;
@@ -39,7 +42,8 @@ public class Empire : MonoBehaviour
     public int militaryCapacity;
     public int fleetStrength;
     public int relationsTowardPlayer;
-    public int diplomaticCapacity; 
+    public int yearlyDiplomaticCapacity;
+    public int totalDiplomaticCapacity;
     // Represents diplomats, analysts, space anthropologists
     // 1-100, with 1 being war, 2-34 being hostile, 35-65 being peace, 66-99 being trade, and 100 being allies
 
@@ -57,7 +61,7 @@ public class Empire : MonoBehaviour
     public float expectedScienceBudget;
     public float expectedDiplomacyBudget;
 
-    
+
     public SectorDetails economy;
     public SectorDetails exploration;
     public SectorDetails colonization;
@@ -88,44 +92,44 @@ public class Empire : MonoBehaviour
         }
 
         if (LogManager.Instance.logsEnabled)
+        {
+            if (LogManager.Instance.addSectorsToListLogs)
             {
-                if (LogManager.Instance.addSectorsToListLogs)
-                {
-                    Debug.Log($"Attempting to add 6 sectors to {Name}'s empireSectors list, in space year {GameManager.Instance.spaceYear}.");
-                }
+                Debug.Log($"Attempting to add 6 sectors to {Name}'s empireSectors list, in space year {GameManager.Instance.spaceYear}.");
             }
+        }
 
-            empireSectors.Add(economy);
-            empireSectors.Add(exploration);
-            empireSectors.Add(colonization);
-            empireSectors.Add(military);
-            empireSectors.Add(science);
-            empireSectors.Add(diplomacy);
+        empireSectors.Add(economy);
+        empireSectors.Add(exploration);
+        empireSectors.Add(colonization);
+        empireSectors.Add(military);
+        empireSectors.Add(science);
+        empireSectors.Add(diplomacy);
 
-            if (LogManager.Instance.logsEnabled)
+        if (LogManager.Instance.logsEnabled)
+        {
+            if (LogManager.Instance.addSectorsToListLogs)
             {
-                if (LogManager.Instance.addSectorsToListLogs)
-                {
-                    Debug.Log($"Added {empireSectors.Count} sectors to {Name}'s empireSectors list, in space year {GameManager.Instance.spaceYear}.");
-                }
+                Debug.Log($"Added {empireSectors.Count} sectors to {Name}'s empireSectors list, in space year {GameManager.Instance.spaceYear}.");
             }
+        }
 
         foreach (SectorDetails sector in empireSectors)
+        {
+            if (LogManager.Instance.logsEnabled)
             {
-                if (LogManager.Instance.logsEnabled)
+                if (LogManager.Instance.initializeFundingLogs)
                 {
-                    if (LogManager.Instance.initializeFundingLogs)
-                    {
-                        Debug.Log($"Initializing funding for {sector.sectorName}, in space year {GameManager.Instance.spaceYear}.");
-                    }
+                    Debug.Log($"Initializing funding for {sector.sectorName}, in space year {GameManager.Instance.spaceYear}.");
                 }
-
-                sector.growthLevelsAchieved = 0;
-                sector.fundingAllocation = 0.0f;
-                sector.currentInvestment = 0;
-                sector.neededInvestment = MagicNumbers.Instance.initialUpgradeCost;
-                sector.sectorScienceMultiplier = 0.0f;
             }
+
+            sector.growthLevelsAchieved = 0;
+            sector.fundingAllocation = 0.0f;
+            sector.currentInvestment = 0;
+            sector.neededInvestment = MagicNumbers.Instance.initialUpgradeCost;
+            sector.sectorScienceMultiplier = 0.0f;
+        }
 
         // Temp allocations until allocating is set up
         if (isPlayer)
@@ -146,13 +150,18 @@ public class Empire : MonoBehaviour
             race.eyeDetails = "two eyes";
             race.externalCovering = "skin";
             race.societalUnit = "in cities";
-            race.governmentTypes = "is a democracy";
+            race.governmentTypes = "a democracy";
         }
 
         InitializeEmpireAddSectorsAndSetGEP(this);
         if (!isPlayer)
         {
             InitializeAlienEmpireDetails(this);
+
+            // TODO - can I do something with this to put the processing time behind the discovery notification?
+            // Show notification
+            // Loop to Spaceyear
+            // !isRunning
             CalculateProgressToSpaceyear();
             GameManager.Instance.allEmpires.Add(this);
             relationsTowardPlayer = MagicNumbers.Instance.startingRelations;
@@ -161,10 +170,10 @@ public class Empire : MonoBehaviour
         // Invicible Sakkran League, or ISL. The ISL is made up of ...
         // Abbreviation = $"{boastWord.Substring(0, 1)}{race.raceAdjective.Substring(0, 1)}{governmentWord.Substring(0, 1)}";
 
-        madlib = $"The {Name} is made up of {race.raceName.ToLower()}, who originated on the planet {race.raceHomeworld}. \n \n" +
-            $"{ race.raceName} are {race.locomation}, and appear to be {race.typeOfRace}, with {race.numberOfAppendages} {race.typesOfAppendages}. \n " +
-            $"They see via {race.eyeDetails}, and their bodies are covered by {race.externalCovering}. \n \n " +
-            $"Most {race.raceName.ToLower()} live {race.societalUnit}. Their typical form of government {race.governmentTypes}.";
+        madlib = $"The {governmentWord} is made up of {race.raceName.ToLower()}, who originated on the planet {race.raceHomeworld}. \n \n" +
+            $"{race.raceName} are {race.locomation}, and appear to be {race.typeOfRace}, with {race.numberOfAppendages} {race.typesOfAppendages}. \n " +
+            $"They see via {race.eyeDetails}, and have bodies covered by {race.externalCovering}. \n \n " +
+            $"Most {race.raceName.ToLower()} live {race.societalUnit}. The {governmentWord} is {race.governmentTypes}. {race.raceName}'s approach to other races is {orientationString.ToLower()}.";
 
         string compiledString = $"In {GameManager.Instance.spaceYear} ESE, your explorers made contact with aliens known as the {Name}. \n \n " +
             $"{madlib}\n \n " +
@@ -210,7 +219,7 @@ public class Empire : MonoBehaviour
         empire.discoveredPlanets = 0;
         empire.colonizedPlanets = MagicNumbers.Instance.StartingColonizedPlanets;
         empire.militaryCapacity = MagicNumbers.Instance.StartingFleetStrength;
-        empire.diplomaticCapacity = 0;
+        empire.yearlyDiplomaticCapacity = 0;
     }
 
 
@@ -316,7 +325,7 @@ public class Empire : MonoBehaviour
                 break;
 
             case "diplomacy":
-                diplomaticCapacity++;
+                yearlyDiplomaticCapacity++;
                 break;
         }
     }
@@ -372,7 +381,7 @@ public class Empire : MonoBehaviour
             string activity = ListSingleObjectGrabber(RandomNamesAndElements.Instance.explorationActivity);
             string finder = ListSingleObjectGrabber(RandomNamesAndElements.Instance.explorationActor);
             string finding = ListSingleObjectGrabber(RandomNamesAndElements.Instance.explorationFinding);
-            string compiledString = $"While {activity}, your {finder} found a {finding} worth {treasureAmount.ToString("0.00")} quadracreds. \n" +
+            string compiledString = $"While {activity}, {race.raceAdjective} {finder} found {finding} worth {treasureAmount.ToString("0.00")} quadracreds. \n" +
             "The full amount will be added to next year's economic allocations. \n \n" +
             "Press space to continue.";
             AddNotificationToList(compiledString);
@@ -382,7 +391,7 @@ public class Empire : MonoBehaviour
     void DiscoverAlienEmpire(Empire discoveredByEmpire)
     {
         // TODO - record who discovered empire
-        
+
         GameObject tempEmpireObject = Instantiate(GameManager.Instance.alienEmpire);
         Empire discoveredEmpire;
         discoveredEmpire = tempEmpireObject.GetComponent<Empire>();
@@ -409,6 +418,11 @@ public class Empire : MonoBehaviour
         rulerName = ListSingleObjectGrabber(RandomNamesAndElements.Instance.emperorNameGenerationList);
         GenerateEmpireName(empire);
         GenerateBiologyValues(empire);
+
+        // Generate a random number for the empire's approach to aliens 0 - exterminate, 1 - xenophobe, 2 - normal, 3 - xenophile
+        int diploRand = UnityEngine.Random.Range(0, 4);
+        orientation = (DiplomaticOrientation)diploRand;
+        orientationString = orientation.ToString();
 
         // REMOVE - handled in Start script via foreach loop
         // SetSectorAllocationsToZero(empire);
@@ -575,26 +589,76 @@ public class Empire : MonoBehaviour
     {
         if (isPlayer)
         {
-            // Diplomacy Goes Here
-            // Xenophobia Effects Go Here As Well
+            DistributeDiplomacyPoints();
         }
         if (!isPlayer)
         {
-            relationsTowardPlayer--;
+            ReduceRelationsByDiplomaticOrientation();
             // Xenophobia Multiplier Goes Here
             if (((relationsTowardPlayer < 10) && (militaryCapacity > 0) && (fleetStrength > 5)) && !AtWarWithPlayer)
             {
                 AtWarWithPlayer = true;
                 GameManager.Instance.currentWars++;
-                
+
                 // TODO - what does the player need to know? Make it sound cool.
                 // This is garbage and needs work
                 string warNotification = $"The {Name} has declared war. Analysts estimate their fleet strength at {fleetStrength}. \n " +
                     $"Our fleet strength is {GameManager.Instance.playerEmpire.fleetStrength}. If we can bring down their fleets, we will triumph. \n" +
                     $"But if they bring our fleet strength to zero, there will be no future for the {GameManager.Instance.playerEmpire.Name}.";
+
+                // TODO - outcomes beyond extermination
+                // Gain colonies, perhaps on a reabsorb/rebuild timer
+                // Gain colonizable worlds
                 AddNotificationToList(warNotification);
             }
         }
+    }
+
+    void ReduceRelationsByDiplomaticOrientation()
+    {
+        switch ((int)orientation)
+        {
+            // Exterminator
+            case 0:
+                relationsTowardPlayer -= MagicNumbers.Instance.exterminatorRelationsReduction;
+                break;
+
+            // Xenophobe
+            case 1:
+                relationsTowardPlayer -= MagicNumbers.Instance.xenophobicRelationsReduction;
+                break;
+
+            // Normal
+            case 2:
+                relationsTowardPlayer -= MagicNumbers.Instance.moderateRelationsReduction;
+                break;
+
+            // Xenophile
+            case 3:
+                relationsTowardPlayer -= MagicNumbers.Instance.xenophilicRelationsReduction;
+                break;
+        }
+    }
+
+    void DistributeDiplomacyPoints()
+    {
+        totalDiplomaticCapacity += yearlyDiplomaticCapacity;
+        while ((GameManager.Instance.knownEmpires.Count > 0) && (totalDiplomaticCapacity > 0))
+        {
+            foreach (Empire relationsImprovedEmpire in GameManager.Instance.knownEmpires)
+            {
+                if (totalDiplomaticCapacity > 0)
+                {
+                    totalDiplomaticCapacity--;
+                    relationsImprovedEmpire.relationsTowardPlayer++;
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
     }
 
     void FightWars()
@@ -645,13 +709,13 @@ public class Empire : MonoBehaviour
                 //    weakerEmpire.defeatedBy = strongerEmpire.Name;
                 //}
                 // Weaker empire loses 30% of their fleet strength, stronger loses 10%
-                weakerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.weakFleetStrengthLossReduction) * weakerEmpire.fleetStrength)  / 100);
+                weakerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.weakFleetStrengthLossReduction) * weakerEmpire.fleetStrength) / 100);
                 strongerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.strongFleetStrengthVictoryReduction) * strongerEmpire.fleetStrength) / 100);
             }
             else
             {
                 // Stronger empire loses outright if under 20% strength
-                
+
                 // TODO - fix these if statements, and un-comment
                 //if (strongerEmpire.fleetStrength < ((strongerEmpire.militaryCapacity * MagicNumbers.Instance.fleetStrengthMaximumAsMultipleOfMilitaryCapacity) / MagicNumbers.Instance.fleetStrengthKillingBlowLevel))
                 //{
@@ -713,7 +777,7 @@ public class Empire : MonoBehaviour
                 GameManager.Instance.playerLoss = true;
                 string defeatNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by {defeatedBy}. \n " +
                     $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
-                    $"Now {race.raceAdjective} civilization will only live on in the history books. \n \n" + 
+                    $"Now {race.raceAdjective} civilization will only live on in the history books. \n \n" +
                     $"You lose, Imperator.";
                 // TODO - random race leader words?
 
@@ -723,10 +787,10 @@ public class Empire : MonoBehaviour
             if (!isPlayer)
             {
                 GameManager.Instance.currentWars--;
-                    string victoryNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by {defeatedBy}. \n " +
-                    $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
-                    $"Now, {race.raceAdjective} civilization will only live on in the history books.";
-                    // GameManager.Instance.isRunning = false; Notification will pause.
+                string victoryNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by {defeatedBy}. \n " +
+                $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
+                $"Now, {race.raceAdjective} civilization will only live on in the history books.";
+                // GameManager.Instance.isRunning = false; Notification will pause.
                 AddNotificationToList(victoryNotifaction);
             }
 
