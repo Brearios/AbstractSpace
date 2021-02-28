@@ -404,7 +404,7 @@ MonoBehaviour:
   treasurePortionOfGEP: 0.3
   fleetStrengthUpgradeMultiplier: 0
   fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 10
-  startingRelations: 200
+  startingRelations: 100
   exterminatorRelationsReduction: 4
   xenophobicRelationsReduction: 3
   moderateRelationsReduction: 2
@@ -430,6 +430,9 @@ MonoBehaviour:
   isRunning: 1
   allocating: 0
   notificationsOn: 1
+  playerDiplomacyTowardExterminators: 0
+  playerDiplomacyTowardXenophobes: 0
+  playerDiplomacyTowardModerates: 1
   playerEmpire: {fileID: 1776160985}
   alienTemplateEmpire: {fileID: 0}
   currentSector:

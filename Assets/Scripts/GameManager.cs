@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public bool isRunning;
     public bool allocating; // Tracks whether Player is on the Allocation Screen
     public bool notificationsOn;
+    public bool playerDiplomacyTowardExterminators;
+    public bool playerDiplomacyTowardXenophobes;
+    public bool playerDiplomacyTowardModerates;
     public Empire playerEmpire;
     public Empire alienTemplateEmpire;
     public SectorDetails currentSector;

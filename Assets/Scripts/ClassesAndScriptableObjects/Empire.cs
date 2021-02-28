@@ -653,8 +653,7 @@ public class Empire : MonoBehaviour
             {
                 if (totalDiplomaticCapacity > 0)
                 {
-                    totalDiplomaticCapacity--;
-                    relationsImprovedEmpire.relationsTowardPlayer++;
+                    ConsiderDiplomacySpending(relationsImprovedEmpire);
                 }
                 else
                 {
@@ -663,6 +662,39 @@ public class Empire : MonoBehaviour
             }
         }
 
+    }
+
+    void ConsiderDiplomacySpending(Empire relationsImprovedEmpire)
+    {
+        if (relationsImprovedEmpire.AtWarWithPlayer)
+            {
+                return;
+                //TODO - enable investing diplomacy to end wars
+            }
+        else if (relationsImprovedEmpire.orientation == DiplomaticOrientation.Xenophilic)
+        {
+            totalDiplomaticCapacity--;
+            relationsImprovedEmpire.relationsTowardPlayer++;
+        }
+        else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Moderate) && (GameManager.Instance.playerDiplomacyTowardModerates))
+        {
+            totalDiplomaticCapacity--;
+            relationsImprovedEmpire.relationsTowardPlayer++;
+        }
+        else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Xenophobic) && (GameManager.Instance.playerDiplomacyTowardXenophobes))
+        {
+            totalDiplomaticCapacity--;
+            relationsImprovedEmpire.relationsTowardPlayer++;
+        }
+        else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Extermination) && (GameManager.Instance.playerDiplomacyTowardExterminators))
+        {
+            totalDiplomaticCapacity--;
+            relationsImprovedEmpire.relationsTowardPlayer++;
+        }
+        else
+        {
+            return;
+        }
     }
 
     void FightWars()
