@@ -15,6 +15,7 @@ public class Empire : MonoBehaviour
     public bool AtWarWithPlayer;
     public bool AlliedWithPlayer;
     public bool isDefeated;
+    public bool keepSpendingDiplomacy;
     public string Name;
     public string Abbreviation;
     public string rulerName;
@@ -23,7 +24,8 @@ public class Empire : MonoBehaviour
     public string governmentWord;
     public string orientationString;
     public bool isPlayer;
-    public enum SixDegrees { Player, Rival, Second, Third, Fourth, Fifth }
+    public int degreesFromPlayer;
+    // public enum SixDegrees { Player, Rival, Second, Third, Fourth, Fifth } Replaced with an int - player is 0, less code/functionality as int increases.
     public enum DiplomaticOrientation { Extermination, Xenophobic, Moderate, Xenophilic }
     // TODO Less calculation for those further "out", determine number of desired degrees, method of discovering/promoting known empries
 
@@ -151,6 +153,7 @@ public class Empire : MonoBehaviour
             race.externalCovering = "skin";
             race.societalUnit = "in cities";
             race.governmentType = "a democracy";
+            degreesFromPlayer = 0;
         }
 
         InitializeEmpireAddSectorsAndSetGEP(this);
@@ -173,11 +176,10 @@ public class Empire : MonoBehaviour
         // TODO - exclude humans from randomness
         // TODO - avoid previously generated races OR better, preserve their biological settings but not others.
 
-        // This should need an "is" in the last line, but it keeps duplicating somehow.
         madlib = $"The {governmentWord} is made up of {race.raceName.ToLower()}, who originated on the planet {race.raceHomeworld}. Most {race.raceName.ToLower()} live {race.societalUnit}. \n \n" +
-            $"{race.raceName} are {race.locomation}, and appear to be {race.typeOfRace}, with {race.numberOfAppendages} {race.typesOfAppendages}. \n " +
+            $"{race.raceName} are {race.locomation}, and {race.typeOfRace} in appearance. {race.raceName} have {race.numberOfAppendages} {race.typesOfAppendages}. \n " +
             $"They see via {race.eyeDetails}, and have bodies covered by {race.externalCovering}. \n \n " +
-            $" The {governmentWord} {race.governmentType}, and their approach to other races is {orientationString.ToLower()}.";
+            $" The {governmentWord} is {race.governmentType}, and their approach to other races is {orientationString.ToLower()}.";
 
         string compiledString = $"In {GameManager.Instance.spaceYear} ESE, your explorers made contact with aliens known as the {Name}. \n \n " +
             $"{madlib}\n \n " +
@@ -400,6 +402,7 @@ public class Empire : MonoBehaviour
         Empire discoveredEmpire;
         discoveredEmpire = tempEmpireObject.GetComponent<Empire>();
         discoveredEmpire.discoveredBy = discoveredByEmpire.Name;
+        discoveredEmpire.degreesFromPlayer = (discoveredByEmpire.degreesFromPlayer +1);
         if (discoveredByEmpire.isPlayer)
         {
             GameManager.Instance.knownEmpires.Add(discoveredEmpire);
@@ -603,6 +606,7 @@ public class Empire : MonoBehaviour
             {
                 AtWarWithPlayer = true;
                 GameManager.Instance.currentWars++;
+                GameManager.Instance.empiresAtWarWithPlayer.Add(this);
 
                 // TODO - what does the player need to know? Make it sound cool.
                 // This is garbage and needs work
@@ -647,7 +651,10 @@ public class Empire : MonoBehaviour
     void DistributeDiplomacyPoints()
     {
         totalDiplomaticCapacity += yearlyDiplomaticCapacity;
-        while ((GameManager.Instance.knownEmpires.Count > 0) && (totalDiplomaticCapacity > 0))
+
+        // If all empires can be looped through without keepSpendingDiplomacy being toggled, we're done after running the loop once. If not, we spend diplomacy until it reaches 0.
+        keepSpendingDiplomacy = false;
+        do
         {
             foreach (Empire relationsImprovedEmpire in GameManager.Instance.knownEmpires)
             {
@@ -661,7 +668,7 @@ public class Empire : MonoBehaviour
                 }
             }
         }
-
+        while ((keepSpendingDiplomacy) && (totalDiplomaticCapacity > 0));
     }
 
     void ConsiderDiplomacySpending(Empire relationsImprovedEmpire)
@@ -675,21 +682,25 @@ public class Empire : MonoBehaviour
         {
             totalDiplomaticCapacity--;
             relationsImprovedEmpire.relationsTowardPlayer++;
+            keepSpendingDiplomacy = true;
         }
         else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Moderate) && (GameManager.Instance.playerDiplomacyTowardModerates))
         {
             totalDiplomaticCapacity--;
             relationsImprovedEmpire.relationsTowardPlayer++;
+            keepSpendingDiplomacy = true;
         }
         else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Xenophobic) && (GameManager.Instance.playerDiplomacyTowardXenophobes))
         {
             totalDiplomaticCapacity--;
             relationsImprovedEmpire.relationsTowardPlayer++;
+            keepSpendingDiplomacy = true;
         }
         else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Extermination) && (GameManager.Instance.playerDiplomacyTowardExterminators))
         {
             totalDiplomaticCapacity--;
             relationsImprovedEmpire.relationsTowardPlayer++;
+            keepSpendingDiplomacy = true;
         }
         else
         {
@@ -794,7 +805,6 @@ public class Empire : MonoBehaviour
             //}
         }
     }
-
 
     void BuildShips()
     {

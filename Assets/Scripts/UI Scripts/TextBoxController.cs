@@ -63,7 +63,7 @@ public class TextBoxController : MonoBehaviour
             $"Fleet Strength (FS): {GameManager.Instance.playerEmpire.fleetStrength} \n \n" +
             // TODO  $"Allies Fleet Strength: {variableForAlliesFleetStrength} \n \n"
             $"Active Wars: {GameManager.Instance.currentWars} \n \n" +
-            $"Enemy FS: {GameManager.Instance.playerEmpire.colonizedPlanets}";
+            $"Enemy FS: {GameManager.Instance.enemyFleetStrength}";
 
         //TODO - fill in diplomacy, double-check list count - may need -1 or +1
         diplomacyText.text = $"Known Empires: {(GameManager.Instance.knownEmpires.Count)} \n \n" +
@@ -73,8 +73,8 @@ public class TextBoxController : MonoBehaviour
             $"Hostile: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
             $"At War: {GameManager.Instance.currentWars} \n" +
             $"Defeated: {GameManager.Instance.playerDefeatedEmpires} \n \n" +
-            $"Diplomatic Capacity: {GameManager.Instance.playerEmpire.yearlyDiplomaticCapacity} \n" +
-            $"Needed Capacity: Placeholder \n";
+            $"Yearly Diplomatic Capacity: {GameManager.Instance.playerEmpire.yearlyDiplomaticCapacity} \n" +
+            $"Available Capacity: Placeholder \n";
 
         selectedSectorText.text = $"{GameManager.Instance.currentSector}";
 

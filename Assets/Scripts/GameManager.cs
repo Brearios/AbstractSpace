@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public List<Empire> allEmpires;
     public List<Empire> knownEmpires;
     public List<Empire> newEmpiresToAdd;
+    public List<Empire> empiresAtWarWithPlayer;
+    public int enemyFleetStrength;
     public int playerDefeatedEmpires;
     public int currentWars;
     public int spaceYear;
@@ -102,7 +104,8 @@ public class GameManager : MonoBehaviour
         ShowNotifications();
 
         ClearNotifications();
-        
+
+        CalculateEnemyFleetStrength();        
 
         IncrementYear();
 
@@ -201,6 +204,17 @@ public class GameManager : MonoBehaviour
         {
             gameSpeed = 1.0f;
         }
+    }
+
+    void CalculateEnemyFleetStrength()
+    {
+        int enemyFleetStrengthCalculator;
+        enemyFleetStrengthCalculator = 0;
+        foreach (Empire enemyEmpire in empiresAtWarWithPlayer)
+        {
+            enemyFleetStrengthCalculator += enemyEmpire.fleetStrength;
+        }
+        enemyFleetStrength = enemyFleetStrengthCalculator;
     }
 
     void IncrementYear()

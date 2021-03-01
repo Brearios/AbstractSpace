@@ -632,13 +632,13 @@ MonoBehaviour:
   - in cities
   - in tightly-packed megacities
   governmentTypesGenerationList:
-  - is a democracy
-  - is a dictatorship
-  - is a technocracy
-  - is a oligarchy
-  - is a monarchy
-  - is a theocracy
-  - is non-existent - anarchy
+  - a democracy
+  - a dictatorship
+  - a technocracy
+  - a oligarchy
+  - a monarchy
+  - a theocracy
+  - non-existent - anarchy
   boastWordGenerationList:
   - Great
   - Indomintable
@@ -659,7 +659,7 @@ MonoBehaviour:
   - looking for potential colony sites
   explorationActor:
   - scouts
-  - away team
+  - away teams
   - scanners
   explorationFinding:
   - pirate cache
