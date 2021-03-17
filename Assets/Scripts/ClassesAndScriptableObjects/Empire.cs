@@ -7,7 +7,8 @@ using UnityEngine;
 // TODO - add xenophobe/xenophile modifier - changing relations decay rate and costs
 
 // TODO - build in properties for Human Space Alliance if (isPlayer)
-// TODO - Empire madlib string
+// TODO - wars are unlikely to ever end if they're 1v1
+
 
 public class Empire : MonoBehaviour
 {
@@ -833,6 +834,7 @@ public class Empire : MonoBehaviour
             if (!isPlayer)
             {
                 GameManager.Instance.currentWars--;
+                GameManager.Instance.empiresAtWarWithPlayer.Remove(this);
                 string victoryNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by {defeatedBy}. \n " +
                 $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
                 $"Now, {race.raceAdjective} civilization will only live on in the history books.";

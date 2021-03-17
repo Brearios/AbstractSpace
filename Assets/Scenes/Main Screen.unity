@@ -364,9 +364,9 @@ GameObject:
   m_Component:
   - component: {fileID: 191888508}
   - component: {fileID: 191888507}
+  - component: {fileID: 191888511}
   - component: {fileID: 191888506}
   - component: {fileID: 191888509}
-  - component: {fileID: 191888511}
   - component: {fileID: 191888510}
   - component: {fileID: 191888512}
   m_Layer: 0
@@ -445,6 +445,8 @@ MonoBehaviour:
   allEmpires: []
   knownEmpires: []
   newEmpiresToAdd: []
+  empiresAtWarWithPlayer: []
+  enemyFleetStrength: 0
   playerDefeatedEmpires: 0
   currentWars: 0
   spaceYear: 1
@@ -547,7 +549,6 @@ MonoBehaviour:
   - Alkari
   - Bulrathi
   - Darloks
-  - Humans
   - Klackons
   - Meklar
   - Mrrshan
@@ -561,7 +562,6 @@ MonoBehaviour:
   - Alkaran
   - Bulrath
   - Darlokian
-  - Human
   - Klackon
   - Meklar
   - Mrrshan
@@ -575,7 +575,6 @@ MonoBehaviour:
   - Altair
   - Ursa
   - Nazin
-  - Sol
   - Kholdan
   - Meklon
   - Fieras
@@ -611,6 +610,7 @@ MonoBehaviour:
   typesOfAppendagesGenerationList:
   - hands
   - claws
+  - clawed hands
   - wings
   - tentacles
   eyeDetailsGenerationList:
@@ -635,7 +635,7 @@ MonoBehaviour:
   - a democracy
   - a dictatorship
   - a technocracy
-  - a oligarchy
+  - an oligarchy
   - a monarchy
   - a theocracy
   - non-existent - anarchy
@@ -645,6 +645,7 @@ MonoBehaviour:
   - Invincible
   - Galactic
   - Eternal
+  - Grand
   governmentWordGenerationList:
   - Federaion
   - Alliance
@@ -653,6 +654,8 @@ MonoBehaviour:
   - Coalition
   - Union
   - Consortium
+  - High
+  - Imperium
   explorationActivity:
   - exploring a star system
   - mapping an asteroid belt
@@ -662,7 +665,7 @@ MonoBehaviour:
   - away teams
   - scanners
   explorationFinding:
-  - pirate cache
+  - a pirate cache
   - ancient relics
   - raw materials
 --- !u!114 &191888512

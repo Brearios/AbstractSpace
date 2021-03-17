@@ -74,7 +74,7 @@ public class TextBoxController : MonoBehaviour
             $"At War: {GameManager.Instance.currentWars} \n" +
             $"Defeated: {GameManager.Instance.playerDefeatedEmpires} \n \n" +
             $"Yearly Diplomatic Capacity: {GameManager.Instance.playerEmpire.yearlyDiplomaticCapacity} \n" +
-            $"Available Capacity: Placeholder \n";
+            $"Available Capacity: {GameManager.Instance.playerEmpire.totalDiplomaticCapacity}";
 
         selectedSectorText.text = $"{GameManager.Instance.currentSector}";
 
