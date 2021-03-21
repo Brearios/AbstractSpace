@@ -18,8 +18,8 @@ public class RandomNamesAndElements : MonoBehaviour
     public List<string> externalCoveringGenerationList = new List<string>{ "an exoskeleton", "fur", "scales", "skin" };
     public List<string> societalUnitGenerationList = new List<string>{ "in solitary isolation", "with immediate family", "with extended family groups", "in large tribes", "in cities", "in tightly-packed megacities" };
     public List<string> governmentTypesGenerationList = new List<string>{ "a democracy", "a dictatorship", "a technocracy", "an oligarchy", "a monarchy", "a theocracy", "non-existent - anarchy" };
-    public List<string> boastWordGenerationList = new List<string> { "Great", "Indomintable", "Invincible", "Galactic", "Eternal", "Grand" };
-    public List<string> governmentWordGenerationList = new List<string> { "Federaion", "Alliance", "Confederacy", "League", "Coalition", "Union", "Consortium", "High", "Imperium" };
+    public List<string> boastWordGenerationList = new List<string> { "Great", "Indomintable", "Invincible", "Galactic", "Eternal", "High", "Grand" };
+    public List<string> governmentWordGenerationList = new List<string> { "Federaion", "Alliance", "Confederacy", "League", "Coalition", "Union", "Consortium", "Imperium" };
     public List<string> explorationActivity = new List<string> { "exploring a star system", "mapping an asteroid belt", "looking for potential colony sites" };
     public List<string> explorationActor = new List<string> { "scouts", "away teams", "scanners" };
     public List<string> explorationFinding = new List<string> { "a pirate cache", "ancient relics", "raw materials" };
