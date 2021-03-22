@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public float deltaTime;
     public float timeIncrement;
     public GameObject alienEmpire;
+    public string currentStoredInput;
+    public string inputFieldTitle;
 
     public GameObject notificationTextActivator;
     public string currentNotification;
@@ -156,9 +158,9 @@ public class GameManager : MonoBehaviour
 
     private void CustomizeEmpire()
     {
+        PanelActivator.Instance.CustomizeEmpire();
         // Set MagicNumbers Empire Variables via text boxes
         // TODO - implement customization with text boxes
-        throw new NotImplementedException();
     }
 
     private void AllocateSpending()

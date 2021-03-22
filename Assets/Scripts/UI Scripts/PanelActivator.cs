@@ -5,12 +5,15 @@ using UnityEngine;
 public class PanelActivator : MonoBehaviour
 {
     public static PanelActivator Instance;
+    public GameObject inputWindowActivator;
+    public GameObject menuPanel;
     public GameObject notificationTextActivator;
     public GameObject buttonActivator;
     public GameObject statusTextActivator;
     public GameObject OverviewTextBackground;
     public GameObject AllocationTextBackground;
 
+    public List<GameObject> UIElementList;
     public void Awake()
     {
         {
@@ -24,30 +27,34 @@ public class PanelActivator : MonoBehaviour
                 return;
             }
         }
+        UIElementList.Add(inputWindowActivator);
+        UIElementList.Add(menuPanel);
+        UIElementList.Add(notificationTextActivator);
+        UIElementList.Add(buttonActivator);
+        UIElementList.Add(statusTextActivator);
+        UIElementList.Add(OverviewTextBackground);
+        UIElementList.Add(AllocationTextBackground);
+    }
+
+    // Disable all UI elements so you only need to enable what's needed
+    public void DisableUIElements()
+    {
+        foreach (GameObject UIElement in UIElementList)
+        {
+            UIElement.SetActive(false);
+        }
     }
 
     public void AcknowledgeNotificationAndDismiss()
     {
         notificationTextActivator.SetActive(false);
         GameManager.Instance.isRunning = true;
+    }
 
-        // REMOVE - unneeded because it works fine over the top of things
-        //if (GameManager.Instance.allocating)
-        //{
-        //    notificationTextActivator.SetActive(false);
-        //    statusTextActivator.SetActive(false);
-        //    buttonActivator.SetActive(true);
-        //    GameManager.Instance.isRunning = false;
-        //}
-        //else
-        //{
-        //    notificationTextActivator.SetActive(false);
-        //    buttonActivator.SetActive(false);
-        //    statusTextActivator.SetActive(true);
-        //    GameManager.Instance.isRunning = true;
-        //}
-        //De-activate object
-        //Activate other panels
-        GameManager.Instance.isRunning = true;
+    public void CustomizeEmpire()
+    {
+        GameManager.Instance.isRunning = false;
+        DisableUIElements();
+        inputWindowActivator.SetActive(true);
     }
 }
