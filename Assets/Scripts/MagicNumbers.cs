@@ -18,6 +18,8 @@ public class MagicNumbers : MonoBehaviour
     public int StartingGrossEmpireProduct = 10;
     public int StartingColonizedPlanets = 1;
     public int StartingFleetStrength = 1;
+    public float tradeBonusMultiplier = 0.15f;
+    public float allyFleetBonusMultiplier = 0.05f;
     public float treasurePortionOfGEP = 0.3f;
     public float fleetStrengthUpgradeMultiplier; // I forgot what this is
     public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity; // Currently starting at 10 - so if your military capacity is 6, your max fleet strength would be 60.

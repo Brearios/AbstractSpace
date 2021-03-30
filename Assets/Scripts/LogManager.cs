@@ -19,6 +19,8 @@ public class LogManager : MonoBehaviour
     public bool trackAlienAllocationLoop;
     public bool alienEmpireCatchUpLogs;
     public bool empireDiscovered;
+    public bool tradeBenefitLogs;
+    public bool allyFleetBonusLogs;
 
     //public bool displaySectorUpgradeLogs;
     //public bool displaySectorUpgradeLogs;
