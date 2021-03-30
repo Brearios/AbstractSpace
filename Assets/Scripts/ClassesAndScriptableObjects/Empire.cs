@@ -13,19 +13,26 @@ using UnityEngine;
 public class Empire : MonoBehaviour
 {
     public Race race;
-    public bool AtWarWithPlayer;
+    public bool AtWarWithDiscoveredBy;
     public bool AlliedWithPlayer;
     public bool isDefeated;
     public bool keepSpendingDiplomacy;
     public string Name;
     public string Abbreviation;
     public string rulerName;
-    public string discoveredBy;
+    public Empire discoveredBy;
     public string boastWord;
     public string governmentWord;
     public string orientationString;
     public bool isPlayer;
     public int degreesFromPlayer;
+
+    // 0 degrees - player
+    // 1 degree - opponents - does everything players do
+    // 2 degrees - enemies of opponents - pays the costs opponents pay, details are less necessary
+    // 3 degrees - just get discovered and targeted, no diplomacy, exploration, or wars of their own
+
+    public int empiresCurrentWars;
     // public enum SixDegrees { Player, Rival, Second, Third, Fourth, Fifth } Replaced with an int - player is 0, less code/functionality as int increases.
     public enum DiplomaticOrientation { Extermination, Xenophobic, Moderate, Xenophilic }
     // TODO Less calculation for those further "out", determine number of desired degrees, method of discovering/promoting known empries
@@ -35,6 +42,7 @@ public class Empire : MonoBehaviour
     public string currentStatus; // Allied, War, Defeated, Peace
 
     public DiplomaticOrientation orientation;
+    public DiplomaticOrientation diplomacyOrientation;
 
     public float grossEmpireProduct;
     public float bonusResourcesFromEvents;
@@ -44,7 +52,7 @@ public class Empire : MonoBehaviour
     public int colonyShips;
     public int militaryCapacity;
     public int fleetStrength;
-    public int relationsTowardPlayer;
+    public int relationsTowardDiscoveredBy; // adapt to reducing relations with all known Empires
     public int yearlyDiplomaticCapacity;
     public int totalDiplomaticCapacity;
     // Represents diplomats, analysts, space anthropologists
@@ -77,6 +85,8 @@ public class Empire : MonoBehaviour
 
     // Potentially could add population numbers, to be factored into grossEmpireProduct, with a sector for spending that would increase growth rate
     public List<SectorDetails> empireSectors = new List<SectorDetails>();
+    public List<Empire> encounteredEmpires = new List<Empire>();
+    public List<Empire> empiresAtWarWithThisEmpire = new List<Empire>();
 
     private void Start()
     {
@@ -90,8 +100,9 @@ public class Empire : MonoBehaviour
 
         if (isPlayer)
         {
-            AtWarWithPlayer = false;
+            AtWarWithDiscoveredBy = false;
             AlliedWithPlayer = false;
+            diplomacyOrientation = DiplomaticOrientation.Xenophilic;
         }
 
         if (LogManager.Instance.logsEnabled)
@@ -168,7 +179,8 @@ public class Empire : MonoBehaviour
             // !isRunning
             CalculateProgressToSpaceyear();
             GameManager.Instance.allEmpires.Add(this);
-            relationsTowardPlayer = MagicNumbers.Instance.startingRelations;
+            relationsTowardDiscoveredBy = MagicNumbers.Instance.startingRelations;
+            encounteredEmpires.Add(discoveredBy);
         }
 
         // Invicible Sakkran League, or ISL. The ISL is made up of ...
@@ -182,11 +194,12 @@ public class Empire : MonoBehaviour
             $"They see via {race.eyeDetails}, and have bodies covered by {race.externalCovering}. \n \n " +
             $" The {governmentWord} is {race.governmentType}, and their approach to other races is {orientationString.ToLower()}.";
 
+
         string compiledString = $"In {GameManager.Instance.spaceYear} ESE, your explorers made contact with aliens known as the {Name}. \n \n " +
             $"{madlib}\n \n " +
             $"Press Space to continue.";
 
-        if (!isPlayer)
+        if ((!isPlayer) && (discoveredBy.isPlayer))
         {
             AddNotificationToList(compiledString);
         }
@@ -364,7 +377,11 @@ public class Empire : MonoBehaviour
 
             // If Aliens discover aliens, especially in higher spaceyears, those aliens will discover aliens as they CalculateProgress.
             // This would only be advisable if it only applied to rivals, possibly with a method for promoting empires discovered by Rivals to rivals themselves
-            if (isPlayer)
+            //if (isPlayer)
+            //{
+            //    DiscoverAlienEmpire(this);
+            //}
+            if (degreesFromPlayer <= 1)
             {
                 DiscoverAlienEmpire(this);
             }
@@ -402,12 +419,10 @@ public class Empire : MonoBehaviour
         GameObject tempEmpireObject = Instantiate(GameManager.Instance.alienEmpire);
         Empire discoveredEmpire;
         discoveredEmpire = tempEmpireObject.GetComponent<Empire>();
-        discoveredEmpire.discoveredBy = discoveredByEmpire.Name;
+        discoveredEmpire.discoveredBy = discoveredByEmpire;
         discoveredEmpire.degreesFromPlayer = (discoveredByEmpire.degreesFromPlayer +1);
-        if (discoveredByEmpire.isPlayer)
-        {
-            GameManager.Instance.knownEmpires.Add(discoveredEmpire);
-        }
+        discoveredByEmpire.encounteredEmpires.Add(discoveredEmpire);
+        GameManager.Instance.allEmpires.Add(discoveredEmpire);
         if (LogManager.Instance.logsEnabled)
         {
             if (LogManager.Instance.empireDiscovered)
@@ -430,6 +445,7 @@ public class Empire : MonoBehaviour
         // Generate a random number for the empire's approach to aliens 0 - exterminate, 1 - xenophobe, 2 - normal, 3 - xenophile
         int diploRand = UnityEngine.Random.Range(0, 4);
         orientation = (DiplomaticOrientation)diploRand;
+        diplomacyOrientation = orientation;
         orientationString = orientation.ToString();
 
         // REMOVE - handled in Start script via foreach loop
@@ -598,53 +614,72 @@ public class Empire : MonoBehaviour
         if (isPlayer)
         {
             DistributeDiplomacyPoints();
+            // Species design - choose a xeno-relations level at a species design cost
+            // Implement diplomacy damage based on that level to encounteredEmpires
         }
-        if (!isPlayer)
+        if (!isPlayer && degreesFromPlayer == 1)
         {
-            ReduceRelationsByDiplomaticOrientation();
-            // Xenophobia Multiplier Goes Here
-            if (((relationsTowardPlayer < 10) && (militaryCapacity > 0) && (fleetStrength > 5)) && !AtWarWithPlayer)
+            DistributeDiplomacyPoints();
+            foreach (Empire reduceRelationsEmpire in encounteredEmpires)
             {
-                AtWarWithPlayer = true;
-                GameManager.Instance.currentWars++;
-                GameManager.Instance.empiresAtWarWithPlayer.Add(this);
+                ReduceRelationsByDiplomaticOrientation(reduceRelationsEmpire);
+            }
+            // Xenophobia Multiplier Goes Here
+            if (((relationsTowardDiscoveredBy < 10) && (militaryCapacity > 0) && (fleetStrength > 5)) && !AtWarWithDiscoveredBy)
+            {
+                AtWarWithDiscoveredBy = true;
+                if (discoveredBy == GameManager.Instance.playerEmpire)
+                {
+                    GameManager.Instance.currentWars++;
+                    discoveredBy.empiresAtWarWithThisEmpire.Add(this);
+                    string warNotification = $"The {Name} has declared war. Analysts estimate their fleet strength at {fleetStrength}. \n " +
+                   $"Our fleet strength is {GameManager.Instance.playerEmpire.fleetStrength}. If we can bring down their fleets, we will triumph. \n" +
+                   $"But if they bring our fleet strength to zero, there will be no future for the {GameManager.Instance.playerEmpire.Name}.";
+
+                    // TODO - outcomes beyond extermination
+                    // Gain colonies, perhaps on a reabsorb/rebuild timer
+                    // Gain colonizable worlds
+                    AddNotificationToList(warNotification);
+                }
+                else
+                {
+                    discoveredBy.empiresAtWarWithThisEmpire.Add(this);
+                    string nonPlayerWarNotifcation = $"The {Name} has declared war on {discoveredBy.Name}. Analysts estimate their fleet strength at {fleetStrength}. \n " +
+                    $"The {discoveredBy.Name} has a fleet strength of {discoveredBy.fleetStrength}. The battles of the days to come will determine who continues to \n +" +
+                    $"explore the stars, and which empire will be left to the pages of history.";
+                    AddNotificationToList(nonPlayerWarNotifcation);
+                }
+                
 
                 // TODO - what does the player need to know? Make it sound cool.
                 // This is garbage and needs work
-                string warNotification = $"The {Name} has declared war. Analysts estimate their fleet strength at {fleetStrength}. \n " +
-                    $"Our fleet strength is {GameManager.Instance.playerEmpire.fleetStrength}. If we can bring down their fleets, we will triumph. \n" +
-                    $"But if they bring our fleet strength to zero, there will be no future for the {GameManager.Instance.playerEmpire.Name}.";
-
-                // TODO - outcomes beyond extermination
-                // Gain colonies, perhaps on a reabsorb/rebuild timer
-                // Gain colonizable worlds
-                AddNotificationToList(warNotification);
+               
             }
         }
     }
 
-    void ReduceRelationsByDiplomaticOrientation()
+    void ReduceRelationsByDiplomaticOrientation(Empire discoveredBy)
     {
         switch ((int)orientation)
         {
             // Exterminator
             case 0:
-                relationsTowardPlayer -= MagicNumbers.Instance.exterminatorRelationsReduction;
+                relationsTowardDiscoveredBy -= MagicNumbers.Instance.exterminatorRelationsReduction;
                 break;
 
             // Xenophobe
             case 1:
-                relationsTowardPlayer -= MagicNumbers.Instance.xenophobicRelationsReduction;
+                relationsTowardDiscoveredBy -= MagicNumbers.Instance.xenophobicRelationsReduction;
                 break;
 
             // Normal
             case 2:
-                relationsTowardPlayer -= MagicNumbers.Instance.moderateRelationsReduction;
+                relationsTowardDiscoveredBy -= MagicNumbers.Instance.moderateRelationsReduction;
                 break;
 
             // Xenophile
             case 3:
-                relationsTowardPlayer -= MagicNumbers.Instance.xenophilicRelationsReduction;
+                relationsTowardDiscoveredBy -= MagicNumbers.Instance.xenophilicRelationsReduction;
                 break;
         }
     }
@@ -657,7 +692,7 @@ public class Empire : MonoBehaviour
         keepSpendingDiplomacy = false;
         do
         {
-            foreach (Empire relationsImprovedEmpire in GameManager.Instance.knownEmpires)
+            foreach (Empire relationsImprovedEmpire in encounteredEmpires)
             {
                 if (totalDiplomaticCapacity > 0)
                 {
@@ -674,7 +709,7 @@ public class Empire : MonoBehaviour
 
     void ConsiderDiplomacySpending(Empire relationsImprovedEmpire)
     {
-        if (relationsImprovedEmpire.AtWarWithPlayer)
+        if (relationsImprovedEmpire.AtWarWithDiscoveredBy)
             {
                 return;
                 //TODO - enable investing diplomacy to end wars
@@ -682,25 +717,25 @@ public class Empire : MonoBehaviour
         else if (relationsImprovedEmpire.orientation == DiplomaticOrientation.Xenophilic)
         {
             totalDiplomaticCapacity--;
-            relationsImprovedEmpire.relationsTowardPlayer++;
+            relationsImprovedEmpire.relationsTowardDiscoveredBy++;
             keepSpendingDiplomacy = true;
         }
         else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Moderate) && (GameManager.Instance.playerDiplomacyTowardModerates))
         {
             totalDiplomaticCapacity--;
-            relationsImprovedEmpire.relationsTowardPlayer++;
+            relationsImprovedEmpire.relationsTowardDiscoveredBy++;
             keepSpendingDiplomacy = true;
         }
         else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Xenophobic) && (GameManager.Instance.playerDiplomacyTowardXenophobes))
         {
             totalDiplomaticCapacity--;
-            relationsImprovedEmpire.relationsTowardPlayer++;
+            relationsImprovedEmpire.relationsTowardDiscoveredBy++;
             keepSpendingDiplomacy = true;
         }
         else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Extermination) && (GameManager.Instance.playerDiplomacyTowardExterminators))
         {
             totalDiplomaticCapacity--;
-            relationsImprovedEmpire.relationsTowardPlayer++;
+            relationsImprovedEmpire.relationsTowardDiscoveredBy++;
             keepSpendingDiplomacy = true;
         }
         else
@@ -725,7 +760,7 @@ public class Empire : MonoBehaviour
             return;
         }
 
-        if (AtWarWithPlayer)
+        if (AtWarWithDiscoveredBy)
         {
             int enemyFleetStrength = fleetStrength;
             int playerFleetStrength = GameManager.Instance.playerEmpire.fleetStrength;

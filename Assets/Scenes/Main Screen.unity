@@ -598,7 +598,6 @@ MonoBehaviour:
     neededInvestment: 0
     sectorScienceMultiplier: 0
   allEmpires: []
-  knownEmpires: []
   newEmpiresToAdd: []
   empiresAtWarWithPlayer: []
   enemyFleetStrength: 0
@@ -803,6 +802,7 @@ MonoBehaviour:
   - Galactic
   - Eternal
   - Grand
+  - High
   governmentWordGenerationList:
   - Federaion
   - Alliance
@@ -811,7 +811,7 @@ MonoBehaviour:
   - Coalition
   - Union
   - Consortium
-  - High
+  - Hegemony
   - Imperium
   explorationActivity:
   - exploring a star system
@@ -1490,7 +1490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &627501944
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3536,7 +3536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1260816914
 Transform:
   m_ObjectHideFlags: 0
@@ -3695,7 +3695,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 513
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0

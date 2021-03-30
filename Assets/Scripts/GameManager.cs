@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public Empire alienTemplateEmpire;
     public SectorDetails currentSector;
     public List<Empire> allEmpires;
-    public List<Empire> knownEmpires;
+    // public List<Empire> knownEmpires; Moved to the empire script as encounteredEmpires
     public List<Empire> newEmpiresToAdd;
     public List<Empire> empiresAtWarWithPlayer;
     public int enemyFleetStrength;
@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
     {
         int enemyFleetStrengthCalculator;
         enemyFleetStrengthCalculator = 0;
-        foreach (Empire enemyEmpire in empiresAtWarWithPlayer)
+        foreach (Empire enemyEmpire in GameManager.Instance.playerEmpire.empiresAtWarWithThisEmpire)
         {
             enemyFleetStrengthCalculator += enemyEmpire.fleetStrength;
         }
