@@ -557,6 +557,8 @@ MonoBehaviour:
   StartingGrossEmpireProduct: 10
   StartingColonizedPlanets: 0
   StartingFleetStrength: 1
+  tradeBonusMultiplier: 0.15
+  allyFleetBonusMultiplier: 0.1
   treasurePortionOfGEP: 0.3
   fleetStrengthUpgradeMultiplier: 0
   fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 10
@@ -675,7 +677,10 @@ MonoBehaviour:
   generateBiologyLogs: 1
   trackAlienAllocationLoop: 1
   alienEmpireCatchUpLogs: 1
-  empireDiscovered: 0
+  empireDiscovered: 1
+  tradeBenefitLogs: 1
+  allyFleetBonusLogs: 1
+  empireRelationsLogs: 1
 --- !u!114 &191888511
 MonoBehaviour:
   m_ObjectHideFlags: 0

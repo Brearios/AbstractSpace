@@ -18,14 +18,18 @@ public class Empire : MonoBehaviour
     public bool isDefeated;
     public bool keepSpendingDiplomacy;
     public bool warInitiated;
+    public bool tradingWithDiscoveredBy;
+    public bool alliedWithDiscoveredBy;
     public string Name;
     public string Abbreviation;
     public string rulerName;
     public Empire discoveredBy;
+    public string discoveredByName;
     public string boastWord;
     public string governmentWord;
     public string orientationString;
     public bool isPlayer;
+    public bool defeatAnnounced;
     public int degreesFromPlayer;
 
     // 0 degrees - player
@@ -105,6 +109,7 @@ public class Empire : MonoBehaviour
             AtWarWithDiscoveredBy = false;
             AlliedWithPlayer = false;
             diplomacyOrientation = DiplomaticOrientation.Xenophilic;
+            discoveredByName = "The Player.";
         }
 
         if (LogManager.Instance.logsEnabled)
@@ -183,6 +188,7 @@ public class Empire : MonoBehaviour
             GameManager.Instance.allEmpires.Add(this);
             relationsTowardDiscoveredBy = MagicNumbers.Instance.startingRelations;
             encounteredEmpires.Add(discoveredBy);
+            discoveredByName = discoveredBy.Name;
         }
 
         // Invicible Sakkran League, or ISL. The ISL is made up of ...
@@ -216,7 +222,7 @@ public class Empire : MonoBehaviour
 
         CheckForDefeat();
 
-        if (isDefeated)
+        if (isDefeated && defeatAnnounced)
         {
             return;
         }
@@ -258,6 +264,7 @@ public class Empire : MonoBehaviour
         fleetStrength -= warDamageThisYear;
         if ((fleetStrength <= 0) && (warInitiated))
         {
+            defeatedBy = empiresAtWarWithThisEmpire[0].Name;
             isDefeated = true;
         }
         warDamageThisYear = 0;
@@ -708,10 +715,26 @@ public class Empire : MonoBehaviour
                
             }
             // Build a way to stop wars
-            if ((relationsTowardDiscoveredBy <= 100) && (!AtWarWithDiscoveredBy))
+            if ((relationsTowardDiscoveredBy >= MagicNumbers.Instance.tradeThreshold) && (!tradingWithDiscoveredBy))
             {
                 tradePartnerEmpires.Add(discoveredBy);
                 discoveredBy.tradePartnerEmpires.Add(this);
+                if (LogManager.Instance.empireRelationsLogs)
+                {
+                    Debug.Log($"The {Name} and the {discoveredBy.Name} became trading partners in {GameManager.Instance.spaceYear}.");
+                }
+                tradingWithDiscoveredBy = true;
+            }
+
+            if ((relationsTowardDiscoveredBy >= MagicNumbers.Instance.allianceThreshold) && (!alliedWithDiscoveredBy))
+            {
+                alliedEmpires.Add(discoveredBy);
+                discoveredBy.alliedEmpires.Add(this);
+                if (LogManager.Instance.empireRelationsLogs)
+                {
+                    Debug.Log($"The {Name} and the {discoveredBy.Name} became allies in {GameManager.Instance.spaceYear}.");
+                }
+                alliedWithDiscoveredBy = true;
             }
         }
     }
@@ -807,7 +830,15 @@ public class Empire : MonoBehaviour
         int warDivisor = empiresAtWarWithThisEmpire.Count;
         int fleetStrengthPerWar = (fleetStrength / warDivisor);
         int shipDamageRoll = UnityEngine.Random.Range(1, 4);
-        int damageDealtPerWar = (fleetStrengthPerWar * shipDamageRoll);
+        int damageDealtPerWar = ((fleetStrengthPerWar * shipDamageRoll) / MagicNumbers.Instance.fleetDamageInflictionDivisor);
+        if (LogManager.Instance.logsEnabled)
+        {
+            if (LogManager.Instance.warLogsEnabled)
+            {
+                Debug.Log($"In {GameManager.Instance.spaceYear}, {Name}'s fleets will deal {damageDealtPerWar}, to each empire they are at war with.");
+            }
+        }
+
         foreach (Empire warEnemy in empiresAtWarWithThisEmpire)
         {
             warDamageThisYear += damageDealtPerWar;
@@ -923,27 +954,35 @@ public class Empire : MonoBehaviour
     {
         if (isDefeated == true)
         {
-            if (isPlayer)
+            if (isPlayer && !defeatAnnounced)
             {
                 GameManager.Instance.playerLoss = true;
-                string defeatNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by {defeatedBy}. \n " +
+                string defeatNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by the {defeatedBy}. \n " +
                     $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
                     $"Now {race.raceAdjective} civilization will only live on in the history books. \n \n" +
                     $"You lose, Imperator.";
+
+                defeatAnnounced = true;
                 // TODO - random race leader words?
 
                 // GameManager.Instance.isRunning = false; Notification will pause.
                 AddNotificationToList(defeatNotifaction);
             }
-            if (!isPlayer)
+            if (!isPlayer && !defeatAnnounced)
             {
                 GameManager.Instance.currentWars--;
                 GameManager.Instance.empiresAtWarWithPlayer.Remove(this);
-                string victoryNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by {defeatedBy}. \n " +
+                string victoryNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by the {defeatedBy}. \n " +
                 $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
                 $"Now, {race.raceAdjective} civilization will only live on in the history books.";
                 // GameManager.Instance.isRunning = false; Notification will pause.
                 AddNotificationToList(victoryNotifaction);
+
+                defeatAnnounced = true;
+            }
+            foreach (Empire enemy in empiresAtWarWithThisEmpire)
+            {
+                enemy.empiresAtWarWithThisEmpire.Remove(this);
             }
 
         }

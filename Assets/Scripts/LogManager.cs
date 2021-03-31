@@ -21,6 +21,8 @@ public class LogManager : MonoBehaviour
     public bool empireDiscovered;
     public bool tradeBenefitLogs;
     public bool allyFleetBonusLogs;
+    public bool empireRelationsLogs;
+    public bool warLogsEnabled;
 
     //public bool displaySectorUpgradeLogs;
     //public bool displaySectorUpgradeLogs;
