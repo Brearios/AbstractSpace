@@ -278,7 +278,7 @@ public class Empire : MonoBehaviour
             bonusResourcesFromEventsAndTrade += tradeBonus;
             if (LogManager.Instance.tradeBenefitLogs)
             {
-                Debug.Log($"Adding trade bonus for {Name}, of {tradeBonus}, from trade with {tradingPartner.name} in space year {GameManager.Instance.spaceYear}.");
+                Debug.Log($"Adding trade bonus for {Name}, of {tradeBonus}, from trade with {tradingPartner.Name} in space year {GameManager.Instance.spaceYear}.");
             }
         }
     }
@@ -287,12 +287,13 @@ public class Empire : MonoBehaviour
     {
         foreach (Empire alliedEmpire in alliedEmpires)
         {
-            float allyFleetBonus = (alliedEmpire.fleetStrength * MagicNumbers.Instance.allyFleetBonusMultiplier);
+            // Current settings should grant 5% of what the empire you're allied would gain in a year - likely rounds down to zero. =\
+            float allyFleetBonus = ((alliedEmpire.militaryCapacity * MagicNumbers.Instance.fleetStrengthMaximumAsMultipleOfMilitaryCapacity) * MagicNumbers.Instance.allyFleetBonusMultiplier);
             int allyFleetInt = (int)Math.Round(allyFleetBonus); // Rounds to nearest int
             fleetStrength += allyFleetInt; 
             if (LogManager.Instance.allyFleetBonusLogs)
             {
-                Debug.Log($"Adding fleet bonus for {Name}, of {allyFleetInt}, from alliance with {alliedEmpire.name} in space year {GameManager.Instance.spaceYear}.");
+                Debug.Log($"Adding fleet bonus for {Name}, of {allyFleetInt}, from alliance with {alliedEmpire.Name} in space year {GameManager.Instance.spaceYear}.");
             }
         }
     }
