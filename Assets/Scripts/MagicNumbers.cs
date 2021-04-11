@@ -20,6 +20,9 @@ public class MagicNumbers : MonoBehaviour
     public int StartingFleetStrength = 1;
     public int allianceThreshold = 150;
     public int tradeThreshold = 100;
+    public int peaceThreshold = 50;
+    public int warThreshold = 10;
+    public int explorationDiscoverEmpireChanceThreshold = 67;
     public int fleetDamageInflictionDivisor = 10; // Used to determine what percentage of fleetStrength a fleet can destroy. 10 would be 10%, 20 would be 5%, 5 would be 20%.
     public float tradeBonusMultiplier = 0.15f;
     public float allyFleetBonusMultiplier = 0.05f;

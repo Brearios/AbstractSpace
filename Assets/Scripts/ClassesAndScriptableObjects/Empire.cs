@@ -174,6 +174,8 @@ public class Empire : MonoBehaviour
             race.governmentType = "a democracy";
             degreesFromPlayer = 0;
             GameManager.Instance.allEmpires.Add(this);
+            orientation = DiplomaticOrientation.Moderate;
+            diplomacyOrientation = DiplomaticOrientation.Moderate;
         }
 
         InitializeEmpireAddSectorsAndSetGEP(this);
@@ -429,7 +431,7 @@ public class Empire : MonoBehaviour
                 discoveredPlanets++;
             }
         }
-        else if (random < 67)
+        else if (random < MagicNumbers.Instance.explorationDiscoverEmpireChanceThreshold)
         {
             //TODO - figure out if I want alien empires meeting alien empires and having their own trade and war
 
@@ -683,7 +685,7 @@ public class Empire : MonoBehaviour
                 ReduceRelationsByDiplomaticOrientation(reduceRelationsEmpire);
             }
             // Xenophobia Multiplier Goes Here
-            if (((relationsTowardDiscoveredBy < 10) && (militaryCapacity > 0) && (fleetStrength > 5)) && !AtWarWithDiscoveredBy)
+            if (((relationsTowardDiscoveredBy < MagicNumbers.Instance.warThreshold) && (militaryCapacity > 0) && (fleetStrength > 5)) && !AtWarWithDiscoveredBy)
             {
                 AtWarWithDiscoveredBy = true;
                 warInitiated = true;
@@ -716,7 +718,7 @@ public class Empire : MonoBehaviour
                 // TODO - what does the player need to know? Make it sound cool.               
             }
             // 50+ diplomacy can stop a war
-            if ((relationsTowardDiscoveredBy >= 50) && AtWarWithDiscoveredBy)
+            if ((relationsTowardDiscoveredBy >= MagicNumbers.Instance.peaceThreshold) && AtWarWithDiscoveredBy)
             {
                 AtWarWithDiscoveredBy = false;
                 warInitiated = false;
