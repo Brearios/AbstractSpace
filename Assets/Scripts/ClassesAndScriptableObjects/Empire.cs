@@ -173,6 +173,7 @@ public class Empire : MonoBehaviour
             race.societalUnit = "in cities";
             race.governmentType = "a democracy";
             degreesFromPlayer = 0;
+            GameManager.Instance.allEmpires.Add(this);
         }
 
         InitializeEmpireAddSectorsAndSetGEP(this);
@@ -185,7 +186,8 @@ public class Empire : MonoBehaviour
             // Loop to Spaceyear
             // !isRunning
             CalculateProgressToSpaceyear();
-            GameManager.Instance.allEmpires.Add(this);
+            // Handled on Discovery
+            // GameManager.Instance.allEmpires.Add(this); 
             relationsTowardDiscoveredBy = MagicNumbers.Instance.startingRelations;
             encounteredEmpires.Add(discoveredBy);
             discoveredByName = discoveredBy.Name;
