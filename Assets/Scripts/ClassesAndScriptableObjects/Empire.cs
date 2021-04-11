@@ -715,7 +715,7 @@ public class Empire : MonoBehaviour
 
                 // TODO - what does the player need to know? Make it sound cool.               
             }
-            // Build a way to stop wars
+            // 50+ diplomacy can stop a war
             if ((relationsTowardDiscoveredBy >= 50) && AtWarWithDiscoveredBy)
             {
                 AtWarWithDiscoveredBy = false;
