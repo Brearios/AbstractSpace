@@ -713,21 +713,40 @@ public class Empire : MonoBehaviour
                 }
                 
 
-                // TODO - what does the player need to know? Make it sound cool.
-                // This is garbage and needs work
-               
+                // TODO - what does the player need to know? Make it sound cool.               
             }
             // Build a way to stop wars
-            if ((relationsTowardDiscoveredBy >= MagicNumbers.Instance.tradeThreshold) && (!tradingWithDiscoveredBy))
+            if ((relationsTowardDiscoveredBy >= 50) && AtWarWithDiscoveredBy)
             {
-                tradePartnerEmpires.Add(discoveredBy);
-                discoveredBy.tradePartnerEmpires.Add(this);
-                if (LogManager.Instance.empireRelationsLogs)
+                AtWarWithDiscoveredBy = false;
+                warInitiated = false;
+                discoveredBy.warInitiated = false;
+                if (discoveredBy == GameManager.Instance.playerEmpire)
                 {
-                    Debug.Log($"The {Name} and the {discoveredBy.Name} became trading partners in {GameManager.Instance.spaceYear}.");
+                    GameManager.Instance.currentWars--;
+                    discoveredBy.empiresAtWarWithThisEmpire.Remove(this);
+                    empiresAtWarWithThisEmpire.Remove(discoveredBy);
+                    string peaceNotification = $"Through hard diplomatic work, extensive communication, and better understanding, we are now at peace with the {Name}. Hopefully it continues.";
+                    AddNotificationToList(peaceNotification);
                 }
-                tradingWithDiscoveredBy = true;
+                else
+                {
+                    discoveredBy.empiresAtWarWithThisEmpire.Remove(this);
+                    empiresAtWarWithThisEmpire.Remove(discoveredBy);
+                    string nonPlayerPeaceNotifcation = $"The {Name} and the {discoveredBy.Name} are no longer at war. For unknown reasons, the fighting has stopped.";
+                    AddNotificationToList(nonPlayerPeaceNotifcation);
+                }
             }
+            if ((relationsTowardDiscoveredBy >= MagicNumbers.Instance.tradeThreshold) && (!tradingWithDiscoveredBy))
+                {
+                    tradePartnerEmpires.Add(discoveredBy);
+                    discoveredBy.tradePartnerEmpires.Add(this);
+                    if (LogManager.Instance.empireRelationsLogs)
+                    {
+                        Debug.Log($"The {Name} and the {discoveredBy.Name} became trading partners in {GameManager.Instance.spaceYear}.");
+                    }
+                    tradingWithDiscoveredBy = true;
+                }
 
             if ((relationsTowardDiscoveredBy >= MagicNumbers.Instance.allianceThreshold) && (!alliedWithDiscoveredBy))
             {
@@ -798,6 +817,11 @@ public class Empire : MonoBehaviour
                 return;
                 //TODO - enable investing diplomacy to end wars
             }
+        if (relationsImprovedEmpire == discoveredBy)
+            {
+                // Avoid this until relationships are "affectable" from both sides
+                return;
+            }
         else if (relationsImprovedEmpire.orientation == DiplomaticOrientation.Xenophilic)
         {
             totalDiplomaticCapacity--;
@@ -846,103 +870,6 @@ public class Empire : MonoBehaviour
         {
             warDamageThisYear += damageDealtPerWar;
         }
-
-        // Reduce both side's fleetStrength by an amount each year, until it reaches zero
-        // This should take into account who is stronger, and make the weaker lose more while they lose less
-        // But a given year may have some randomness, as well.
-
-        // Ideally, both wars and diplomacy need to happen among AI empires as well, not just between them and the player.
-
-        // Each empire script does this, so there's no reason to loop.
-        //foreach (Empire enemyEmpire in GameManager.Instance.knownEmpires)
-        //{
-
-        // Old war system, only has AI empires attack
-        //if (isPlayer)
-        //{
-        //    return;
-        //}
-
-        //if (AtWarWithDiscoveredBy)
-        //{
-        //    int enemyFleetStrength = fleetStrength;
-        //    int playerFleetStrength = GameManager.Instance.playerEmpire.fleetStrength;
-        //    int weakerEmpireFleetStrength;
-        //    Empire weakerEmpire;
-        //    Empire strongerEmpire;
-        //    int combinedFleetStrength = enemyFleetStrength + playerFleetStrength;
-        //    if (enemyFleetStrength < playerFleetStrength)
-        //    {
-        //        weakerEmpireFleetStrength = enemyFleetStrength;
-        //        weakerEmpire = this;
-        //        strongerEmpire = GameManager.Instance.playerEmpire;
-        //    }
-        //    else
-        //    {
-        //        weakerEmpireFleetStrength = GameManager.Instance.playerEmpire.fleetStrength;
-        //        weakerEmpire = GameManager.Instance.playerEmpire;
-        //        strongerEmpire = this;
-        //    }
-        //    int roll = UnityEngine.Random.Range(1, (combinedFleetStrength + 1));
-        //    if (roll > weakerEmpireFleetStrength)
-        //    {
-        //        // Weaker empire loses outright if under 20% strength
-
-        //        // TODO - fix these if statements, and un-comment
-        //        //if (weakerEmpire.fleetStrength < ((weakerEmpire.militaryCapacity * MagicNumbers.Instance.fleetStrengthMaximumAsMultipleOfMilitaryCapacity) / MagicNumbers.Instance.fleetStrengthKillingBlowLevel))
-        //        //{
-        //        //    weakerEmpire.isDefeated = true;
-        //        //    weakerEmpire.defeatedBy = strongerEmpire.Name;
-        //        //}
-        //        // Weaker empire loses 30% of their fleet strength, stronger loses 10%
-        //        weakerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.weakFleetStrengthLossReduction) * weakerEmpire.fleetStrength) / 100);
-        //        strongerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.strongFleetStrengthVictoryReduction) * strongerEmpire.fleetStrength) / 100);
-        //    }
-        //    else
-        //    {
-        //        // Stronger empire loses outright if under 20% strength
-
-        //        // TODO - fix these if statements, and un-comment
-        //        //if (strongerEmpire.fleetStrength < ((strongerEmpire.militaryCapacity * MagicNumbers.Instance.fleetStrengthMaximumAsMultipleOfMilitaryCapacity) / MagicNumbers.Instance.fleetStrengthKillingBlowLevel))
-        //        //{
-        //        //    strongerEmpire.isDefeated = true;
-        //        //    strongerEmpire.defeatedBy = weakerEmpire.Name;
-        //        //}
-        //        // Stronger empire loses 25% of their fleet strength, weaker loses 15%
-        //        strongerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.strongFleetStrengthLossReduction) * strongerEmpire.fleetStrength) / 100);
-        //        weakerEmpire.fleetStrength = (((100 - MagicNumbers.Instance.weakFleetStrengthVictoryReduction) * weakerEmpire.fleetStrength) / 100);
-        //    }
-
-        //    if (weakerEmpire.fleetStrength < 1)
-        //    {
-        //        weakerEmpire.isDefeated = true;
-        //        weakerEmpire.defeatedBy = strongerEmpire.Name;
-        //    }
-
-        //    if (strongerEmpire.fleetStrength < 1)
-        //    {
-        //        strongerEmpire.isDefeated = true;
-        //        strongerEmpire.defeatedBy = weakerEmpire.Name;
-        //    }
-
-
-            // These never get to zero, so the war will not end
-            // REMOVE if other system works well
-            //if (enemyEmpire.fleetStrength > GameManager.Instance.playerEmpire.fleetStrength)
-            //{
-            //    // Multiply by 9 then divide by 10, to reduce by roughly 10%
-            //    enemyEmpire.fleetStrength = ((enemyEmpire.fleetStrength * MagicNumbers.Instance.fleetStrengthWinnerReduction) / MagicNumbers.Instance.fleetStrengthMaximumAsMultipleOfMilitaryCapacity);
-            //    // Multiply by 8 then divide by 10, to reduce by roughly 20%
-            //    GameManager.Instance.playerEmpire.fleetStrength = ((GameManager.Instance.playerEmpire.fleetStrength * MagicNumbers.Instance.fleetStrengthLoserReduction) / MagicNumbers.Instance.fleetStrengthMaximumAsMultipleOfMilitaryCapacity);
-            //}
-            //else if (enemyEmpire.fleetStrength < GameManager.Instance.playerEmpire.fleetStrength)
-            //{
-            //    // Multiply by  then divide by 10, to reduce by roughly 10%
-            //    GameManager.Instance.playerEmpire.fleetStrength = ((GameManager.Instance.playerEmpire.fleetStrength * MagicNumbers.Instance.fleetStrengthWinnerReduction) / MagicNumbers.Instance.fleetStrengthMaximumAsMultipleOfMilitaryCapacity);
-            //    // Multiply by 8 then divide by 10, to reduce by roughly 20%
-            //    enemyEmpire.fleetStrength = ((enemyEmpire.fleetStrength * MagicNumbers.Instance.fleetStrengthLoserReduction) / MagicNumbers.Instance.fleetStrengthMaximumAsMultipleOfMilitaryCapacity);
-            //}
-        // }
     }
 
     void BuildShips()
