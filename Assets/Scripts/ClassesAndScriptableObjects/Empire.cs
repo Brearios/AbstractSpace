@@ -293,7 +293,7 @@ public class Empire : MonoBehaviour
             fleetStrength += allyFleetInt; 
             if (LogManager.Instance.allyFleetBonusLogs)
             {
-                Debug.Log($"Adding fleet bonus for {Name}, of {allyFleetInt}, from alliance with {alliedEmpire.Name} in space year {GameManager.Instance.spaceYear}.");
+                Debug.Log($"Adding fleet bonus for {Name}, of {allyFleetInt}, due to being allied with {alliedEmpire.Name} in space year {GameManager.Instance.spaceYear}.");
             }
         }
     }
