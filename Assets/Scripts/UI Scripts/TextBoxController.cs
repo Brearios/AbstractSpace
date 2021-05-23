@@ -64,16 +64,16 @@ public class TextBoxController : MonoBehaviour
         militaryText.text = $"Annual Fleet Construction Capacity: {GameManager.Instance.playerEmpire.militaryCapacity} \n \n" +
             $"Fleet Strength (FS): {GameManager.Instance.playerEmpire.fleetStrength} \n \n" +
             // TODO  $"Allies Fleet Strength: {variableForAlliesFleetStrength} \n \n"
-            $"Active Wars: {GameManager.Instance.playerEmpire.empiresCurrentWars} \n \n" +
+            $"Active Wars: {GameManager.Instance.currentWars} \n \n" +
             $"Enemy FS: {GameManager.Instance.enemyFleetStrength}";
 
         //TODO - fill in diplomacy, double-check list count - may need -1 or +1
         diplomacyText.text = $"Known Empires: {(GameManager.Instance.playerEmpire.encounteredEmpires.Count)} \n \n" +
             $"Allies: {GameManager.Instance.playerEmpire.alliedEmpires.Count} \n" +
             $"Trading Partners: {GameManager.Instance.playerEmpire.tradePartnerEmpires.Count} \n" +
-            $"Peaceful Coexistence: {(GameManager.Instance.playerEmpire.encounteredEmpires.Count - GameManager.Instance.playerEmpire.empiresCurrentWars)} \n" +
+            $"Peaceful Coexistence: {(GameManager.Instance.playerEmpire.encounteredEmpires.Count - GameManager.Instance.currentWars)} \n" +
             // $"Hostile: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
-            $"At War: {GameManager.Instance.playerEmpire.empiresCurrentWars} \n" +
+            $"At War: {GameManager.Instance.currentWars} \n" +
             $"Defeated: {GameManager.Instance.playerDefeatedEmpires} \n \n" +
             $"Yearly Diplomatic Capacity: {GameManager.Instance.playerEmpire.yearlyDiplomaticCapacity} \n" +
             $"Available Capacity: {GameManager.Instance.playerEmpire.totalDiplomaticCapacity}";

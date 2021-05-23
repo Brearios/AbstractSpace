@@ -772,7 +772,7 @@ public class Empire : MonoBehaviour
                 discoveredBy.alliedEmpires.Add(this);
                 if (degreesFromPlayer == 1)
                 {
-                    string playerAllyNotification = $"With deepening diplomatic and social ties, we have entered a mility alliance with {Name}. \n " +
+                    string playerAllyNotification = $"With deepening diplomatic and social ties, we have entered a military alliance with {Name}. \n " +
                     $"We will mutually defend each other, bolstering one another's fleet strength.";
                     AddNotificationToList(playerAllyNotification);
                 }
