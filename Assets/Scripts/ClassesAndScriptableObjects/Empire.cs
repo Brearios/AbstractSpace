@@ -291,13 +291,16 @@ public class Empire : MonoBehaviour
     {
         foreach (Empire alliedEmpire in alliedEmpires)
         {
-            // Current settings should grant 5% of what the empire you're allied would gain in a year - likely rounds down to zero. =\
-            float allyFleetBonus = ((alliedEmpire.militaryCapacity * MagicNumbers.Instance.fleetStrengthMaximumAsMultipleOfMilitaryCapacity) * MagicNumbers.Instance.allyFleetBonusMultiplier);
-            int allyFleetInt = (int)Math.Round(allyFleetBonus); // Rounds to nearest int
-            fleetStrength += allyFleetInt; 
-            if (LogManager.Instance.allyFleetBonusLogs)
+            // Adds 5% (modified in MagicNumbers) of ally's fleet strength to your fleet strength
+            if (fleetStrength < (militaryCapacity * MagicNumbers.Instance.fleetStrengthMaximumAsMultipleOfMilitaryCapacity))
             {
-                Debug.Log($"Adding fleet bonus for {Name}, of {allyFleetInt}, due to being allied with {alliedEmpire.Name} in space year {GameManager.Instance.spaceYear}.");
+                float allyFleetBonus = (alliedEmpire.fleetStrength * MagicNumbers.Instance.allyFleetBonusMultiplier);
+                int allyFleetInt = (int)Math.Round(allyFleetBonus); // Rounds to nearest int
+                fleetStrength += allyFleetInt;
+                if (LogManager.Instance.allyFleetBonusLogs)
+                {
+                    Debug.Log($"Adding fleet bonus for {Name}, of {allyFleetInt}, due to being allied with {alliedEmpire.Name} in space year {GameManager.Instance.spaceYear}.");
+                }
             }
         }
     }
@@ -728,7 +731,8 @@ public class Empire : MonoBehaviour
                     GameManager.Instance.currentWars--;
                     discoveredBy.empiresAtWarWithThisEmpire.Remove(this);
                     empiresAtWarWithThisEmpire.Remove(discoveredBy);
-                    string peaceNotification = $"Through hard diplomatic work, extensive communication, and better understanding, we are now at peace with the {Name}. Hopefully it continues.";
+                    string peaceNotification = $"Through hard diplomatic work, extensive communication, and better understanding, \n " +
+                        $"we are now at peace with the {Name}. Hopefully it continues.";
                     AddNotificationToList(peaceNotification);
                 }
                 else
