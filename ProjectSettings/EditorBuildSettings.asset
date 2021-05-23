@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Screen.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Allocation Screen.unity
-    guid: 2cf24b0ebb17f8d408382c75a45e9022
-  - enabled: 1
-    path: Assets/Scenes/Empire Settings Screen.unity
-    guid: c0cff2b79c8aa3b4aa961fadc8b6c61f
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

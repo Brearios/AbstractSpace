@@ -216,7 +216,10 @@ public class Empire : MonoBehaviour
             AddNotificationToList(compiledString);
         }
 
-        DisplayInstructions();
+        if (isPlayer)
+        {
+            DisplayInstructions();
+        }
     }
 
     private void Update()
