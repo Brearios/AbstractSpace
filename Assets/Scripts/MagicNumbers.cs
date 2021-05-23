@@ -18,8 +18,8 @@ public class MagicNumbers : MonoBehaviour
     public int StartingGrossEmpireProduct = 10;
     public int StartingColonizedPlanets = 1;
     public int StartingFleetStrength = 1;
-    public int allianceThreshold = 150;
-    public int tradeThreshold = 100;
+    public int allianceThreshold = 200;
+    public int tradeThreshold = 150;
     public int peaceThreshold = 50;
     public int warThreshold = 10;
     public int explorationDiscoverEmpireChanceThreshold = 67;

@@ -557,14 +557,14 @@ MonoBehaviour:
   StartingGrossEmpireProduct: 10
   StartingColonizedPlanets: 0
   StartingFleetStrength: 1
-  allianceThreshold: 150
-  tradeThreshold: 100
+  allianceThreshold: 200
+  tradeThreshold: 150
   peaceThreshold: 50
   warThreshold: 10
   explorationDiscoverEmpireChanceThreshold: 67
   fleetDamageInflictionDivisor: 10
   tradeBonusMultiplier: 0.15
-  allyFleetBonusMultiplier: 0.1
+  allyFleetBonusMultiplier: 0.05
   treasurePortionOfGEP: 0.3
   fleetStrengthUpgradeMultiplier: 0
   fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 25

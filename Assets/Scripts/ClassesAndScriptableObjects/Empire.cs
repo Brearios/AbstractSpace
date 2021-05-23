@@ -683,10 +683,11 @@ public class Empire : MonoBehaviour
         if (!isPlayer && degreesFromPlayer == 1)
         {
             DistributeDiplomacyPoints();
-            foreach (Empire reduceRelationsEmpire in encounteredEmpires)
-            {
-                ReduceRelationsByDiplomaticOrientation(reduceRelationsEmpire);
-            }
+            // This would not be foreach, as each empire modifies their discoverer directly. Will need to be changed with Diplomacy 2.0.
+            //foreach (Empire reduceRelationsEmpire in encounteredEmpires)
+            
+            ReduceRelationsByDiplomaticOrientation(discoveredBy);
+            
             // Xenophobia Multiplier Goes Here
             if (((relationsTowardDiscoveredBy < MagicNumbers.Instance.warThreshold) && (militaryCapacity > 0) && (fleetStrength > 5)) && !AtWarWithDiscoveredBy)
             {
@@ -747,6 +748,12 @@ public class Empire : MonoBehaviour
                 {
                     tradePartnerEmpires.Add(discoveredBy);
                     discoveredBy.tradePartnerEmpires.Add(this);
+                    if (degreesFromPlayer == 1)
+                    {
+                        string playerTradePartnerNotification = $"As our relations with the {Name} have improved, trade has begun between our empires. \n " +
+                        $"This will result in greater economic growth for both empires.";
+                        AddNotificationToList(playerTradePartnerNotification);
+                    }
                     if (LogManager.Instance.empireRelationsLogs)
                     {
                         Debug.Log($"The {Name} and the {discoveredBy.Name} became trading partners in {GameManager.Instance.spaceYear}.");
@@ -758,6 +765,12 @@ public class Empire : MonoBehaviour
             {
                 alliedEmpires.Add(discoveredBy);
                 discoveredBy.alliedEmpires.Add(this);
+                if (degreesFromPlayer == 1)
+                {
+                    string playerAllyNotification = $"With deepening diplomatic and social ties, we have entered a mility alliance with {Name}. \n " +
+                    $"We will mutually defend each other, bolstering one another's fleet strength.";
+                    AddNotificationToList(playerAllyNotification);
+                }
                 if (LogManager.Instance.empireRelationsLogs)
                 {
                     Debug.Log($"The {Name} and the {discoveredBy.Name} became allies in {GameManager.Instance.spaceYear}.");
