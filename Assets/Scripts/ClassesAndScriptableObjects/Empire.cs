@@ -215,6 +215,8 @@ public class Empire : MonoBehaviour
         {
             AddNotificationToList(compiledString);
         }
+
+        DisplayInstructions();
     }
 
     private void Update()
@@ -347,15 +349,15 @@ public class Empire : MonoBehaviour
         }
         switch (sector.sectorName)
         {
-            case "economy":
+            case "Economy":
                 GrowGEP();
                 break;
 
-            case "exploration":
+            case "Exploration":
                 ExploreStar();
                 break;
 
-            case "colonization":
+            case "Colonization":
                 //TODO May want to eventually have individual planets with their own bonuses that roll here
                 if (discoveredPlanets > 0)
                 {
@@ -369,7 +371,7 @@ public class Empire : MonoBehaviour
 
                 break;
 
-            case "military":
+            case "Military":
                 if (LogManager.Instance.logsEnabled)
                 {
                     if (LogManager.Instance.fleetUpgradeLogs)
@@ -382,7 +384,7 @@ public class Empire : MonoBehaviour
                 //TODO Multiply by a value - say 1.08 - rounding up if less than 1?
                 break;
 
-            case "science":
+            case "Science":
                 int selectedSector = UnityEngine.Random.Range(1, 7);
                 switch (selectedSector)
                 {
@@ -407,7 +409,7 @@ public class Empire : MonoBehaviour
                 }
                 break;
 
-            case "diplomacy":
+            case "Diplomacy":
                 yearlyDiplomaticCapacity++;
                 break;
         }
@@ -935,5 +937,18 @@ public class Empire : MonoBehaviour
             }
 
         }
+    }
+
+    void DisplayInstructions()
+    {
+        string instructionNotification = $"Welcome to Abstract Space! You are the Emperor of the {GameManager.Instance.playerEmpire.Name}. \n \n" +
+            $"(Empire customization will be coming in a future build.) \n" +
+            $"Your empire's success will depend on effective allocation of resources. \n" +
+            $"You will determine, via the \"Allocate\" button, how much of the pie goes to economic growth, exploration, science, and so on. \n" +
+            $"Time flows quickly in Abstract Space, but the game will be paused when you hit space, as well as when you're allocating resources. \n \n" +
+            // TODO - make title customizable and apply to this
+            $"You can adjust the default allocations if you like, or just see what happens. Best of luck, Emperor! \n \n" +
+            $"(Press Space or click Pause to begin)";
+        AddNotificationToList(instructionNotification);
     }
 }
