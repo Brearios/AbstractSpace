@@ -557,11 +557,17 @@ MonoBehaviour:
   StartingGrossEmpireProduct: 10
   StartingColonizedPlanets: 0
   StartingFleetStrength: 1
+  allianceThreshold: 150
+  tradeThreshold: 100
+  peaceThreshold: 50
+  warThreshold: 10
+  explorationDiscoverEmpireChanceThreshold: 67
+  fleetDamageInflictionDivisor: 10
   tradeBonusMultiplier: 0.15
   allyFleetBonusMultiplier: 0.1
   treasurePortionOfGEP: 0.3
   fleetStrengthUpgradeMultiplier: 0
-  fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 10
+  fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 25
   startingRelations: 100
   exterminatorRelationsReduction: 4
   xenophobicRelationsReduction: 3
@@ -681,6 +687,7 @@ MonoBehaviour:
   tradeBenefitLogs: 1
   allyFleetBonusLogs: 1
   empireRelationsLogs: 1
+  warLogsEnabled: 0
 --- !u!114 &191888511
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,11 +24,11 @@ public class MagicNumbers : MonoBehaviour
     public int warThreshold = 10;
     public int explorationDiscoverEmpireChanceThreshold = 67;
     public int fleetDamageInflictionDivisor = 10; // Used to determine what percentage of fleetStrength a fleet can destroy. 10 would be 10%, 20 would be 5%, 5 would be 20%.
-    public float tradeBonusMultiplier = 0.15f;
+    public float tradeBonusMultiplier = 0.025f; // This is multiplied by your trading partner's GEP to determine how much you gain from trade
     public float allyFleetBonusMultiplier = 0.05f;
     public float treasurePortionOfGEP = 0.3f;
     public float fleetStrengthUpgradeMultiplier; // I forgot what this is
-    public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity; // Currently starting at 10 - so if your military capacity is 6, your max fleet strength would be 60.
+    public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity; // Currently starting at 25 - so if your military capacity is 4, your max fleet strength would be 100.
     public int startingRelations;
     public int exterminatorRelationsReduction;
     public int xenophobicRelationsReduction;

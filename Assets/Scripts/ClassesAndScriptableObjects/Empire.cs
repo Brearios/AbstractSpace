@@ -317,14 +317,14 @@ public class Empire : MonoBehaviour
         }
         foreach (SectorDetails currentSector in empireSectors)
         {
-            float iteratedInvestment = ((grossEmpireProduct * currentSector.fundingAllocation) / (100 / MagicNumbers.Instance.allocationIterationAmount));
-            iteratedInvestment += ((bonusResourcesFromEventsAndTrade * currentSector.fundingAllocation) / (100 / MagicNumbers.Instance.allocationIterationAmount));
-            iteratedInvestment += (iteratedInvestment * currentSector.sectorScienceMultiplier);
-            currentSector.currentInvestment += iteratedInvestment;
-            while (currentSector.currentInvestment > currentSector.neededInvestment)
+            float iteratedInvestment = ((grossEmpireProduct * currentSector.fundingAllocation) / (100 / MagicNumbers.Instance.allocationIterationAmount)); // Divides investment into pie slices based on allocations
+            iteratedInvestment += ((bonusResourcesFromEventsAndTrade * currentSector.fundingAllocation) / (100 / MagicNumbers.Instance.allocationIterationAmount)); // Adds trade to investment slices based on allocations
+            iteratedInvestment += (iteratedInvestment * currentSector.sectorScienceMultiplier); // Multiplies investment by the empire's science bonus
+            currentSector.currentInvestment += iteratedInvestment; // Adds the invested amount
+            while (currentSector.currentInvestment > currentSector.neededInvestment) // Determines if the investment is sufficient to upgrade
             {
-                UpgradeEmpire(currentSector);
-                UpgradeSector(currentSector);
+                UpgradeEmpire(currentSector); // Explores a star, researches a tech, adds a fleet, etc.
+                UpgradeSector(currentSector); // Upgrades growth level for sector, subtracts growth cost, increases costs for the next sector upgrade
             }
         }
 
