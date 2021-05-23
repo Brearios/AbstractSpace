@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public GameObject notificationTextActivator;
     public string currentNotification;
     public List<String> notificationsToDisplay;
+    public bool allocationsAvailable;
 
     //TODO - War button and screen
     //TODO - connect gameSpeed to deltaTime

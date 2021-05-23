@@ -8,16 +8,17 @@ public class ButtonScripts : MonoBehaviour
     //TODO - better UI would be for each to have a +/- button, and a reset button - for later
     public void ReduceAllocation()
     {
-        if (GameManager.Instance.currentSector.fundingAllocation > MagicNumbers.Instance.allocationIterationAmount)
+        if (GameManager.Instance.currentSector.fundingAllocation > 0)
         {
-            GameManager.Instance.currentSector.fundingAllocation -= MagicNumbers.Instance.allocationIterationAmount;
-        }   
+            GameManager.Instance.currentSector.fundingAllocation--;
+        }
     }
     public void IncreaseAllocation()
     {
-        if (GameManager.Instance.currentSector.fundingAllocation < (100 - MagicNumbers.Instance.allocationIterationAmount))
+        CheckAvailableAllocations();
+        if (GameManager.Instance.allocationsAvailable)
         {
-            GameManager.Instance.currentSector.fundingAllocation -= MagicNumbers.Instance.allocationIterationAmount;
+            GameManager.Instance.currentSector.fundingAllocation++;
         }
     }
 
@@ -54,5 +55,23 @@ public class ButtonScripts : MonoBehaviour
     public void isRunningToggle()
     {
         GameManager.Instance.isRunning = !GameManager.Instance.isRunning;
+    }
+
+    public void CheckAvailableAllocations()
+    {
+        float totalSectorAllocations = 0;
+        foreach (SectorDetails sector in GameManager.Instance.playerEmpire.empireSectors)
+        {
+            totalSectorAllocations += sector.fundingAllocation;
+        }
+        if (totalSectorAllocations >= (100 / MagicNumbers.Instance.allocationIterationAmount))
+        {
+            GameManager.Instance.allocationsAvailable = false;
+        }
+        else
+        {
+            GameManager.Instance.allocationsAvailable = true;
+        }
+
     }
 }

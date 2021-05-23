@@ -96,12 +96,12 @@ public class Empire : MonoBehaviour
     public List<Empire> alliedEmpires = new List<Empire>();
     private void Start()
     {
-        economy.sectorName = "economy";
-        exploration.sectorName = "exploration";
-        colonization.sectorName = "colonization";
-        military.sectorName = "military";
-        science.sectorName = "science";
-        diplomacy.sectorName = "diplomacy";
+        economy.sectorName = "Economy";
+        exploration.sectorName = "Exploration";
+        colonization.sectorName = "Colonization";
+        military.sectorName = "Military";
+        science.sectorName = "Science";
+        diplomacy.sectorName = "Diplomacy";
         isDefeated = false;
 
         if (isPlayer)

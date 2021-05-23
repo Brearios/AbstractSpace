@@ -623,6 +623,7 @@ MonoBehaviour:
   notificationTextActivator: {fileID: 58381984}
   currentNotification: 
   notificationsToDisplay: []
+  allocationsAvailable: 0
 --- !u!4 &191888508
 Transform:
   m_ObjectHideFlags: 0
@@ -658,6 +659,8 @@ MonoBehaviour:
   diplomacyText: {fileID: 583335611}
   selectedSectorText: {fileID: 1421963312}
   notificationText: {fileID: 1761448394}
+  decreaseAllocationText: {fileID: 662427808}
+  increaseAllocationText: {fileID: 423025931}
 --- !u!114 &191888510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1261,7 +1264,7 @@ GameObject:
   - component: {fileID: 423025932}
   - component: {fileID: 423025931}
   m_Layer: 5
-  m_Name: PlusFivePercentText
+  m_Name: IncreaseAllocationText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1662,7 +1665,7 @@ GameObject:
   - component: {fileID: 662427809}
   - component: {fileID: 662427808}
   m_Layer: 5
-  m_Name: MinusFivePercentText
+  m_Name: DecreaseAllocationText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1741,7 +1744,7 @@ GameObject:
   - component: {fileID: 787091035}
   - component: {fileID: 787091034}
   m_Layer: 5
-  m_Name: MinusFivePercentButton
+  m_Name: DecreaseAllocationButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3799,7 +3802,7 @@ GameObject:
   - component: {fileID: 1421879416}
   - component: {fileID: 1421879419}
   m_Layer: 5
-  m_Name: PlusFivePercentButton
+  m_Name: IncreaseAllocationButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,6 +14,8 @@ public class TextBoxController : MonoBehaviour
     public Text diplomacyText;
     public Text selectedSectorText;
     public Text notificationText;
+    public Text decreaseAllocationText;
+    public Text increaseAllocationText;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +52,7 @@ public class TextBoxController : MonoBehaviour
             "(Extra-Solar Era)";
 
         allocationText.text = $"GEP: ${GameManager.Instance.playerEmpire.grossEmpireProduct.ToString("0.00")} Quadracreds \n \n" +
-            // TODO  $"Added by Trade: {variableForTradingGEP&AllyGEP} \n \n"
+            $"Allocations (out of {100 / MagicNumbers.Instance.allocationIterationAmount}): \n" +
             $"Economy: {GameManager.Instance.playerEmpire.economy.fundingAllocation} \n" +
             $"Exploration: {GameManager.Instance.playerEmpire.exploration.fundingAllocation} \n" +
             $"Colonization: {GameManager.Instance.playerEmpire.colonization.fundingAllocation} \n" +
@@ -67,16 +69,20 @@ public class TextBoxController : MonoBehaviour
 
         //TODO - fill in diplomacy, double-check list count - may need -1 or +1
         diplomacyText.text = $"Known Empires: {(GameManager.Instance.playerEmpire.encounteredEmpires.Count)} \n \n" +
-            $"Allies: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
-            $"Trading Partners: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
+            $"Allies: {GameManager.Instance.playerEmpire.alliedEmpires.Count} \n" +
+            $"Trading Partners: {GameManager.Instance.playerEmpire.tradePartnerEmpires.Count} \n" +
             $"Peaceful Coexistence: {(GameManager.Instance.playerEmpire.encounteredEmpires.Count - GameManager.Instance.playerEmpire.empiresCurrentWars)} \n" +
-            $"Hostile: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
+            // $"Hostile: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
             $"At War: {GameManager.Instance.playerEmpire.empiresCurrentWars} \n" +
             $"Defeated: {GameManager.Instance.playerDefeatedEmpires} \n \n" +
             $"Yearly Diplomatic Capacity: {GameManager.Instance.playerEmpire.yearlyDiplomaticCapacity} \n" +
             $"Available Capacity: {GameManager.Instance.playerEmpire.totalDiplomaticCapacity}";
 
-        selectedSectorText.text = $"{GameManager.Instance.currentSector}";
+        selectedSectorText.text = $"{GameManager.Instance.currentSector.sectorName}";
+
+        increaseAllocationText.text = $"+{MagicNumbers.Instance.allocationIterationAmount}%";
+
+        decreaseAllocationText.text = $"-{MagicNumbers.Instance.allocationIterationAmount}%";
 
         notificationText.text = GameManager.Instance.currentNotification;
     }
