@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PanelActivator : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class PanelActivator : MonoBehaviour
     public GameObject buttonActivator;
     public GameObject statusTextActivator;
     public GameObject OverviewTextBackground;
-    public GameObject AllocationTextBackground;
+    public GameObject AllocationTextBackground;    
+    public Text pauseButtonText;
 
     public List<GameObject> UIElementList;
     public void Awake()
@@ -34,6 +36,20 @@ public class PanelActivator : MonoBehaviour
         UIElementList.Add(statusTextActivator);
         UIElementList.Add(OverviewTextBackground);
         UIElementList.Add(AllocationTextBackground);
+    }
+
+    void Update()
+    {
+        if (GameManager.Instance.isRunning)
+        {
+            pauseButtonText.text = "Pause";
+        }
+
+        if (!GameManager.Instance.isRunning)
+        {
+            pauseButtonText.text = "Resume";
+        }
+
     }
 
     // Disable all UI elements so you only need to enable what's needed

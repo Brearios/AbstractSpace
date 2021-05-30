@@ -951,7 +951,7 @@ public class Empire : MonoBehaviour
             $"Time flows quickly in Abstract Space, but the game will be paused when you hit space, as well as when you're allocating resources. \n \n" +
             // TODO - make title customizable and apply to this
             $"You can adjust the default allocations if you like, or just see what happens. Best of luck, Emperor! \n \n" +
-            $"(Press Space or click Pause to begin)";
+            $"(Press Space or click Resume to begin)";
         AddNotificationToList(instructionNotification);
     }
 }

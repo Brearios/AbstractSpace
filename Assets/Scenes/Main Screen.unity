@@ -482,7 +482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &191496944
 RectTransform:
   m_ObjectHideFlags: 0
@@ -862,6 +862,7 @@ MonoBehaviour:
   statusTextActivator: {fileID: 1285485743}
   OverviewTextBackground: {fileID: 1036709215}
   AllocationTextBackground: {fileID: 1659988530}
+  pauseButtonText: {fileID: 1678200475}
   UIElementList: []
 --- !u!114 &191888513
 MonoBehaviour:
@@ -2287,7 +2288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonActivator: {fileID: 191496943}
   statusTextActivator: {fileID: 1285485743}
-  buttonText: {fileID: 263191242}
+  allocationButtonText: {fileID: 263191242}
 --- !u!1 &955553473
 GameObject:
   m_ObjectHideFlags: 0
@@ -3241,7 +3242,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000061035156, y: 15}
-  m_SizeDelta: {x: 187.13614, y: 230.32863}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1212699783
 MonoBehaviour:
@@ -3964,10 +3965,10 @@ RectTransform:
   m_Father: {fileID: 1212699782}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 93.56807, y: -115.164314}
-  m_SizeDelta: {x: 167.13614, y: 210.32863}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1421963312
 MonoBehaviour:
@@ -4686,6 +4687,7 @@ MonoBehaviour:
   statusTextActivator: {fileID: 1285485743}
   OverviewTextBackground: {fileID: 1036709215}
   AllocationTextBackground: {fileID: 1659988530}
+  pauseButtonText: {fileID: 0}
   UIElementList: []
 --- !u!1 &1610034240
 GameObject:
@@ -5144,7 +5146,7 @@ GameObject:
   - component: {fileID: 1678200476}
   - component: {fileID: 1678200475}
   m_Layer: 5
-  m_Name: MenuText
+  m_Name: PauseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

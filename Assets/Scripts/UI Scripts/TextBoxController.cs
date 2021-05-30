@@ -68,7 +68,7 @@ public class TextBoxController : MonoBehaviour
             $"Enemy FS: {GameManager.Instance.enemyFleetStrength}";
 
         //TODO - fill in diplomacy, double-check list count - may need -1 or +1
-        diplomacyText.text = $"Empires with Established Relations: {GameManager.Instance.playerEmpire.encounteredEmpires.Count} \n \n" +
+        diplomacyText.text = $"Empires with Diplomatic Relations: {GameManager.Instance.playerEmpire.encounteredEmpires.Count} \n \n" +
             $"All Known Empires: {GameManager.Instance.allEmpires.Count} \n" +
             $"Allies: {GameManager.Instance.playerEmpire.alliedEmpires.Count} \n" +
             $"Trading Partners: {GameManager.Instance.playerEmpire.tradePartnerEmpires.Count} \n" +
