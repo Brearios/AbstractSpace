@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public string currentNotification;
     public List<String> notificationsToDisplay;
     public bool allocationsAvailable;
+    public int numberOfAllocationsAvailable;
 
     //TODO - War button and screen
     //TODO - connect gameSpeed to deltaTime
@@ -89,13 +90,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            AllocateSpending();
-            //TODO - switch activations
-        }
-
-
         TimeControls();
 
         // REMOVE - No longer need foreach due to move of CalculateProgress to Empire.cs
@@ -112,7 +106,7 @@ public class GameManager : MonoBehaviour
 
         IncrementYear();
 
-
+        
     }
 
     private void ClearNotifications()
@@ -162,14 +156,6 @@ public class GameManager : MonoBehaviour
         PanelActivator.Instance.CustomizeEmpire();
         // Set MagicNumbers Empire Variables via text boxes
         // TODO - implement customization with text boxes
-    }
-
-    private void AllocateSpending()
-    {
-        isRunning = false;
-        // Activate Buttons
-        // Deactivate Extra Menus
-        isRunning = true;
     }
 
     private void TimeControls()

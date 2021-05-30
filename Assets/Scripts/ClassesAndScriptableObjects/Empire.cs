@@ -65,6 +65,7 @@ public class Empire : MonoBehaviour
     public int yearlyDiplomaticCapacity; 
     public int totalDiplomaticCapacity; // Represents funding for diplomats, analysts, space anthropologists
     public int warDamageThisYear;
+    public int unusedAllocations;
 
     public float economyAllocationAmount;
     public float explorationAllocationAmount;
@@ -235,6 +236,11 @@ public class Empire : MonoBehaviour
         {
             return;
         }
+
+        //if (!isPlayer)
+        //{
+        //    CheckForUnusedAllocations();
+        //}
 
         LoseFleetsFromLastYear();
 
@@ -941,6 +947,16 @@ public class Empire : MonoBehaviour
 
         }
     }
+
+    //void CheckForUnusedAllocations()
+    //{
+    //    float assignedSectorAllocations = 0;
+    //    foreach (SectorDetails sector in empireSectors)
+    //    {
+    //        assignedSectorAllocations += sector.fundingAllocation;
+    //    }
+    //    unusedAllocations = (MagicNumbers.Instance.numberOfAllocationSegments - (int)assignedSectorAllocations);
+    //}
 
     void DisplayInstructions()
     {

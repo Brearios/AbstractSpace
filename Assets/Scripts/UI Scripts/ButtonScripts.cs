@@ -11,14 +11,16 @@ public class ButtonScripts : MonoBehaviour
         if (GameManager.Instance.currentSector.fundingAllocation > 0)
         {
             GameManager.Instance.currentSector.fundingAllocation--;
+            GameManager.Instance.numberOfAllocationsAvailable++;
         }
     }
     public void IncreaseAllocation()
     {
         CheckAvailableAllocations();
-        if (GameManager.Instance.allocationsAvailable)
+        if (GameManager.Instance.allocationsAvailable = true)
         {
             GameManager.Instance.currentSector.fundingAllocation++;
+            GameManager.Instance.numberOfAllocationsAvailable--;
         }
     }
 

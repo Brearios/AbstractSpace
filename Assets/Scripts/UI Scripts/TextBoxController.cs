@@ -79,7 +79,12 @@ public class TextBoxController : MonoBehaviour
             $"Yearly Diplomatic Capacity: {GameManager.Instance.playerEmpire.yearlyDiplomaticCapacity} \n" +
             $"Available Capacity: {GameManager.Instance.playerEmpire.totalDiplomaticCapacity}";
 
-        selectedSectorText.text = $"{GameManager.Instance.currentSector.sectorName}";
+        selectedSectorText.text = $"Selected Sector: \n" +
+            $"{GameManager.Instance.currentSector.sectorName} \n \n" +
+            $"Allocation: \n" +
+            $"{(GameManager.Instance.currentSector.fundingAllocation * MagicNumbers.Instance.allocationIterationAmount)}% \n \n " +
+            $"Unallocated: \n " +
+            $"{(GameManager.Instance.numberOfAllocationsAvailable * MagicNumbers.Instance.allocationPercentage)}%";
 
         increaseAllocationText.text = $"+{MagicNumbers.Instance.allocationIterationAmount}%";
 
