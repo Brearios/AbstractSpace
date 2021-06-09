@@ -17,7 +17,7 @@ public class ButtonScripts : MonoBehaviour
     public void IncreaseAllocation()
     {
         CheckAvailableAllocations();
-        if (GameManager.Instance.allocationsAvailable = true)
+        if (GameManager.Instance.allocationsAvailable == true)
         {
             GameManager.Instance.currentSector.fundingAllocation++;
             GameManager.Instance.numberOfAllocationsAvailable--;
@@ -54,7 +54,7 @@ public class ButtonScripts : MonoBehaviour
         GameManager.Instance.currentSector = GameManager.Instance.playerEmpire.diplomacy;
     }
 
-    public void isRunningToggle()
+    public void IsRunningToggle()
     {
         GameManager.Instance.isRunning = !GameManager.Instance.isRunning;
     }
@@ -75,5 +75,10 @@ public class ButtonScripts : MonoBehaviour
             GameManager.Instance.allocationsAvailable = true;
         }
 
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

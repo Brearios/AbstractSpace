@@ -16,7 +16,7 @@ public class ToggleUIActivation : MonoBehaviour
 
         if (!GameManager.Instance.allocating)
         {
-            trackNotificationStatus();
+            TrackNotificationStatus();
             statusTextActivator.SetActive(false);
             buttonActivator.SetActive(true);
             allocationButtonText.text = "Return";
@@ -40,7 +40,7 @@ public class ToggleUIActivation : MonoBehaviour
         }
         GameManager.Instance.allocating = !GameManager.Instance.allocating;
     }
-    public void trackNotificationStatus()
+    public void TrackNotificationStatus()
     {
         if (PanelActivator.Instance.notificationTextActivator.activeSelf)
         {
