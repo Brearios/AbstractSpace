@@ -11,7 +11,7 @@ public class MagicNumbers : MonoBehaviour
     public int numberOfAllocationSegments;
     public float upgradeCostMultiplier;
     public float planetGrossEmpireProductContribution; // How much an economic growth level is added to, per colonized planet
-    public int totalCivilizations;
+    // public int totalCivilizations; Unused - could be used to code a maximum number of concurrent empires
     public string PlayerEmpireName = "Human Space Alliance";
     public string PlayerAdjective = "Human";
     public string PlayerRuler = "Dwight Eisenhower";
@@ -24,7 +24,7 @@ public class MagicNumbers : MonoBehaviour
     public int warThreshold = 10;
     public int perEmpireDiplomacySpendingPerYear = 15;
     public int explorationDiscoverEmpireChanceThreshold = 67;
-    public int fleetDamageInflictionDivisor = 10; // Used to determine what percentage of fleetStrength a fleet can destroy. 10 would be 10%, 20 would be 5%, 5 would be 20%.
+    public int fleetHitPoints = 10; // Amount of damage taken to destroy one fleet strength
     public float tradeBonusMultiplier = 0.025f; // This is multiplied by your trading partner's GEP to determine how much you gain from trade
     public float allyFleetBonusMultiplier = 0.05f;
     public float treasurePortionOfGEP = 0.3f;
@@ -35,6 +35,10 @@ public class MagicNumbers : MonoBehaviour
     public int xenophobicRelationsReduction;
     public int moderateRelationsReduction;
     public int xenophilicRelationsReduction;
+    public int exclusiveMaxShipDamageRoll = 6;
+    public int inclusiveMinShipDamageRoll = 2;
+    public float minimumColonizablePlanetOverlapInclusiveFloat = .2f;
+    public float maximumColonizablePlanetOverlapInclusiveFloat = .8f;
 
     // Not currently in use
     // REMOVE if not needed

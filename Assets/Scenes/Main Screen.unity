@@ -552,7 +552,6 @@ MonoBehaviour:
   numberOfAllocationSegments: 0
   upgradeCostMultiplier: 1.15
   planetGrossEmpireProductContribution: 0.2
-  totalCivilizations: 20
   PlayerEmpireName: Human Space Alliance
   PlayerAdjective: Human
   PlayerRuler: Aaron
@@ -563,8 +562,9 @@ MonoBehaviour:
   tradeThreshold: 150
   peaceThreshold: 50
   warThreshold: 10
+  perEmpireDiplomacySpendingPerYear: 15
   explorationDiscoverEmpireChanceThreshold: 67
-  fleetDamageInflictionDivisor: 10
+  fleetHitPoints: 10
   tradeBonusMultiplier: 0.15
   allyFleetBonusMultiplier: 0.05
   treasurePortionOfGEP: 0.3
@@ -575,6 +575,8 @@ MonoBehaviour:
   xenophobicRelationsReduction: 3
   moderateRelationsReduction: 2
   xenophilicRelationsReduction: 1
+  exclusiveMaxShipDamageRoll: 13
+  inclusiveMinShipDamageRoll: 4
   strongFleetStrengthVictoryReduction: 10
   strongFleetStrengthLossReduction: 25
   weakFleetStrengthVictoryReduction: 15
@@ -693,7 +695,7 @@ MonoBehaviour:
   tradeBenefitLogs: 1
   allyFleetBonusLogs: 1
   empireRelationsLogs: 1
-  warLogsEnabled: 0
+  warLogsEnabled: 1
 --- !u!114 &191888511
 MonoBehaviour:
   m_ObjectHideFlags: 0

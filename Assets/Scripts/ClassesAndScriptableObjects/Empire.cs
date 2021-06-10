@@ -46,7 +46,7 @@ public class Empire : MonoBehaviour
 
     public string currentStatus; // Allied, War, Defeated, Peace
     public string madlib;
-    public string defeatedBy;
+    public Empire defeatedBy;
 
     public DiplomaticOrientation orientation;
     public DiplomaticOrientation diplomacyOrientation;
@@ -109,7 +109,6 @@ public class Empire : MonoBehaviour
         {
             AtWarWithDiscoveredBy = false;
             AlliedWithPlayer = false;
-            diplomacyOrientation = DiplomaticOrientation.Xenophilic;
             discoveredByName = "The Player.";
         }
 
@@ -262,6 +261,8 @@ public class Empire : MonoBehaviour
         }
 
         BuildShips();
+
+        ColonizedPlanets();
     }
 
     private void InitializeEmpireAddSectorsAndSetGEP(Empire empire)
@@ -279,7 +280,11 @@ public class Empire : MonoBehaviour
         fleetStrength -= warDamageThisYear;
         if ((fleetStrength <= 0) && (warInitiated))
         {
-            defeatedBy = empiresAtWarWithThisEmpire[0].Name;
+            defeatedBy = empiresAtWarWithThisEmpire[0];
+            if (defeatedBy == GameManager.Instance.playerEmpire)
+            {
+                GameManager.Instance.playerDefeatedEmpires++;
+            }
             isDefeated = true;
         }
         warDamageThisYear = 0;
@@ -893,13 +898,13 @@ public class Empire : MonoBehaviour
         int warDivisor = empiresAtWarWithThisEmpire.Count;
         int fleetStrengthPerWar = (fleetStrength / warDivisor);
         // Roll 1-5
-        int shipDamageRoll = UnityEngine.Random.Range(1, 6);
-        int damageDealtPerWar = ((fleetStrengthPerWar * shipDamageRoll) / MagicNumbers.Instance.fleetDamageInflictionDivisor);
+        int shipDamageRoll = UnityEngine.Random.Range(MagicNumbers.Instance.inclusiveMinShipDamageRoll, MagicNumbers.Instance.exclusiveMaxShipDamageRoll); // War Divisor at the beginning ensures a battle cannot result in no damage.
+        int damageDealtPerWar = (fleetStrengthPerWar * shipDamageRoll) / MagicNumbers.Instance.fleetHitPoints;
         if (LogManager.Instance.logsEnabled)
         {
             if (LogManager.Instance.warLogsEnabled)
             {
-                Debug.Log($"In {GameManager.Instance.spaceYear}, {Name}'s fleets will deal {damageDealtPerWar}, to each empire they are at war with.");
+                Debug.Log($"In {GameManager.Instance.spaceYear}, {Name}'s {fleetStrength} fleets will destroy {damageDealtPerWar} fleets, in each of the {warDivisor} empires they are at war with.");
             }
         }
 
@@ -924,10 +929,11 @@ public class Empire : MonoBehaviour
             if (isPlayer && !defeatAnnounced)
             {
                 GameManager.Instance.playerLoss = true;
-                string defeatNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by the {defeatedBy}. \n " +
+                string defeatNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by the {defeatedBy.Name}. \n " +
                     $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
-                    $"Now {race.raceAdjective} civilization will only live on in the history books. \n \n" +
+                    $"{race.raceAdjective} civilization will only live on in the history books. \n \n" +
                     $"You lose, Imperator.";
+                warInitiated = false;
 
                 defeatAnnounced = true;
                 // TODO - random race leader words?
@@ -939,17 +945,21 @@ public class Empire : MonoBehaviour
             {
                 GameManager.Instance.currentWars--;
                 GameManager.Instance.empiresAtWarWithPlayer.Remove(this);
-                string victoryNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by the {defeatedBy}. \n " +
+                string victoryNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by the {defeatedBy.Name}. \n " +
                 $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
                 $"Now, {race.raceAdjective} civilization will only live on in the history books.";
-                // GameManager.Instance.isRunning = false; Notification will pause.
                 AddNotificationToList(victoryNotifaction);
-
+                warInitiated = false;
                 defeatAnnounced = true;
+                AllocatePlanets(this, defeatedBy);
             }
             foreach (Empire enemy in empiresAtWarWithThisEmpire)
             {
                 enemy.empiresAtWarWithThisEmpire.Remove(this);
+                if (enemy.empiresAtWarWithThisEmpire.Count == 0)
+                {
+                    enemy.warInitiated = false;
+                }
             }
 
         }
@@ -977,4 +987,28 @@ public class Empire : MonoBehaviour
             $"(Press Space or click Resume to begin)";
         AddNotificationToList(instructionNotification);
     }
+
+    void AllocatePlanets(Empire defeatedEmpire, Empire conqueringEmpire)
+    {
+        float colonizablePlanetOverlapRoll = UnityEngine.Random.Range(MagicNumbers.Instance.minimumColonizablePlanetOverlapInclusiveFloat, MagicNumbers.Instance.maximumColonizablePlanetOverlapInclusiveFloat);
+        int colonizablePlanetsThroughConquest = Convert.ToInt32(defeatedEmpire.colonizedPlanets * colonizablePlanetOverlapRoll);
+        conqueringEmpire.discoveredPlanets += colonizablePlanetsThroughConquest;
+        if (conqueringEmpire == GameManager.Instance.playerEmpire)
+        {
+            string availablePlanetsNotification = $"With the subjugation of the {defeatedEmpire.Name}, the {conqueringEmpire.Name} now has complete control of their space, \n" +
+                $"including the {defeatedEmpire.colonizedPlanets} worlds they had colonized. {colonizablePlanetsThroughConquest} of these worlds are suitable for your people, \n" +
+                $"and will be colonized as soon as your ships are ready.";
+            AddNotificationToList(availablePlanetsNotification);
+        }
+    }
+
+    void ColonizedPlanets()
+    {
+        if ((discoveredPlanets > 0) && (colonyShips > 0))
+        {
+            discoveredPlanets--;
+            colonizedPlanets++;
+        }
+    }
+
 }
