@@ -477,7 +477,8 @@ public class Empire : MonoBehaviour
 
     private void FindBonusResources()
     {
-        float treasureAmount = (grossEmpireProduct * MagicNumbers.Instance.treasurePortionOfGEP);
+        float treasureMultiplier = UnityEngine.Random.Range(MagicNumbers.Instance.treasureMinPortionOfGEP, MagicNumbers.Instance.treasureMaxPortionOfGEP);
+        float treasureAmount = (grossEmpireProduct * treasureMultiplier);
         bonusResourcesFromEventsAndTrade += treasureAmount;
         if (isPlayer)
         {
@@ -897,20 +898,19 @@ public class Empire : MonoBehaviour
     {           
         int warDivisor = empiresAtWarWithThisEmpire.Count;
         int fleetStrengthPerWar = (fleetStrength / warDivisor);
-        // Roll 1-5
-        int shipDamageRoll = UnityEngine.Random.Range(MagicNumbers.Instance.inclusiveMinShipDamageRoll, MagicNumbers.Instance.exclusiveMaxShipDamageRoll); // War Divisor at the beginning ensures a battle cannot result in no damage.
-        int damageDealtPerWar = (fleetStrengthPerWar * shipDamageRoll) / MagicNumbers.Instance.fleetHitPoints;
-        if (LogManager.Instance.logsEnabled)
-        {
-            if (LogManager.Instance.warLogsEnabled)
-            {
-                Debug.Log($"In {GameManager.Instance.spaceYear}, {Name}'s {fleetStrength} fleets will destroy {damageDealtPerWar} fleets, in each of the {warDivisor} empires they are at war with.");
-            }
-        }
-
         foreach (Empire warEnemy in empiresAtWarWithThisEmpire)
         {
-            warDamageThisYear += damageDealtPerWar;
+            // Roll for damage
+            int shipDamageRoll = UnityEngine.Random.Range(MagicNumbers.Instance.inclusiveMinShipDamageRoll, MagicNumbers.Instance.exclusiveMaxShipDamageRoll);
+            int damageDealtToWarEnemy = (fleetStrengthPerWar * shipDamageRoll) / MagicNumbers.Instance.fleetHitPoints;
+            warEnemy.warDamageThisYear += damageDealtToWarEnemy;
+            if (LogManager.Instance.logsEnabled)
+            {
+                if (LogManager.Instance.warLogsEnabled)
+                {
+                    Debug.Log($"In {GameManager.Instance.spaceYear}, the {fleetStrength} {Name} fleets fighting on the {warEnemy.race.raceAdjective} front will destroyed {damageDealtToWarEnemy} of the {warEnemy.fleetStrength} {warEnemy.Name} fleets.");
+                }
+            }
         }
     }
 
@@ -990,7 +990,7 @@ public class Empire : MonoBehaviour
 
     void AllocatePlanets(Empire defeatedEmpire, Empire conqueringEmpire)
     {
-        float colonizablePlanetOverlapRoll = UnityEngine.Random.Range(MagicNumbers.Instance.minimumColonizablePlanetOverlapInclusiveFloat, MagicNumbers.Instance.maximumColonizablePlanetOverlapInclusiveFloat);
+        float colonizablePlanetOverlapRoll = UnityEngine.Random.Range(MagicNumbers.Instance.inclusiveMinColonizablePlanetOverlapInclusiveFloat, MagicNumbers.Instance.inclusiveMaxColonizablePlanetOverlapInclusiveFloat);
         int colonizablePlanetsThroughConquest = Convert.ToInt32(defeatedEmpire.colonizedPlanets * colonizablePlanetOverlapRoll);
         conqueringEmpire.discoveredPlanets += colonizablePlanetsThroughConquest;
         if (conqueringEmpire == GameManager.Instance.playerEmpire)
@@ -1008,6 +1008,7 @@ public class Empire : MonoBehaviour
         {
             discoveredPlanets--;
             colonizedPlanets++;
+            colonyShips--;
         }
     }
 

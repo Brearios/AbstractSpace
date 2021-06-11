@@ -27,8 +27,8 @@ public class MagicNumbers : MonoBehaviour
     public int fleetHitPoints = 10; // Amount of damage taken to destroy one fleet strength
     public float tradeBonusMultiplier = 0.025f; // This is multiplied by your trading partner's GEP to determine how much you gain from trade
     public float allyFleetBonusMultiplier = 0.05f;
-    public float treasurePortionOfGEP = 0.3f;
-    public float fleetStrengthUpgradeMultiplier; // I forgot what this is
+    public float treasureMinPortionOfGEP = 0.3f;
+    public float treasureMaxPortionOfGEP = 0.3f;
     public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity; // Currently starting at 25 - so if your military capacity is 4, your max fleet strength would be 100.
     public int startingRelations;
     public int exterminatorRelationsReduction;
@@ -37,8 +37,8 @@ public class MagicNumbers : MonoBehaviour
     public int xenophilicRelationsReduction;
     public int exclusiveMaxShipDamageRoll = 6;
     public int inclusiveMinShipDamageRoll = 2;
-    public float minimumColonizablePlanetOverlapInclusiveFloat = .2f;
-    public float maximumColonizablePlanetOverlapInclusiveFloat = .8f;
+    public float inclusiveMinColonizablePlanetOverlapInclusiveFloat = .2f;
+    public float inclusiveMaxColonizablePlanetOverlapInclusiveFloat = .8f;
 
     // Not currently in use
     // REMOVE if not needed

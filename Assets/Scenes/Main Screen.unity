@@ -546,11 +546,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cc45613c1edd841927e8e89307ece0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialUpgradeCost: 50
+  initialUpgradeCost: 250
   allocationIterationAmount: 10
   allocationPercentage: 0
   numberOfAllocationSegments: 0
-  upgradeCostMultiplier: 1.15
+  upgradeCostMultiplier: 1.07
   planetGrossEmpireProductContribution: 0.2
   PlayerEmpireName: Human Space Alliance
   PlayerAdjective: Human
@@ -558,25 +558,27 @@ MonoBehaviour:
   StartingGrossEmpireProduct: 10
   StartingColonizedPlanets: 0
   StartingFleetStrength: 1
-  allianceThreshold: 200
-  tradeThreshold: 150
-  peaceThreshold: 50
-  warThreshold: 10
+  allianceThreshold: 1000
+  tradeThreshold: 500
+  peaceThreshold: 100
+  warThreshold: 20
   perEmpireDiplomacySpendingPerYear: 15
   explorationDiscoverEmpireChanceThreshold: 67
-  fleetHitPoints: 10
+  fleetHitPoints: 16
   tradeBonusMultiplier: 0.15
   allyFleetBonusMultiplier: 0.05
-  treasurePortionOfGEP: 0.3
-  fleetStrengthUpgradeMultiplier: 0
+  treasureMinPortionOfGEP: 0.3
+  treasureMaxPortionOfGEP: 3
   fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 25
   startingRelations: 100
   exterminatorRelationsReduction: 4
   xenophobicRelationsReduction: 3
   moderateRelationsReduction: 2
   xenophilicRelationsReduction: 1
-  exclusiveMaxShipDamageRoll: 13
+  exclusiveMaxShipDamageRoll: 8
   inclusiveMinShipDamageRoll: 4
+  inclusiveMinColonizablePlanetOverlapInclusiveFloat: 0.2
+  inclusiveMaxColonizablePlanetOverlapInclusiveFloat: 0.8
   strongFleetStrengthVictoryReduction: 10
   strongFleetStrengthLossReduction: 25
   weakFleetStrengthVictoryReduction: 15

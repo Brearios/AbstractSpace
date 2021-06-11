@@ -72,7 +72,7 @@ public class TextBoxController : MonoBehaviour
             $"All Known Empires: {GameManager.Instance.allEmpires.Count} \n" +
             $"Allies: {GameManager.Instance.playerEmpire.alliedEmpires.Count} \n" +
             $"Trading Partners: {GameManager.Instance.playerEmpire.tradePartnerEmpires.Count} \n" +
-            $"Peaceful Coexistence: {(GameManager.Instance.playerEmpire.encounteredEmpires.Count - GameManager.Instance.currentWars)} \n" +
+            $"Peaceful Coexistence: {(GameManager.Instance.playerEmpire.encounteredEmpires.Count - (GameManager.Instance.currentWars + GameManager.Instance.playerDefeatedEmpires))} \n" +
             // $"Hostile: {GameManager.Instance.playerEmpire.discoveredPlanets} \n" +
             $"At War: {GameManager.Instance.currentWars} \n" +
             $"Defeated: {GameManager.Instance.playerDefeatedEmpires} \n \n" +
