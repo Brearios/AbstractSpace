@@ -18,6 +18,7 @@ public class MagicNumbers : MonoBehaviour
     public int StartingGrossEmpireProduct = 10;
     public int StartingColonizedPlanets = 1;
     public int StartingFleetStrength = 1;
+    public int startingRelations = 100;
     public int allianceThreshold = 200;
     public int tradeThreshold = 150;
     public int peaceThreshold = 50;
@@ -30,7 +31,6 @@ public class MagicNumbers : MonoBehaviour
     public float treasureMinPortionOfGEP = 0.3f;
     public float treasureMaxPortionOfGEP = 0.3f;
     public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity; // Currently starting at 25 - so if your military capacity is 4, your max fleet strength would be 100.
-    public int startingRelations;
     public int exterminatorRelationsReduction;
     public int xenophobicRelationsReduction;
     public int moderateRelationsReduction;

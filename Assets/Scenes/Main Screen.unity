@@ -558,8 +558,8 @@ MonoBehaviour:
   StartingGrossEmpireProduct: 10
   StartingColonizedPlanets: 0
   StartingFleetStrength: 1
-  allianceThreshold: 1000
-  tradeThreshold: 500
+  allianceThreshold: 500
+  tradeThreshold: 175
   peaceThreshold: 100
   warThreshold: 20
   perEmpireDiplomacySpendingPerYear: 15

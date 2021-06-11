@@ -377,6 +377,14 @@ public class Empire : MonoBehaviour
                 {
                     colonizedPlanets++;
                     discoveredPlanets--;
+                    if (isPlayer)
+                    {
+                        string colonizedPlanetNotification = $"A {race.raceAdjective} colony ship has just landed on a new world. \n" +
+                            $"Your empire's GEP will increase at a slightly faster rate from now on, \n " +
+                            $"as the population grows, the colony develops infrastructure, and trade flourishes with your other worlds. \n \n" +
+                            $"(Each economic upgrade going forward will be {MagicNumbers.Instance.planetGrossEmpireProductContribution} larger.)";
+                        AddNotificationToList(colonizedPlanetNotification);
+                    }
                 }
                 else
                 {
@@ -448,6 +456,12 @@ public class Empire : MonoBehaviour
             else
             {
                 discoveredPlanets++;
+                if (isPlayer)
+                {
+                    string planetDiscoveredButNoShips = $"{Name} science vessels have just located an unclaimed, habitable planet, ready to be colonized.  \n" +
+                            $"Make sure some of your GEP is dedicated to colonization, as each upgrade there will prepare colonists and a ship for a new planet.";
+                    AddNotificationToList(planetDiscoveredButNoShips);
+                }
             }
         }
         else if (random < MagicNumbers.Instance.explorationDiscoverEmpireChanceThreshold)
@@ -478,7 +492,9 @@ public class Empire : MonoBehaviour
     private void FindBonusResources()
     {
         float treasureMultiplier = UnityEngine.Random.Range(MagicNumbers.Instance.treasureMinPortionOfGEP, MagicNumbers.Instance.treasureMaxPortionOfGEP);
-        float treasureAmount = (grossEmpireProduct * treasureMultiplier);
+        // Old system based on GEP - too small of rewards
+        //float treasureAmount = (grossEmpireProduct * treasureMultiplier);
+        float treasureAmount = (exploration.neededInvestment * treasureMultiplier);
         bonusResourcesFromEventsAndTrade += treasureAmount;
         if (isPlayer)
         {
@@ -764,7 +780,9 @@ public class Empire : MonoBehaviour
                     AddNotificationToList(nonPlayerPeaceNotifcation);
                 }
             }
-            if ((relationsTowardDiscoveredBy >= MagicNumbers.Instance.tradeThreshold) && (!tradingWithDiscoveredBy))
+
+            // Multiplied by 1 to make sure the price doesn't drop to zero prior to planet colonization
+            if ((relationsTowardDiscoveredBy >= (1 * MagicNumbers.Instance.tradeThreshold) * (1 * colonizedPlanets)) && (!tradingWithDiscoveredBy))
             {
                 tradePartnerEmpires.Add(discoveredBy);
                 discoveredBy.tradePartnerEmpires.Add(this);
@@ -780,8 +798,8 @@ public class Empire : MonoBehaviour
                 }
                 tradingWithDiscoveredBy = true;
             }
-
-            if ((relationsTowardDiscoveredBy > MagicNumbers.Instance.allianceThreshold) && (!alliedWithDiscoveredBy))
+            // Multiplied by 1 to make sure the price doesn't drop to zero prior to planet colonization
+            if ((relationsTowardDiscoveredBy > ( MagicNumbers.Instance.allianceThreshold) * (1 * colonizedPlanets)) && (!alliedWithDiscoveredBy))
             {
                 alliedEmpires.Add(discoveredBy);
                 discoveredBy.alliedEmpires.Add(this);
@@ -993,11 +1011,19 @@ public class Empire : MonoBehaviour
         float colonizablePlanetOverlapRoll = UnityEngine.Random.Range(MagicNumbers.Instance.inclusiveMinColonizablePlanetOverlapInclusiveFloat, MagicNumbers.Instance.inclusiveMaxColonizablePlanetOverlapInclusiveFloat);
         int colonizablePlanetsThroughConquest = Convert.ToInt32(defeatedEmpire.colonizedPlanets * colonizablePlanetOverlapRoll);
         conqueringEmpire.discoveredPlanets += colonizablePlanetsThroughConquest;
-        if (conqueringEmpire == GameManager.Instance.playerEmpire)
+        if (conqueringEmpire == GameManager.Instance.playerEmpire && (colonizablePlanetsThroughConquest > 0))
         {
             string availablePlanetsNotification = $"With the subjugation of the {defeatedEmpire.Name}, the {conqueringEmpire.Name} now has complete control of their space, \n" +
                 $"including the {defeatedEmpire.colonizedPlanets} worlds they had colonized. {colonizablePlanetsThroughConquest} of these worlds are suitable for your people, \n" +
                 $"and will be colonized as soon as your ships are ready.";
+            AddNotificationToList(availablePlanetsNotification);
+        }
+
+        else if (conqueringEmpire == GameManager.Instance.playerEmpire)
+        {
+            string availablePlanetsNotification = $"With the subjugation of the {defeatedEmpire.Name}, the {conqueringEmpire.Name} now has complete control of their space, \n" +
+                $"including the {defeatedEmpire.colonizedPlanets} worlds they had colonized. Unfortunately, none of these worlds are suitable for your people, \n" +
+                $"but this war has bought the {conqueringEmpire.Name} peace on this front.";
             AddNotificationToList(availablePlanetsNotification);
         }
     }
