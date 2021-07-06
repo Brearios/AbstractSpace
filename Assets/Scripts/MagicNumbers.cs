@@ -50,6 +50,9 @@ public class MagicNumbers : MonoBehaviour
     public int weakFleetStrengthVictoryReduction; // starting at 15%
     public int weakFleetStrengthLossReduction; // starting at 25%
     public int fleetStrengthKillingBlowLevel; // starting at 5 - if a fleet is below 20% total capacity, and suffers a loss, that empire is defeated
+    public int diplomacyModerateUnlockRank = 5; // science points in diplomacy to improve relations with moderate aliens
+    public int diplomacyXenophobeUnlockRank = 10; // science points in diplomacy to improve relations with moderate aliens
+    public int diplomacyExterminatorUnlockRank = 30; // science points in diplomacy to improve relations with moderate aliens
 
 
 

@@ -558,19 +558,19 @@ MonoBehaviour:
   StartingGrossEmpireProduct: 10
   StartingColonizedPlanets: 0
   StartingFleetStrength: 1
+  startingRelations: 100
   allianceThreshold: 500
   tradeThreshold: 175
-  peaceThreshold: 100
+  peaceThreshold: 60
   warThreshold: 20
   perEmpireDiplomacySpendingPerYear: 15
   explorationDiscoverEmpireChanceThreshold: 67
-  fleetHitPoints: 16
+  fleetHitPoints: 32
   tradeBonusMultiplier: 0.15
   allyFleetBonusMultiplier: 0.05
   treasureMinPortionOfGEP: 0.3
   treasureMaxPortionOfGEP: 3
   fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 25
-  startingRelations: 100
   exterminatorRelationsReduction: 4
   xenophobicRelationsReduction: 3
   moderateRelationsReduction: 2
@@ -584,6 +584,9 @@ MonoBehaviour:
   weakFleetStrengthVictoryReduction: 15
   weakFleetStrengthLossReduction: 30
   fleetStrengthKillingBlowLevel: 20
+  diplomacyModerateUnlockRank: 5
+  diplomacyXenophobeUnlockRank: 10
+  diplomacyExterminatorUnlockRank: 30
 --- !u!114 &191888507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,9 +603,6 @@ MonoBehaviour:
   isRunning: 1
   allocating: 0
   notificationsOn: 1
-  playerDiplomacyTowardExterminators: 0
-  playerDiplomacyTowardXenophobes: 0
-  playerDiplomacyTowardModerates: 1
   playerEmpire: {fileID: 1776160985}
   alienTemplateEmpire: {fileID: 0}
   currentSector:

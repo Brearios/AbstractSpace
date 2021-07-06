@@ -207,7 +207,7 @@ public class Empire : MonoBehaviour
             $" The {governmentWord} is {race.governmentType}, and their approach to other races is {orientationString.ToLower()}.";
 
 
-        string compiledString = $"In {GameManager.Instance.spaceYear} ESE, your explorers made contact with aliens known as the {Name}. \n \n " +
+        string compiledString = $"Your explorers have made contact with aliens known as the {Name}. \n \n " +
             $"{madlib}\n \n " +
             $"Press Space to continue.";
 
@@ -380,8 +380,8 @@ public class Empire : MonoBehaviour
                     if (isPlayer)
                     {
                         string colonizedPlanetNotification = $"A {race.raceAdjective} colony ship has just landed on a new world. \n" +
-                            $"Your empire's GEP will increase at a slightly faster rate from now on, \n " +
-                            $"as the population grows, the colony develops infrastructure, and trade flourishes with your other worlds. \n \n" +
+                            $"Your empire's GEP will increase at a slightly faster rate from now on, as the population grows, \n " +
+                            $"the colony develops infrastructure, and trade flourishes with your other worlds. \n \n" +
                             $"(Each economic upgrade going forward will be {MagicNumbers.Instance.planetGrossEmpireProductContribution} larger.)";
                         AddNotificationToList(colonizedPlanetNotification);
                     }
@@ -427,6 +427,12 @@ public class Empire : MonoBehaviour
                         break;
                     case 6:
                         diplomacy.sectorScienceMultiplier += 0.1f;
+                        if (diplomacy.sectorScienceMultiplier == 5 || diplomacy.sectorScienceMultiplier == 10 || diplomacy.sectorScienceMultiplier == 30)
+                        {
+                            string diplomacyCongratulations = $"Recent scientific breakthroughs will allow {race.raceName} diplomats to reach out \n " +
+                                "to less welcoming aliens and improve our relations with them. The galaxy became a more peaceful place today.";
+                            AddNotificationToList(diplomacyCongratulations);
+                        }
                         break;
                 }
                 break;
@@ -700,8 +706,11 @@ public class Empire : MonoBehaviour
 
     void AddNotificationToList(string notificationText)
     {
+        // Add spaceYear ie 1980 Extra-Solar Era
+        string spaceYear = $"E.S.E. {GameManager.Instance.spaceYear}:    ";
         // Add to Notification List
-        GameManager.Instance.notificationsToDisplay.Add(notificationText);
+        string compiledNotification = spaceYear + notificationText;
+        GameManager.Instance.notificationsToDisplay.Add(compiledNotification);
         // Display Notification is Handled by GameManager
     }
 
@@ -884,31 +893,35 @@ public class Empire : MonoBehaviour
 
             else if (relationsImprovedEmpire.orientation == DiplomaticOrientation.Xenophilic)
             {
-                totalDiplomaticCapacity--;
-                relationsImprovedEmpire.relationsTowardDiscoveredBy++;
-                keepSpendingDiplomacy = true;
+                CalculateCostAndSubtractDiplomacy(relationsImprovedEmpire);
             }
 
-            else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Moderate) && (GameManager.Instance.playerDiplomacyTowardModerates))
+            else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Moderate) && (GameManager.Instance.playerEmpire.diplomacy.sectorScienceMultiplier > MagicNumbers.Instance.diplomacyModerateUnlockRank))
             {
-                totalDiplomaticCapacity--;
-                relationsImprovedEmpire.relationsTowardDiscoveredBy++;
-                keepSpendingDiplomacy = true;
+                CalculateCostAndSubtractDiplomacy(relationsImprovedEmpire);
             }
 
-            else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Xenophobic) && (GameManager.Instance.playerDiplomacyTowardXenophobes))
+            else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Xenophobic) && (GameManager.Instance.playerEmpire.diplomacy.sectorScienceMultiplier > MagicNumbers.Instance.diplomacyXenophobeUnlockRank))
             {
-                totalDiplomaticCapacity--;
-                relationsImprovedEmpire.relationsTowardDiscoveredBy++;
-                keepSpendingDiplomacy = true;
+                CalculateCostAndSubtractDiplomacy(relationsImprovedEmpire);
             }
 
-            else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Extermination) && (GameManager.Instance.playerDiplomacyTowardExterminators))
+            else if ((relationsImprovedEmpire.orientation == DiplomaticOrientation.Extermination) && (GameManager.Instance.playerEmpire.diplomacy.sectorScienceMultiplier > MagicNumbers.Instance.diplomacyExterminatorUnlockRank))
             {
-                totalDiplomaticCapacity--;
-                relationsImprovedEmpire.relationsTowardDiscoveredBy++;
-                keepSpendingDiplomacy = true;
+                CalculateCostAndSubtractDiplomacy(relationsImprovedEmpire);
             }
+        }
+    }
+
+    void CalculateCostAndSubtractDiplomacy(Empire relationsImprovedEmpire)
+    {
+        // Because the friction of xenophobic relations is abstracted away through greater yearly subtraction, we can ignore it here
+        int baseDiplomaticCost = relationsImprovedEmpire.colonizedPlanets;
+        if (totalDiplomaticCapacity > baseDiplomaticCost)
+        {
+            totalDiplomaticCapacity -= baseDiplomaticCost;
+            relationsImprovedEmpire.relationsTowardDiscoveredBy++;
+            keepSpendingDiplomacy = true;
         }
     }
 
@@ -926,7 +939,7 @@ public class Empire : MonoBehaviour
             {
                 if (LogManager.Instance.warLogsEnabled)
                 {
-                    Debug.Log($"In {GameManager.Instance.spaceYear}, the {fleetStrength} {Name} fleets fighting on the {warEnemy.race.raceAdjective} front will destroyed {damageDealtToWarEnemy} of the {warEnemy.fleetStrength} {warEnemy.Name} fleets.");
+                    Debug.Log($"In {GameManager.Instance.spaceYear}, the {fleetStrength} {Name} fleets fighting on the {warEnemy.race.raceAdjective} front destroyed {damageDealtToWarEnemy} of the {warEnemy.fleetStrength} {warEnemy.Name} fleets.");
                 }
             }
         }
@@ -947,7 +960,7 @@ public class Empire : MonoBehaviour
             if (isPlayer && !defeatAnnounced)
             {
                 GameManager.Instance.playerLoss = true;
-                string defeatNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by the {defeatedBy.Name}. \n " +
+                string defeatNotifaction = $"After {GameManager.Instance.spaceYear} years of interstellar history, the {Name} was subjugated by the {defeatedBy.Name}. \n " +
                     $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
                     $"{race.raceAdjective} civilization will only live on in the history books. \n \n" +
                     $"You lose, Imperator.";
@@ -963,7 +976,7 @@ public class Empire : MonoBehaviour
             {
                 GameManager.Instance.currentWars--;
                 GameManager.Instance.empiresAtWarWithPlayer.Remove(this);
-                string victoryNotifaction = $"In {GameManager.Instance.spaceYear} ESE, the {Name} was subjugated by the {defeatedBy.Name}. \n " +
+                string victoryNotifaction = $"Ultimately, the {Name} was subjugated by the {defeatedBy.Name}. \n " +
                 $"With their fleet in shambles, {race.raceHomeworld} was invaded, and {rulerName} was captured. \n \n" +
                 $"Now, {race.raceAdjective} civilization will only live on in the history books.";
                 AddNotificationToList(victoryNotifaction);
@@ -1035,6 +1048,15 @@ public class Empire : MonoBehaviour
             discoveredPlanets--;
             colonizedPlanets++;
             colonyShips--;
+
+            if (isPlayer)
+            {
+                string colonizedPlanetNotification = $"A {race.raceAdjective} colony ship has just landed on a new world. \n" +
+                    $"Your empire's GEP will increase at a slightly faster rate from now on, as the population grows, \n " +
+                    $"the colony develops infrastructure, and trade flourishes with your other worlds. \n \n" +
+                    $"(Each economic upgrade going forward will be {MagicNumbers.Instance.planetGrossEmpireProductContribution} larger.)";
+                AddNotificationToList(colonizedPlanetNotification);
+            }
         }
     }
 
