@@ -587,6 +587,11 @@ MonoBehaviour:
   diplomacyModerateUnlockRank: 5
   diplomacyXenophobeUnlockRank: 10
   diplomacyExterminatorUnlockRank: 30
+  riskThresholdToBeDiscovered: 5000
+  baseYearlyChanceToBeDiscovered: 20
+  colonizedPlanetDiscoveryRiskMultiplier: 0.1
+  knownRacesDiscoveryRiskMultiplier: 0.1
+  warDiscoveryRiskMultiplier: 0.3
 --- !u!114 &191888507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,6 +703,7 @@ MonoBehaviour:
   allyFleetBonusLogs: 1
   empireRelationsLogs: 1
   warLogsEnabled: 1
+  beDiscoveredRollLogsEnabled: 1
 --- !u!114 &191888511
 MonoBehaviour:
   m_ObjectHideFlags: 0

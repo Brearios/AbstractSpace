@@ -53,6 +53,12 @@ public class MagicNumbers : MonoBehaviour
     public int diplomacyModerateUnlockRank = 5; // science points in diplomacy to improve relations with moderate aliens
     public int diplomacyXenophobeUnlockRank = 10; // science points in diplomacy to improve relations with moderate aliens
     public int diplomacyExterminatorUnlockRank = 30; // science points in diplomacy to improve relations with moderate aliens
+    public int riskThresholdToBeDiscovered = 5000; // roll number to determine if you are discovered by an alien race - should keep odds fairly low
+    public int baseYearlyChanceToBeDiscovered = 22; // starting at 20 - represents yearly "risk" of being discovered by alien explorers
+    public float colonizedPlanetDiscoveryRiskMultiplier = .1f; // multiple of base yearly chance for each planet colonized
+    public float knownRacesDiscoveryRiskMultiplier = .1f; // multiple of base yearly chance for each race known
+    public float warDiscoveryRiskMultiplier = .3f; // Wars are very impactful. Their effects invite investigation into their cause.
+
 
 
 

@@ -20,6 +20,7 @@ public class Empire : MonoBehaviour
     public bool warInitiated;
     public bool tradingWithDiscoveredBy;
     public bool alliedWithDiscoveredBy;
+    public bool initiatedContactWithPlayer;
     public string Name;
     public string Abbreviation;
     public string rulerName;
@@ -80,7 +81,6 @@ public class Empire : MonoBehaviour
     public float expectedMilitaryBudget;
     public float expectedScienceBudget;
     public float expectedDiplomacyBudget;
-
 
     public SectorDetails economy;
     public SectorDetails exploration;
@@ -206,11 +206,19 @@ public class Empire : MonoBehaviour
             $"They see via {race.eyeDetails}, and have bodies covered by {race.externalCovering}. \n \n " +
             $" The {governmentWord} is {race.governmentType}, and their approach to other races is {orientationString.ToLower()}.";
 
-
-        string compiledString = $"Your explorers have made contact with aliens known as the {Name}. \n \n " +
+        string compiledString;
+        if (!initiatedContactWithPlayer)
+        {
+            compiledString = $"Your explorers have made contact with aliens known as the {Name}. \n \n " +
             $"{madlib}\n \n " +
             $"Press Space to continue.";
-
+        }
+        else
+        {
+            compiledString = $"Our empire has been contacted by representatives of the {Name}, who recently discovered us.. \n \n " +
+            $"{madlib}\n \n " +
+            $"Press Space to continue.";
+        }
         if ((!isPlayer) && (discoveredBy.isPlayer))
         {
             AddNotificationToList(compiledString);
@@ -262,7 +270,9 @@ public class Empire : MonoBehaviour
 
         BuildShips();
 
-        ColonizedPlanets();
+        ColonizePlanets();
+
+        CalculateAndRollToBeDiscovered();
     }
 
     private void InitializeEmpireAddSectorsAndSetGEP(Empire empire)
@@ -482,7 +492,7 @@ public class Empire : MonoBehaviour
             //}
             if (degreesFromPlayer <= 1)
             {
-                DiscoverAlienEmpire(this);
+                DiscoverAlienEmpireOrBeDiscovered(this, false);
             }
             else
             {
@@ -514,13 +524,17 @@ public class Empire : MonoBehaviour
         }
     }
 
-    void DiscoverAlienEmpire(Empire discoveredByEmpire)
+    void DiscoverAlienEmpireOrBeDiscovered(Empire discoveredByEmpire, bool discoveredPlayer)
     {
         // TODO - record who discovered empire
 
         GameObject tempEmpireObject = Instantiate(GameManager.Instance.alienEmpire);
         Empire discoveredEmpire;
         discoveredEmpire = tempEmpireObject.GetComponent<Empire>();
+        if (discoveredPlayer)
+        {
+            discoveredEmpire.initiatedContactWithPlayer = true;
+        }
         discoveredEmpire.discoveredBy = discoveredByEmpire;
         discoveredEmpire.degreesFromPlayer = (discoveredByEmpire.degreesFromPlayer + 1);
         discoveredByEmpire.encounteredEmpires.Add(discoveredEmpire);
@@ -529,7 +543,7 @@ public class Empire : MonoBehaviour
         {
             if (LogManager.Instance.empireDiscovered)
             {
-                Debug.Log($"An alien empire was discovered by {discoveredByEmpire} in {GameManager.Instance.spaceYear}.");
+                Debug.Log($"An alien empire was discovered by {discoveredByEmpire.name} in {GameManager.Instance.spaceYear}.");
             }
         }
     }
@@ -791,7 +805,7 @@ public class Empire : MonoBehaviour
             }
 
             // Multiplied by 1 to make sure the price doesn't drop to zero prior to planet colonization
-            if ((relationsTowardDiscoveredBy >= (1 * MagicNumbers.Instance.tradeThreshold) * (1 * colonizedPlanets)) && (!tradingWithDiscoveredBy))
+            if ((relationsTowardDiscoveredBy >= (1 * MagicNumbers.Instance.tradeThreshold) * (1 + colonizedPlanets)) && (!tradingWithDiscoveredBy))
             {
                 tradePartnerEmpires.Add(discoveredBy);
                 discoveredBy.tradePartnerEmpires.Add(this);
@@ -808,7 +822,7 @@ public class Empire : MonoBehaviour
                 tradingWithDiscoveredBy = true;
             }
             // Multiplied by 1 to make sure the price doesn't drop to zero prior to planet colonization
-            if ((relationsTowardDiscoveredBy > ( MagicNumbers.Instance.allianceThreshold) * (1 * colonizedPlanets)) && (!alliedWithDiscoveredBy))
+            if ((relationsTowardDiscoveredBy > ( MagicNumbers.Instance.allianceThreshold) * (1 + colonizedPlanets)) && (!alliedWithDiscoveredBy))
             {
                 alliedEmpires.Add(discoveredBy);
                 discoveredBy.alliedEmpires.Add(this);
@@ -1041,7 +1055,7 @@ public class Empire : MonoBehaviour
         }
     }
 
-    void ColonizedPlanets()
+    void ColonizePlanets()
     {
         if ((discoveredPlanets > 0) && (colonyShips > 0))
         {
@@ -1060,4 +1074,24 @@ public class Empire : MonoBehaviour
         }
     }
 
+    void CalculateAndRollToBeDiscovered()
+    {
+        float empireSizeRisk = (colonizedPlanets * MagicNumbers.Instance.colonizedPlanetDiscoveryRiskMultiplier);
+        float galacticCommunicationsRisk = ((encounteredEmpires.Count - GameManager.Instance.playerDefeatedEmpires) * MagicNumbers.Instance.knownRacesDiscoveryRiskMultiplier);
+        float activeWarsRisk = (empiresAtWarWithThisEmpire.Count * MagicNumbers.Instance.warDiscoveryRiskMultiplier);
+        float discoveryChanceFloat = (MagicNumbers.Instance.baseYearlyChanceToBeDiscovered * (1.0f + empireSizeRisk + galacticCommunicationsRisk + activeWarsRisk));
+        int discoveryChanceInt = (int)discoveryChanceFloat;
+        int discoveryRoll = UnityEngine.Random.Range(1, MagicNumbers.Instance.riskThresholdToBeDiscovered);
+        if (discoveryChanceInt > discoveryRoll)
+        {
+            DiscoverAlienEmpireOrBeDiscovered(this, true);
+        }
+        if (LogManager.Instance.logsEnabled)
+        {
+            if (LogManager.Instance.beDiscoveredRollLogsEnabled)
+            {
+                Debug.Log($"In {GameManager.Instance.spaceYear}, the sum discovery risk of the {Name} was {discoveryChanceInt} and the roll was {discoveryRoll}");
+            }
+        }
+    }
 }
