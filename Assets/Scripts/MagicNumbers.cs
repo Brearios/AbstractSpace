@@ -15,10 +15,16 @@ public class MagicNumbers : MonoBehaviour
     public string PlayerEmpireName = "Human Space Alliance";
     public string PlayerAdjective = "Human";
     public string PlayerRuler = "Dwight Eisenhower";
-    public int StartingGrossEmpireProduct = 10;
+    public int startingEconomicUnits = 10; // Starting economic units for each empire
+    public float startingEconomicOutputPerUnit = 1.0f; // Starting output per EU
+    // public int StartingGrossEmpireProduct = startingEconomicUnits; // Changed from 10 to startingEconomicUnits to set up Colony Economy Scaling
+            // Then I realized there's no need for this variable
+    public int economicUnitsPerColony = 1; // EUs gained per colony
+    public float economicOutputIncreasePerUpgrade = 0.1f; // How much economic output increases per EU per upgrade
     public int StartingColonizedPlanets = 1;
     public int StartingFleetStrength = 1;
     public int startingRelations = 100;
+    
     public int allianceThreshold = 200;
     public int tradeThreshold = 150;
     public int peaceThreshold = 50;

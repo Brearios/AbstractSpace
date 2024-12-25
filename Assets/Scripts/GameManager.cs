@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
         // playerEmpire.Adjective = MagicNumbers.Instance.PlayerAdjective;
 
         playerEmpire.rulerName = MagicNumbers.Instance.PlayerRuler;
-        playerEmpire.grossEmpireProduct = MagicNumbers.Instance.StartingGrossEmpireProduct;
+        playerEmpire.grossEmpireProduct = MagicNumbers.Instance.startingEconomicUnits;
         playerEmpire.discoveredPlanets = 0;
         playerEmpire.colonizedPlanets = 1;
         playerEmpire.colonyShips = 0;

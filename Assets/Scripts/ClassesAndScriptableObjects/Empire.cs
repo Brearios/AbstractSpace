@@ -32,6 +32,10 @@ public class Empire : MonoBehaviour
     public bool isPlayer;
     public bool defeatAnnounced;
     public int degreesFromPlayer;
+    public int economicUnits;
+    public float economicUnitOutput;
+    public float economicUnitOutputBase; // Starting output per economic unit
+    public int economicUnitsPerColony; // Economic units per colony
 
     // 0 degrees - player
     // 1 degree - opponents - does everything players do
@@ -104,6 +108,10 @@ public class Empire : MonoBehaviour
         science.sectorName = "Science";
         diplomacy.sectorName = "Diplomacy";
         isDefeated = false;
+        economicUnits = MagicNumbers.Instance.startingEconomicUnits;
+        economicUnitOutputBase = MagicNumbers.Instance.startingEconomicOutputPerUnit;
+        economicUnitOutput = economicUnitOutputBase;
+        economicUnitsPerColony = MagicNumbers.Instance.economicUnitsPerColony;
 
         if (isPlayer)
         {
@@ -277,7 +285,7 @@ public class Empire : MonoBehaviour
 
     private void InitializeEmpireAddSectorsAndSetGEP(Empire empire)
     {
-        empire.grossEmpireProduct = MagicNumbers.Instance.StartingGrossEmpireProduct;
+        empire.grossEmpireProduct = MagicNumbers.Instance.startingEconomicUnits;
         empire.exploredStars = 0;
         empire.discoveredPlanets = 0;
         empire.colonizedPlanets = MagicNumbers.Instance.StartingColonizedPlanets;
@@ -375,6 +383,7 @@ public class Empire : MonoBehaviour
         {
             case "Economy":
                 GrowGEP();
+                economicUnitOutput += MagicNumbers.Instance.economicOutputIncreasePerUpgrade;
                 break;
 
             case "Exploration":
@@ -385,15 +394,20 @@ public class Empire : MonoBehaviour
                 //TODO May want to eventually have individual planets with their own bonuses that roll here
                 if (discoveredPlanets > 0)
                 {
-                    colonizedPlanets++;
                     discoveredPlanets--;
+                    colonizedPlanets++;
+                    economicUnits+= economicUnitsPerColony;
+                    colonyShips--;
+
                     if (isPlayer)
                     {
+                        float economicImpact = ((float)economicUnitsPerColony / (economicUnits - economicUnitsPerColony)) * 100;
                         string colonizedPlanetNotification = $"A {race.raceAdjective} colony ship has just landed on a new world. \n" +
-                            $"Your empire's GEP will increase at a slightly faster rate from now on, as the population grows, \n " +
+                            $"Your empire's GEP has increased by {economicImpact.ToString("0.0")} percent, and will increase at a faster rate from now on, as the population grows, \n " +
                             $"the colony develops infrastructure, and trade flourishes with your other worlds. \n \n" +
-                            $"(Each economic upgrade going forward will be {MagicNumbers.Instance.planetGrossEmpireProductContribution} larger.)";
+                            $"(Each economic upgrade going forward will increase your Gross Empire Product by {(MagicNumbers.Instance.economicOutputIncreasePerUpgrade * economicUnits).ToString("0.0")}.)";
                         AddNotificationToList(colonizedPlanetNotification);
+                    }
                     }
                 }
                 else
@@ -662,18 +676,23 @@ public class Empire : MonoBehaviour
     }
 
     private void GrowGEP()
+    // Modify GrowGEP to use Economic Units
     {
-        float economyIncrease = (1.0f + (colonizedPlanets * MagicNumbers.Instance.planetGrossEmpireProductContribution));
+        // GEP is now calculated as the product of economic units and their output
+        grossEmpireProduct = economicUnits * economicUnitOutput;
+        // Prior system
+        //float economyIncrease = (1.0f + (colonizedPlanets * MagicNumbers.Instance.planetGrossEmpireProductContribution));
         {
             if (LogManager.Instance.logsEnabled)
             {
                 if (LogManager.Instance.growGEPLogs)
                 {
-                    Debug.Log($"Economy of {Name} increasing by {economyIncrease}, from {grossEmpireProduct}, in space year {GameManager.Instance.spaceYear}.");
+                    Debug.Log($"Economy of {Name} is now {grossEmpireProduct}, in space year {GameManager.Instance.spaceYear}.");
                 }
             }
         }
-        grossEmpireProduct += economyIncrease;
+        // Prior system, before Economic Units
+        // grossEmpireProduct += economyIncrease;
     }
 
     private void CalculateProgressToSpaceyear()
@@ -1061,14 +1080,16 @@ public class Empire : MonoBehaviour
         {
             discoveredPlanets--;
             colonizedPlanets++;
+            economicUnits+= economicUnitsPerColony;
             colonyShips--;
 
             if (isPlayer)
             {
+                float economicImpact = ((float)economicUnitsPerColony / (economicUnits - economicUnitsPerColony)) * 100;
                 string colonizedPlanetNotification = $"A {race.raceAdjective} colony ship has just landed on a new world. \n" +
-                    $"Your empire's GEP will increase at a slightly faster rate from now on, as the population grows, \n " +
+                    $"Your empire's GEP has increased by {economicImpact.ToString("0.0")} percent, and will increase at a faster rate from now on, as the population grows, \n " +
                     $"the colony develops infrastructure, and trade flourishes with your other worlds. \n \n" +
-                    $"(Each economic upgrade going forward will be {MagicNumbers.Instance.planetGrossEmpireProductContribution} larger.)";
+                    $"(Each economic upgrade going forward will increase your Gross Empire Product by {(MagicNumbers.Instance.economicOutputIncreasePerUpgrade * economicUnits).ToString("0.0")} larger.)";
                 AddNotificationToList(colonizedPlanetNotification);
             }
         }
