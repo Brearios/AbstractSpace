@@ -1029,6 +1029,65 @@ public class Empire : MonoBehaviour
         }
     }
 
+public void ResetEmpire()
+{
+    // Reset core empire properties
+    grossEmpireProduct = 0;
+    exploredStars = 0;
+    discoveredPlanets = 0;
+    colonizedPlanets = MagicNumbers.Instance.startingColonizedPlanets;
+    colonyShips = MagicNumbers.Instance.startingColonyShips;
+    militaryCapacity = MagicNumbers.Instance.startingMilitaryCapacity;
+    fleetStrength = MagicNumbers.Instance.startingFleetStrength;
+    relationsTowardDiscoveredBy = MagicNumbers.Instance.startingRelations;
+    yearlyDiplomaticCapacity = 0;
+    totalDiplomaticCapacity = 0;
+    warDamageThisYear = 0;
+    bonusResourcesFromEventsAndTrade = 0;
+
+    // Reset economic units
+    economicUnits = MagicNumbers.Instance.startingEconomicUnits;
+    economicUnitOutput = economicUnitOutputBase;
+
+    // Reset allocations
+    foreach (SectorDetails sector in empireSectors)
+    {
+        sector.fundingAllocation = 0;
+        sector.growthLevelsAchieved = 0;
+        sector.neededInvestment = MagicNumbers.Instance.initialUpgradeCost;
+        sector.sectorScienceMultiplier = 0;
+    }
+    economy.fundingAllocation = 4;
+    exploration.fundingAllocation = 2;
+    colonization.fundingAllocation = 1;
+    military.fundingAllocation = 1;
+    science.fundingAllocation = 1;
+    diplomacy.fundingAllocation = 1;
+
+    // Reset diplomatic relationships (Dictionary NYI)
+
+    // Reset war status
+    AtWarWithDiscoveredBy = false;
+    AlliedWithPlayer = false;
+    isDefeated = false;
+    keepSpendingDiplomacy = false;
+    warInitiated = false;
+    tradingWithDiscoveredBy = false;
+    alliedWithDiscoveredBy = false;
+    defeatAnnounced = false;
+    empiresCurrentWars = 0;
+
+    // Clear lists
+    encounteredEmpires.Clear();
+    empiresAtWarWithThisEmpire.Clear();
+    tradePartnerEmpires.Clear();
+    alliedEmpires.Clear();
+
+    // Add back the player empire to relevant lists
+    encounteredEmpires.Add(this)
+}
+    }
+
     //void CheckForUnusedAllocations()
     //{
     //    float assignedSectorAllocations = 0;

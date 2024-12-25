@@ -64,6 +64,15 @@ public class PanelActivator : MonoBehaviour
     public void AcknowledgeNotificationAndDismiss()
     {
         notificationTextActivator.SetActive(false);
+        // Only restart the game if the player has lost
+        if (GameManager.Instance.playerLoss)
+        {
+            GameManager.Instance.RestartGame();
+        }
+        else
+        {
+            GameManager.Instance.isRunning = true;
+        }
         GameManager.Instance.isRunning = true;
     }
 

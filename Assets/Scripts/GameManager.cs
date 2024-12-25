@@ -161,6 +161,37 @@ public class GameManager : MonoBehaviour
         // TODO - implement customization with text boxes
     }
 
+        public void RestartGame()
+    {
+        // Reset space year
+        SpaceYear = 1;
+
+        // Reset player empire
+        playerEmpire.ResetEmpire();
+
+        // Clear and recreate alien empires
+        foreach (Empire empire in allEmpires)
+        {
+            if (!empire.isPlayer)
+            {
+                Destroy(empire.gameObject);
+            }
+        }
+        allEmpires.Clear();
+        allEmpires.Add(playerEmpire);
+
+        // Clear shell empires - NYI
+        notificationsToDisplay.Clear();
+        playerLoss = false;
+        currentWars = 0;
+        playerDefeatedEmpires = 0;
+        // Add overlooked variables
+
+        // Regenerate shell empires (NYI)
+
+        // Resume the game
+        isRunning = true;
+
     private void TimeControls()
     {
         deltaTime = (gameSpeed * Time.deltaTime);
