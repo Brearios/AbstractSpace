@@ -392,7 +392,7 @@ public class Empire : MonoBehaviour
 
             case "Colonization":
                 //TODO May want to eventually have individual planets with their own bonuses that roll here
-                if (discoveredPlanets > 0)
+                if ((discoveredPlanets > 0) && (colonyShips > 0))
                 {
                     discoveredPlanets--;
                     colonizedPlanets++;
