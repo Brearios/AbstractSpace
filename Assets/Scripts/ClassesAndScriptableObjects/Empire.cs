@@ -288,8 +288,8 @@ public class Empire : MonoBehaviour
         empire.grossEmpireProduct = MagicNumbers.Instance.startingEconomicUnits;
         empire.exploredStars = 0;
         empire.discoveredPlanets = 0;
-        empire.colonizedPlanets = MagicNumbers.Instance.StartingColonizedPlanets;
-        empire.militaryCapacity = MagicNumbers.Instance.StartingFleetStrength;
+        empire.colonizedPlanets = MagicNumbers.Instance.startingColonizedPlanets;
+        empire.militaryCapacity = MagicNumbers.Instance.startingFleetStrength;
         empire.yearlyDiplomaticCapacity = 0;
     }
 
@@ -408,15 +408,14 @@ public class Empire : MonoBehaviour
                             $"(Each economic upgrade going forward will increase your Gross Empire Product by {(MagicNumbers.Instance.economicOutputIncreasePerUpgrade * economicUnits).ToString("0.0")}.)";
                         AddNotificationToList(colonizedPlanetNotification);
                     }
-                    }
-                }
+
                 else
                 {
                     colonyShips++;
                 }
-
+                }
                 break;
-
+                
             case "Military":
                 if (LogManager.Instance.logsEnabled)
                 {
@@ -1036,9 +1035,9 @@ public void ResetEmpire()
     exploredStars = 0;
     discoveredPlanets = 0;
     colonizedPlanets = MagicNumbers.Instance.startingColonizedPlanets;
-    colonyShips = MagicNumbers.Instance.startingColonyShips;
-    militaryCapacity = MagicNumbers.Instance.startingMilitaryCapacity;
-    fleetStrength = MagicNumbers.Instance.startingFleetStrength;
+    colonyShips = 0;
+    militaryCapacity = 0;
+    fleetStrength = 0;
     relationsTowardDiscoveredBy = MagicNumbers.Instance.startingRelations;
     yearlyDiplomaticCapacity = 0;
     totalDiplomaticCapacity = 0;
@@ -1084,9 +1083,7 @@ public void ResetEmpire()
     alliedEmpires.Clear();
 
     // Add back the player empire to relevant lists
-    encounteredEmpires.Add(this)
-}
-    }
+    encounteredEmpires.Add(this);
 
     //void CheckForUnusedAllocations()
     //{
@@ -1097,7 +1094,7 @@ public void ResetEmpire()
     //    }
     //    unusedAllocations = (MagicNumbers.Instance.numberOfAllocationSegments - (int)assignedSectorAllocations);
     //}
-
+}
     void DisplayInstructions()
     {
         string instructionNotification = $"Welcome to Abstract Space! You are the Emperor of the {GameManager.Instance.playerEmpire.Name}. \n \n" +

@@ -21,8 +21,8 @@ public class MagicNumbers : MonoBehaviour
             // Then I realized there's no need for this variable
     public int economicUnitsPerColony = 1; // EUs gained per colony
     public float economicOutputIncreasePerUpgrade = 0.1f; // How much economic output increases per EU per upgrade
-    public int StartingColonizedPlanets = 1;
-    public int StartingFleetStrength = 1;
+    public int startingColonizedPlanets = 1;
+    public int startingFleetStrength = 1;
     public int startingRelations = 100;
     
     public int allianceThreshold = 200;

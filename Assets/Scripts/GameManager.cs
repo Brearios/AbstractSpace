@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
         public void RestartGame()
     {
         // Reset space year
-        SpaceYear = 1;
+        spaceYear = 1;
 
         // Reset player empire
         playerEmpire.ResetEmpire();
@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour
 
         // Resume the game
         isRunning = true;
-
+    }
     private void TimeControls()
     {
         deltaTime = (gameSpeed * Time.deltaTime);
