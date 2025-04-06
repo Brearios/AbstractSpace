@@ -551,13 +551,14 @@ MonoBehaviour:
   peaceThreshold: 50
   warThreshold: 10
   perEmpireDiplomacySpendingPerYear: 15
+  explorationDiscoverHabitablePlanetChanceThreshold: 34
   explorationDiscoverEmpireChanceThreshold: 67
   fleetHitPoints: 10
   tradeBonusMultiplier: 0.025
   allyFleetBonusMultiplier: 0.05
   treasureMinPortionOfGEP: 0.3
   treasureMaxPortionOfGEP: 0.7
-  fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 0
+  fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 25
   exterminatorRelationsReduction: 0
   xenophobicRelationsReduction: 0
   moderateRelationsReduction: 0
