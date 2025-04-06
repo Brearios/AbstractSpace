@@ -38,10 +38,10 @@ public class MagicNumbers : MonoBehaviour
     public float treasureMinPortionOfGEP = 0.3f;
     public float treasureMaxPortionOfGEP = 0.7f;
     public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity = 25; // Currently starting at 25 - so if your military capacity is 4, your max fleet strength would be 100.
-    public int exterminatorRelationsReduction;
-    public int xenophobicRelationsReduction;
-    public int moderateRelationsReduction;
-    public int xenophilicRelationsReduction;
+    public int exterminatorRelationsReduction = 4;
+    public int xenophobicRelationsReduction = 3;
+    public int moderateRelationsReduction = 2;
+    public int xenophilicRelationsReduction = 1;
     public int exclusiveMaxShipDamageRoll = 6;
     public int inclusiveMinShipDamageRoll = 2;
     public float inclusiveMinColonizablePlanetOverlapInclusiveFloat = .2f;
