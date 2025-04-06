@@ -522,8 +522,9 @@ public class Empire : MonoBehaviour
     {
         float treasureMultiplier = UnityEngine.Random.Range(MagicNumbers.Instance.treasureMinPortionOfGEP, MagicNumbers.Instance.treasureMaxPortionOfGEP);
         // Old system based on GEP - too small of rewards
-        //float treasureAmount = (grossEmpireProduct * treasureMultiplier);
-        float treasureAmount = (exploration.neededInvestment * treasureMultiplier);
+        // Reverting to old system - new rewards far too large (or miscalculated)
+        float treasureAmount = (grossEmpireProduct * treasureMultiplier);
+        // float treasureAmount = (exploration.neededInvestment * treasureMultiplier);
         bonusResourcesFromEventsAndTrade += treasureAmount;
         if (isPlayer)
         {
