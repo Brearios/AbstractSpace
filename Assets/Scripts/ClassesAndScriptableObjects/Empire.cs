@@ -1125,7 +1125,7 @@ public void ResetEmpire()
                 string colonizedPlanetNotification = $"A {race.raceAdjective} colony ship has just landed on a new world. \n" +
                     $"Your empire's GEP has increased by {economicImpact.ToString("0.0")} percent, and will increase at a faster rate from now on, as the population grows, \n " +
                     $"the colony develops infrastructure, and trade flourishes with your other worlds. \n \n" +
-                    $"(Each economic upgrade going forward will increase your Gross Empire Product by {(MagicNumbers.Instance.economicOutputIncreasePerUpgrade * economicUnits).ToString("0.0")} larger.)";
+                    $"(Each economic upgrade going forward will increase your Gross Empire Product by {(MagicNumbers.Instance.economicOutputIncreasePerUpgrade * economicUnits).ToString("0.0")}.)";
                 AddNotificationToList(colonizedPlanetNotification);
             }
         }
