@@ -559,10 +559,10 @@ MonoBehaviour:
   treasureMinPortionOfGEP: 0.3
   treasureMaxPortionOfGEP: 0.7
   fleetStrengthMaximumAsMultipleOfMilitaryCapacity: 25
-  exterminatorRelationsReduction: 0
-  xenophobicRelationsReduction: 0
-  moderateRelationsReduction: 0
-  xenophilicRelationsReduction: 0
+  exterminatorRelationsReduction: 4
+  xenophobicRelationsReduction: 3
+  moderateRelationsReduction: 2
+  xenophilicRelationsReduction: 1
   exclusiveMaxShipDamageRoll: 6
   inclusiveMinShipDamageRoll: 2
   inclusiveMinColonizablePlanetOverlapInclusiveFloat: 0.2

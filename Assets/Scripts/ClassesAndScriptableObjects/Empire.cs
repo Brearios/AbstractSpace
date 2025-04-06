@@ -802,8 +802,7 @@ public class Empire : MonoBehaviour
                 }
             }
 
-            // Multiplied by 1 to make sure the price doesn't drop to zero prior to planet colonization
-            if ((relationsTowardDiscoveredBy >= (1 * MagicNumbers.Instance.tradeThreshold) * (1 + colonizedPlanets)) && (!tradingWithDiscoveredBy))
+            if ((relationsTowardDiscoveredBy >= MagicNumbers.Instance.tradeThreshold) && (!tradingWithDiscoveredBy))
             {
                 tradePartnerEmpires.Add(discoveredBy);
                 discoveredBy.tradePartnerEmpires.Add(this);
@@ -819,8 +818,8 @@ public class Empire : MonoBehaviour
                 }
                 tradingWithDiscoveredBy = true;
             }
-            // Multiplied by 1 to make sure the price doesn't drop to zero prior to planet colonization
-            if ((relationsTowardDiscoveredBy > ( MagicNumbers.Instance.allianceThreshold) * (1 + colonizedPlanets)) && (!alliedWithDiscoveredBy))
+
+            if (relationsTowardDiscoveredBy > (MagicNumbers.Instance.allianceThreshold) && (!alliedWithDiscoveredBy))
             {
                 alliedEmpires.Add(discoveredBy);
                 discoveredBy.alliedEmpires.Add(this);
