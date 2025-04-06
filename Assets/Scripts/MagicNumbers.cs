@@ -36,7 +36,7 @@ public class MagicNumbers : MonoBehaviour
     public float allyFleetBonusMultiplier = 0.05f;
     public float treasureMinPortionOfGEP = 0.3f;
     public float treasureMaxPortionOfGEP = 0.7f;
-    public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity; // Currently starting at 25 - so if your military capacity is 4, your max fleet strength would be 100.
+    public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity = 25; // Currently starting at 25 - so if your military capacity is 4, your max fleet strength would be 100.
     public int exterminatorRelationsReduction;
     public int xenophobicRelationsReduction;
     public int moderateRelationsReduction;
@@ -57,8 +57,8 @@ public class MagicNumbers : MonoBehaviour
     public int weakFleetStrengthLossReduction; // starting at 25%
     public int fleetStrengthKillingBlowLevel; // starting at 5 - if a fleet is below 20% total capacity, and suffers a loss, that empire is defeated
     public int diplomacyModerateUnlockRank = 5; // science points in diplomacy to improve relations with moderate aliens
-    public int diplomacyXenophobeUnlockRank = 10; // science points in diplomacy to improve relations with moderate aliens
-    public int diplomacyExterminatorUnlockRank = 30; // science points in diplomacy to improve relations with moderate aliens
+    public int diplomacyXenophobeUnlockRank = 10; // science points in diplomacy to improve relations with xenophobe aliens
+    public int diplomacyExterminatorUnlockRank = 30; // science points in diplomacy to improve relations with exterminator aliens
     public int riskThresholdToBeDiscovered = 5000; // roll number to determine if you are discovered by an alien race - should keep odds fairly low
     public int baseYearlyChanceToBeDiscovered = 22; // starting at 20 - represents yearly "risk" of being discovered by alien explorers
     public float colonizedPlanetDiscoveryRiskMultiplier = .1f; // multiple of base yearly chance for each planet colonized
