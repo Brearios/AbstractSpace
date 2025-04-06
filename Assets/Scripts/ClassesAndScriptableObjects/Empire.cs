@@ -456,12 +456,12 @@ public class Empire : MonoBehaviour
         int random = UnityEngine.Random.Range(1, 100);
         if (random < MagicNumbers.Instance.explorationDiscoverHabitablePlanetChanceThreshold)
         {
-            if (colonyShips > 0)
-            {
-                colonyShips--;
-                colonizedPlanets++;
-            }
-            else
+            // if (colonyShips > 0)
+            // {
+            //    colonyShips--;
+            //    colonizedPlanets++;
+            // }
+            // else
             {
                 discoveredPlanets++;
                 if (isPlayer)
