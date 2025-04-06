@@ -35,7 +35,7 @@ public class MagicNumbers : MonoBehaviour
     public float tradeBonusMultiplier = 0.025f; // This is multiplied by your trading partner's GEP to determine how much you gain from trade
     public float allyFleetBonusMultiplier = 0.05f;
     public float treasureMinPortionOfGEP = 0.3f;
-    public float treasureMaxPortionOfGEP = 0.3f;
+    public float treasureMaxPortionOfGEP = 0.7f;
     public int fleetStrengthMaximumAsMultipleOfMilitaryCapacity; // Currently starting at 25 - so if your military capacity is 4, your max fleet strength would be 100.
     public int exterminatorRelationsReduction;
     public int xenophobicRelationsReduction;
