@@ -454,7 +454,7 @@ public class Empire : MonoBehaviour
     private void RollStarOutcome()
     {
         int random = UnityEngine.Random.Range(1, 100);
-        if (random < 34)
+        if (random < MagicNumbers.Instance.explorationDiscoverHabitablePlanetChanceThreshold)
         {
             if (colonyShips > 0)
             {

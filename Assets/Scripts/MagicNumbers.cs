@@ -30,6 +30,7 @@ public class MagicNumbers : MonoBehaviour
     public int peaceThreshold = 50;
     public int warThreshold = 10;
     public int perEmpireDiplomacySpendingPerYear = 15;
+    public int explorationDiscoverHabitablePlanetChanceThreshold = 34;
     public int explorationDiscoverEmpireChanceThreshold = 67;
     public int fleetHitPoints = 10; // Amount of damage taken to destroy one fleet strength
     public float tradeBonusMultiplier = 0.025f; // This is multiplied by your trading partner's GEP to determine how much you gain from trade
