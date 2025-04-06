@@ -5,11 +5,11 @@ using UnityEngine;
 public class MagicNumbers : MonoBehaviour
 {
     public static MagicNumbers Instance;
-    public int initialUpgradeCost;
+    public int initialUpgradeCost = 30; // Starting cost of the first upgrade
     public int allocationIterationAmount = 10;
     public float allocationPercentage;
     public int numberOfAllocationSegments;
-    public float upgradeCostMultiplier;
+    public float upgradeCostMultiplier = 1.07f; // How much the cost of upgrades increases each time you upgrade
     public float planetGrossEmpireProductContribution; // How much an economic growth level is added to, per colonized planet
     // public int totalCivilizations; Unused - could be used to code a maximum number of concurrent empires
     public string PlayerEmpireName = "Human Space Alliance";
